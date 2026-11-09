@@ -9,6 +9,9 @@ obj/
 # DACPAC files
 *.dacpac
 
+# Mac
+.DS_Store
+
 # Publish profiles (optional, if environment-specific)
 *.publish.xml
 
@@ -28,4 +31,18 @@ obj/
 # Backup files
 *.bak
 *.log
+
+datasets_farmared/
+
+# Python y configuración local de FarmaRed
+.venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+dist/
+.env
+.env.*
+!.env.example
+
 

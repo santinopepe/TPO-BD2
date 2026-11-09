@@ -1,0 +1,44 @@
+
+import argparse
+import sys
+from collections.abc import Sequence
+from importlib import import_module
+from importlib.metadata import version
+
+from farmared.errores import ErrorDominio
+
+COMANDOS = {"estado": ("farmared.cli.estado", "ejecutar")}
+PENDIENTES = {
+    **{f"q{i:02}": "D" if i in (3, 4, 10) else "B" if i in (14, 15) else "C"
+       for i in range(1, 16)},
+    "seed": "A", "validar-datasets": "A", "setup": "A", "reset-demo": "A",
+    "sync": "D", "demo-transaccion": "B",
+}
+
+
+def main(argv: Sequence[str] | None = None) -> int:
+    parser = argparse.ArgumentParser(prog="farmared", description="FarmaRed — TPO BD2")
+    parser.add_argument("--version", action="version", version=version("farmared"))
+    subparsers = parser.add_subparsers(dest="comando", required=True)
+    subparsers.add_parser("estado", help="Versión y reloj local; no comprueba motores.")
+    for comando, responsable in PENDIENTES.items():
+        subparsers.add_parser(comando, help=f"Pendiente de implementación/integración ({responsable}).")
+    args = parser.parse_args(argv)
+    if args.comando in PENDIENTES:
+        print(
+            f"NO_IMPLEMENTADO: {args.comando} pendiente de implementación/integración "
+            f"por Persona {PENDIENTES[args.comando]}; no se ejecutó ninguna operación.",
+            file=sys.stderr,
+        )
+        return 3
+    modulo, funcion = COMANDOS[args.comando]
+    try:
+        handler = getattr(import_module(modulo), funcion)
+        return handler(args)
+    except ErrorDominio as error:
+        print(str(error), file=sys.stderr)
+        return 1
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
