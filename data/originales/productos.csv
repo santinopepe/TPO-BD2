@@ -1,0 +1,14 @@
+id_producto,nombre,principio_activo,categoria,presentacion,condicion_venta,precio_unit,id_proveedor,activo
+PRD001,Paracetamol 500mg x30,Paracetamol,Analgésico,Comprimidos x30,Venta libre,2800,PRV001,True
+PRD002,Ibuprofeno 400mg x20,Ibuprofeno,Antiinflamatorio,Comprimidos x20,Venta libre,3500,PRV001,True
+PRD003,Amoxicilina 500mg x21,Amoxicilina,Antibiótico,Cápsulas x21,Bajo receta,9800,PRV003,True
+PRD004,Losartán 50mg x30,Losartán,Antihipertensivo,Comprimidos x30,Bajo receta,6200,PRV002,True
+PRD005,Metformina 850mg x60,Metformina,Antidiabético,Comprimidos x60,Bajo receta,5400,PRV003,True
+PRD006,Atorvastatina 20mg x30,Atorvastatina,Hipolipemiante,Comprimidos x30,Bajo receta,8900,PRV002,True
+PRD007,Omeprazol 20mg x28,Omeprazol,Gastroprotector,Cápsulas x28,Bajo receta,4800,PRV004,True
+PRD008,"Alprazolam 0,5mg x30",Alprazolam,Ansiolítico,Comprimidos x30,Bajo receta archivada,7300,PRV004,True
+PRD009,Levotiroxina 100mcg x50,Levotiroxina,Hormona tiroidea,Comprimidos x50,Bajo receta,5900,PRV003,True
+PRD010,Salbutamol aerosol 100mcg,Salbutamol,Broncodilatador,Aerosol 200 dosis,Bajo receta,7100,PRV001,True
+PRD011,Loratadina 10mg x10,Loratadina,Antihistamínico,Comprimidos x10,Venta libre,2200,PRV001,True
+PRD012,Alcohol en gel 250ml,Alcohol etílico 70%,Antiséptico,Solución 250 ml,Venta libre,1800,PRV002,False
+PRD013,Ranitidina 150mg x20,Ranitidina,Gastroprotector,Comprimidos x20,Bajo receta,3900,PRV005,False

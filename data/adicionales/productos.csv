@@ -1,0 +1,11 @@
+id_producto,nombre,principio_activo,categoria,presentacion,condicion_venta,precio_unit,id_proveedor,activo
+A-PRD001,Producto adicional 1,Principio ficticio 1,Higiene,Unidad,Venta libre,4999,A-PRV001,True
+A-PRD002,Producto adicional 2,Principio ficticio 2,Higiene,Unidad,Venta libre,5000,A-PRV002,True
+A-PRD003,Producto adicional 3,Principio ficticio 3,Medicamento,Unidad,Bajo receta,1000,A-PRV003,True
+A-PRD004,Producto adicional 4,Principio ficticio 4,Medicamento,Unidad,Bajo receta,2000,A-PRV004,True
+A-PRD005,Producto adicional 5,Principio ficticio 5,Medicamento,Unidad,Bajo receta archivada,1500,A-PRV005,True
+A-PRD006,Producto adicional 6,Principio ficticio 6,Higiene,Unidad,Venta libre,100,A-PRV006,True
+A-PRD007,Producto adicional 7,Principio ficticio 7,Higiene,Unidad,Venta libre,1000,A-PRV007,True
+A-PRD008,Producto adicional 8,Principio ficticio 8,Higiene,Unidad,Venta libre,2000,A-PRV008,True
+A-PRD009,Producto adicional 9,Principio ficticio 9,Higiene,Unidad,Venta libre,500,A-PRV009,False
+A-PRD010,Producto adicional 10,Principio ficticio 10,Higiene,Unidad,Venta libre,700,A-PRV010,True

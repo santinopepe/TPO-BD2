@@ -1,0 +1,13 @@
+id_venta,id_cliente,id_farmaceutico,id_receta,fecha,tipo,medio_pago,total,estado
+A-V001,A-C001,A-F001,,2026-11-10,Venta libre,Efectivo,4999,Completada
+A-V002,A-C002,A-F002,,2026-11-10,Venta libre,Efectivo,5000,Completada
+A-V003,A-C003,A-F002,,2026-11-10,Venta libre,Efectivo,4999,Pendiente
+A-V004,A-C001,A-F001,A-RC001,2026-10-10,Con receta,Efectivo,1000,Completada
+A-V005,A-C001,A-F001,A-RC001,2026-11-10,Con receta,Efectivo,6000,Pendiente
+A-V006,A-C006,A-F001,,2026-11-10,Venta libre,Efectivo,6000,Pendiente
+A-V007,A-C007,A-F001,,2026-11-09,Venta libre,Efectivo,700,Anulada
+A-V008,A-C008,A-F003,,2025-10-06,Venta libre,Efectivo,700,Completada
+A-V009,A-C009,A-F002,,2026-10-31,Venta libre,Efectivo,500,Completada
+A-V010,A-C002,A-F001,,2026-09-12,Venta libre,Efectivo,800,Completada
+A-V011,A-C003,A-F001,,2026-09-11,Venta libre,Efectivo,6400,Completada
+A-V012,A-C004,A-F001,,2026-11-01,Venta libre,Efectivo,10698,Completada

@@ -1,0 +1,11 @@
+id_sucursal,nombre,tipo,direccion,ciudad,provincia,telefono,activo
+A-S001,Sucursal adicional 1,Farmacia,Calle ficticia 1,Buenos Aires,Buenos Aires,1101000001,True
+A-S002,Sucursal adicional 2,Farmacia,Calle ficticia 2,Buenos Aires,Buenos Aires,1101000002,True
+A-S003,Sucursal adicional 3,Farmacia,Calle ficticia 3,Buenos Aires,Buenos Aires,1101000003,True
+A-S004,Sucursal adicional 4,Farmacia,Calle ficticia 4,Buenos Aires,Buenos Aires,1101000004,True
+A-S005,Sucursal adicional 5,Farmacia,Calle ficticia 5,Buenos Aires,Buenos Aires,1101000005,True
+A-S006,Sucursal adicional 6,Farmacia,Calle ficticia 6,Buenos Aires,Buenos Aires,1101000006,True
+A-S007,Sucursal adicional 7,Farmacia,Calle ficticia 7,Buenos Aires,Buenos Aires,1101000007,True
+A-S008,Sucursal adicional 8,Farmacia,Calle ficticia 8,Buenos Aires,Buenos Aires,1101000008,True
+A-S009,Sucursal adicional 9,Farmacia,Calle ficticia 9,Buenos Aires,Buenos Aires,1101000009,False
+A-S010,Sucursal adicional 10,Droguería,Calle ficticia 10,Buenos Aires,Buenos Aires,1101000010,True

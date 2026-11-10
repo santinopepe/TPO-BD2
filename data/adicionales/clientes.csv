@@ -1,0 +1,11 @@
+id_cliente,nombre,apellido,dni,email,telefono,ciudad,provincia,obra_social,nro_afiliado,activo
+A-C001,Cliente adicional 1,Ficticio,90000001,cliente1@example.test,1100000001,Buenos Aires,Buenos Aires,PAMI,A-AF001,True
+A-C002,Cliente adicional 2,Ficticio,90000002,cliente2@example.test,1100000002,Buenos Aires,Buenos Aires,Sin cobertura,,True
+A-C003,Cliente adicional 3,Ficticio,90000003,cliente3@example.test,1100000003,Buenos Aires,Buenos Aires,PAMI,A-AF003,True
+A-C004,Cliente adicional 4,Ficticio,90000004,cliente4@example.test,1100000004,Buenos Aires,Buenos Aires,Sin cobertura,,True
+A-C005,Cliente adicional 5,Ficticio,90000005,cliente5@example.test,1100000005,Buenos Aires,Buenos Aires,PAMI,A-AF005,True
+A-C006,Cliente adicional 6,Ficticio,90000006,cliente6@example.test,1100000006,Buenos Aires,Buenos Aires,Sin cobertura,,True
+A-C007,Cliente adicional 7,Ficticio,90000007,cliente7@example.test,1100000007,Buenos Aires,Buenos Aires,PAMI,A-AF007,True
+A-C008,Cliente adicional 8,Ficticio,90000008,cliente8@example.test,1100000008,Buenos Aires,Buenos Aires,Sin cobertura,,True
+A-C009,Cliente adicional 9,Ficticio,90000009,cliente9@example.test,1100000009,Buenos Aires,Buenos Aires,PAMI,A-AF009,False
+A-C010,Cliente adicional 10,Ficticio,90000010,cliente10@example.test,1100000010,Buenos Aires,Buenos Aires,Sin cobertura,,True

@@ -1,0 +1,6 @@
+id_proveedor,razon_social,cuit,tipo,ciudad,provincia,telefono,activo
+PRV001,Laboratorios Andinos S.A.,30-71234567-1,Laboratorio,Buenos Aires,Buenos Aires,1143001100,True
+PRV002,DroguMed S.R.L.,30-70987654-3,Droguería,Córdoba,Córdoba,3514102200,True
+PRV003,FarmaLitoral S.A.,30-71555222-9,Laboratorio,Rosario,Santa Fe,3414203300,True
+PRV004,Distribuidora Sur Salud S.A.,30-70333111-5,Droguería,Avellaneda,Buenos Aires,1142304400,True
+PRV005,BioPampa Laboratorios S.A.,30-71888444-7,Laboratorio,La Plata,Buenos Aires,2214405500,False

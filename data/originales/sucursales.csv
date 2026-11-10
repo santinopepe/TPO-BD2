@@ -1,0 +1,6 @@
+id_sucursal,nombre,tipo,direccion,ciudad,provincia,telefono,activo
+S001,Farmacia Palermo,Farmacia,Av. Santa Fe 3350,Buenos Aires,Buenos Aires,1148001001,True
+S002,Farmacia Belgrano,Farmacia,Av. Cabildo 2150,Buenos Aires,Buenos Aires,1148002002,True
+S003,Farmacia Rosario Centro,Farmacia,Calle Córdoba 1420,Rosario,Santa Fe,3414003003,True
+S004,Farmacia Nueva Córdoba,Farmacia,Bv. Illia 520,Córdoba,Córdoba,3514004004,True
+S005,Droguería Central,Droguería,Ruta 4 km 12,San Justo,Buenos Aires,1146005005,True

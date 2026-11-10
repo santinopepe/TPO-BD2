@@ -1,0 +1,9 @@
+id_cliente,nombre,apellido,dni,email,telefono,ciudad,provincia,obra_social,nro_afiliado,activo
+C001,Lucía,Fernández,31245678,lucia.f@gmail.com,1145112233,Buenos Aires,Buenos Aires,OSDE,OS-310045,True
+C002,Martín,Gómez,28765432,martin.g@gmail.com,3415223344,Rosario,Santa Fe,Swiss Medical,SM-208811,True
+C003,Carla,Ruiz,40123456,carla.r@gmail.com,3515334455,Córdoba,Córdoba,PAMI,PA-771203,True
+C004,Federico,Navarro,33987654,fede.n@gmail.com,1156445566,Vicente López,Buenos Aires,IOMA,IO-450912,True
+C005,Sofía,Benavídez,37456123,sofia.b@gmail.com,3416556677,Rosario,Santa Fe,Sin cobertura,,True
+C006,Ricardo,Paz,14876543,ricardo.p@gmail.com,1167667788,Buenos Aires,Buenos Aires,PAMI,PA-662871,True
+C007,Julieta,Cabrera,39234567,juli.c@gmail.com,3516778899,Córdoba,Córdoba,Galeno,GA-905532,True
+C008,Hugo,Mansilla,25678901,hugo.m@gmail.com,1178889900,Buenos Aires,Buenos Aires,Sin cobertura,,False
