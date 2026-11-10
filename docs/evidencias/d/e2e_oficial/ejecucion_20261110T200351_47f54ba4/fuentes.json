@@ -1,0 +1,38 @@
+{
+  "hashes_sha256": {
+    "data/originales/clientes.csv": "afaddcaa8762b619dd46b3e21acd4544b0f034550493b76832e774a4ef21d9ed",
+    "data/originales/detalle_ventas.csv": "cb57f070e1e2a12727d19ec799a2002398fc5ddc686ba370c6d9f14f654d085d",
+    "data/originales/farmaceuticos.csv": "03db193b616a41954589703a349ba5b427e05c8ee431ca5c18f1f7dc3f31e021",
+    "data/originales/productos.csv": "cd0bde7d1da5de4cb96ccbd9b7a0218e670e075e4c75179145bbd2a9c572f0f8",
+    "data/originales/proveedores.csv": "609b89e2038ae7ce586baa2cbac24f54b76d6610792844028a3d8543a1beeb23",
+    "data/originales/recetas.csv": "021f56ef49addd28b71076d44bdeabbcf3ffde0f04a9a7c950e792c3e8213ec9",
+    "data/originales/stock_lotes.csv": "7dc07e052cabede0cdfa425315699d38de88f921d9a11e061bd377d6842e30ad",
+    "data/originales/sucursales.csv": "89210e743de64f168c684a51cde82b3feeda27d794b5dd586f57b102b6d1e7b7",
+    "data/originales/ventas.csv": "a8009f4bccdccd7b0679c7518935cb985f31a9bbdb6788172a58998a1f230ab8",
+    "data/adicionales/clientes.csv": "80bd39404be0b45f3579b1f23eafa7a6b544a45e8054b100a5d18cc59f428b1a",
+    "data/adicionales/detalle_ventas.csv": "cb6d2a748a51247cc053c38920bb0974c2b8ddcb203f6ea361af7b00fd503b9b",
+    "data/adicionales/farmaceuticos.csv": "9810b0c81b89356388ef55d1be3f9b635a8d8d7a958171d6b536ac9ef641b2da",
+    "data/adicionales/productos.csv": "3307fb35a8548b0326ea97ae27c15419448d1b270a241e9b78fcc324c3383652",
+    "data/adicionales/proveedores.csv": "d1299690f249f733d7b090a7c601263802a4ff1c272d6dfb68ba4f562c0caf18",
+    "data/adicionales/recetas.csv": "c5108fdfca6442aba6ba6bd8571d951c78fb68a59ae6c0c180ddc986987f7ac5",
+    "data/adicionales/stock_lotes.csv": "4bfc407afb8dfbaf70507df99288952eebf0f756b3c7e9e29d616c1bd8ce781a",
+    "data/adicionales/sucursales.csv": "533a8ad3025ec4417f59ef474a76eea160bbf21dbaee73c7188f7aa5c8874dbf",
+    "data/adicionales/ventas.csv": "697e1995fbd914e8b20f9b517177f54d6fb1ad9cd9b77cdab6cb0d94f7349fa7",
+    "data/adicionales/manifiesto.json": "db74749e2a29a1e4d09c8be2dd18f7e54817c86d0f2c31a77ff3e4e106a9175c"
+  },
+  "compose_sha256": "f221fb75e0a61e99497aa89a569821638c24e82d1d82fdd4b24655ee902487cb",
+  "recursos_previos": {
+    "contenedores": [
+      "2a4b6cf7203c",
+      "1b54b5953738",
+      "c88dc2bee975",
+      "7a57d8ba9fa9",
+      "3c8c51b47374"
+    ],
+    "volumenes": [
+      "MyMySql-data",
+      "ophtha-platform_backend_files",
+      "ophtha-platform_postgres_data"
+    ]
+  }
+}

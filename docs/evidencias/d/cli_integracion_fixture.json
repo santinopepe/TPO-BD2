@@ -1,0 +1,722 @@
+{
+  "fecha": "2026-11-10T16:01:47.025184-03:00",
+  "origen": "fixture_sintetico_CLI_no_dataset_oficial",
+  "carga_csv_ejecutada": false,
+  "motivo": "Union oficial/adicional bloqueada por hashes; esta prueba no sustituye esa demostracion.",
+  "compose": "infra/docker-compose.yml",
+  "compose_sha256": "f221fb75e0a61e99497aa89a569821638c24e82d1d82fdd4b24655ee902487cb",
+  "proyecto_aislado": "farmared_d_cli_98de50c791044782a46867fe39954bcb",
+  "base": "farmared_test_d_cli",
+  "mongodb": {
+    "version": "8.0.15",
+    "replica_set": "rs0",
+    "primario": true
+  },
+  "neo4j": [
+    {
+      "name": "Neo4j Kernel",
+      "versions": [
+        "5.26.12"
+      ],
+      "edition": "community"
+    }
+  ],
+  "registros_mongo": {
+    "clientes": 1,
+    "sucursales": 1,
+    "farmaceuticos": 1,
+    "productos": 1,
+    "recetas": 2,
+    "ventas": 1
+  },
+  "eventos_outbox": 7,
+  "comandos": [
+    {
+      "comando": [
+        "python",
+        "-m",
+        "farmared",
+        "salud"
+      ],
+      "exit_code": 0,
+      "stdout": {
+        "proyeccion": "no_comprobada",
+        "mongo": {
+          "estado": "listo",
+          "base": "farmared_test_d_cli",
+          "primario": true
+        },
+        "neo4j": {
+          "estado": "listo"
+        }
+      },
+      "stderr": ""
+    },
+    {
+      "comando": [
+        "python",
+        "-m",
+        "farmared",
+        "preparar-mongo",
+        "--base",
+        "farmared_test_d_cli"
+      ],
+      "exit_code": 0,
+      "stdout": {
+        "base": "farmared_test_d_cli",
+        "esquema": "listo",
+        "colecciones": [
+          "clientes",
+          "sucursales",
+          "farmaceuticos",
+          "proveedores",
+          "productos",
+          "stock_lotes",
+          "recetas",
+          "ventas",
+          "outbox"
+        ]
+      },
+      "stderr": ""
+    },
+    {
+      "comando": [
+        "python",
+        "-m",
+        "farmared",
+        "grafo-init"
+      ],
+      "exit_code": 0,
+      "stdout": {
+        "comando": "grafo-init",
+        "esquema": "listo"
+      },
+      "stderr": ""
+    },
+    {
+      "comando": [
+        "python",
+        "-m",
+        "farmared",
+        "grafo-verify",
+        "--base",
+        "farmared_test_d_cli",
+        "--lock-path",
+        "<LOCK_COMPARTIDO>",
+        "--confirmar-escrituras-pausadas"
+      ],
+      "exit_code": 1,
+      "stdout": {
+        "alcance": "estado_estable_declarado",
+        "base": "farmared_test_d_cli",
+        "comando": "grafo-verify",
+        "conteos": {
+          "nodos_esperados": 7,
+          "nodos_observados": 0,
+          "relaciones_esperadas": 8,
+          "relaciones_observadas": 0
+        },
+        "diferencias": [
+          {
+            "etiqueta": "Cliente",
+            "id": "CLI-C",
+            "tipo": "nodo_faltante"
+          },
+          {
+            "etiqueta": "Farmaceutico",
+            "id": "CLI-F",
+            "tipo": "nodo_faltante"
+          },
+          {
+            "etiqueta": "Producto",
+            "id": "CLI-P",
+            "tipo": "nodo_faltante"
+          },
+          {
+            "etiqueta": "Receta",
+            "id": "CLI-R",
+            "tipo": "nodo_faltante"
+          },
+          {
+            "etiqueta": "Receta",
+            "id": "CLI-R2",
+            "tipo": "nodo_faltante"
+          },
+          {
+            "etiqueta": "Sucursal",
+            "id": "CLI-S",
+            "tipo": "nodo_faltante"
+          },
+          {
+            "etiqueta": "Venta",
+            "id": "CLI-V",
+            "tipo": "nodo_faltante"
+          },
+          {
+            "destino": {
+              "etiqueta": "Farmaceutico",
+              "id": "CLI-F"
+            },
+            "id_detalle": null,
+            "origen": {
+              "etiqueta": "Venta",
+              "id": "CLI-V"
+            },
+            "relacion": "ATENDIDA_POR",
+            "tipo": "relacion_faltante"
+          },
+          {
+            "destino": {
+              "etiqueta": "Producto",
+              "id": "CLI-P"
+            },
+            "id_detalle": "D1",
+            "origen": {
+              "etiqueta": "Venta",
+              "id": "CLI-V"
+            },
+            "relacion": "CONTIENE",
+            "tipo": "relacion_faltante"
+          },
+          {
+            "destino": {
+              "etiqueta": "Producto",
+              "id": "CLI-P"
+            },
+            "id_detalle": "D2",
+            "origen": {
+              "etiqueta": "Venta",
+              "id": "CLI-V"
+            },
+            "relacion": "CONTIENE",
+            "tipo": "relacion_faltante"
+          },
+          {
+            "destino": {
+              "etiqueta": "Venta",
+              "id": "CLI-V"
+            },
+            "id_detalle": null,
+            "origen": {
+              "etiqueta": "Cliente",
+              "id": "CLI-C"
+            },
+            "relacion": "REALIZO",
+            "tipo": "relacion_faltante"
+          },
+          {
+            "destino": {
+              "etiqueta": "Receta",
+              "id": "CLI-R"
+            },
+            "id_detalle": null,
+            "origen": {
+              "etiqueta": "Cliente",
+              "id": "CLI-C"
+            },
+            "relacion": "TIENE_RECETA",
+            "tipo": "relacion_faltante"
+          },
+          {
+            "destino": {
+              "etiqueta": "Receta",
+              "id": "CLI-R2"
+            },
+            "id_detalle": null,
+            "origen": {
+              "etiqueta": "Cliente",
+              "id": "CLI-C"
+            },
+            "relacion": "TIENE_RECETA",
+            "tipo": "relacion_faltante"
+          },
+          {
+            "destino": {
+              "etiqueta": "Sucursal",
+              "id": "CLI-S"
+            },
+            "id_detalle": null,
+            "origen": {
+              "etiqueta": "Farmaceutico",
+              "id": "CLI-F"
+            },
+            "relacion": "TRABAJA_EN",
+            "tipo": "relacion_faltante"
+          },
+          {
+            "destino": {
+              "etiqueta": "Receta",
+              "id": "CLI-R"
+            },
+            "id_detalle": null,
+            "origen": {
+              "etiqueta": "Venta",
+              "id": "CLI-V"
+            },
+            "relacion": "USA_RECETA",
+            "tipo": "relacion_faltante"
+          }
+        ],
+        "equivalente": false,
+        "precondiciones": {
+          "escrituras_pausadas_confirmadas": true,
+          "exclusion_compartida": true
+        }
+      },
+      "stderr": ""
+    },
+    {
+      "comando": [
+        "python",
+        "-m",
+        "farmared",
+        "sync",
+        "--base",
+        "farmared_test_d_cli",
+        "--lock-path",
+        "<LOCK_COMPARTIDO>"
+      ],
+      "exit_code": 0,
+      "stdout": {
+        "base": "farmared_test_d_cli",
+        "comando": "sync",
+        "estado": "sin_pendientes_observados",
+        "eventos_procesados": [
+          "CLI-E00",
+          "CLI-E01",
+          "CLI-E02",
+          "CLI-E03",
+          "CLI-E04",
+          "CLI-E05",
+          "CLI-E06"
+        ],
+        "fallidos": [],
+        "limite_alcanzado": false,
+        "pendientes_observados": 0,
+        "procesados": 7
+      },
+      "stderr": ""
+    },
+    {
+      "comando": [
+        "python",
+        "-m",
+        "farmared",
+        "grafo-verify",
+        "--base",
+        "farmared_test_d_cli",
+        "--lock-path",
+        "<LOCK_COMPARTIDO>",
+        "--confirmar-escrituras-pausadas"
+      ],
+      "exit_code": 0,
+      "stdout": {
+        "alcance": "estado_estable_declarado",
+        "base": "farmared_test_d_cli",
+        "comando": "grafo-verify",
+        "conteos": {
+          "nodos_esperados": 7,
+          "nodos_observados": 7,
+          "relaciones_esperadas": 8,
+          "relaciones_observadas": 8
+        },
+        "diferencias": [],
+        "equivalente": true,
+        "precondiciones": {
+          "escrituras_pausadas_confirmadas": true,
+          "exclusion_compartida": true
+        }
+      },
+      "stderr": ""
+    },
+    {
+      "comando": [
+        "python",
+        "-m",
+        "farmared",
+        "grafo-verify",
+        "--base",
+        "farmared_test_d_cli",
+        "--lock-path",
+        "<LOCK_COMPARTIDO>"
+      ],
+      "exit_code": 1,
+      "stdout": {
+        "alcance": "diagnostico_puntual",
+        "base": "farmared_test_d_cli",
+        "comando": "grafo-verify",
+        "conteos": {
+          "nodos_esperados": 7,
+          "nodos_observados": 7,
+          "relaciones_esperadas": 8,
+          "relaciones_observadas": 8
+        },
+        "diferencias": [],
+        "equivalente": true,
+        "precondiciones": {
+          "escrituras_pausadas_confirmadas": false,
+          "exclusion_compartida": true
+        }
+      },
+      "stderr": ""
+    },
+    {
+      "comando": [
+        "python",
+        "-m",
+        "farmared",
+        "q03",
+        "--id-cliente",
+        "CLI-C"
+      ],
+      "exit_code": 0,
+      "stdout": {
+        "consulta": "q03",
+        "id_cliente": "CLI-C",
+        "proyeccion": "eventualmente_consistente",
+        "resultados": [
+          {
+            "detalle": {
+              "dispensas_autorizadas": 1,
+              "dispensas_realizadas": 1,
+              "medico": "Médico prueba",
+              "proxima_dispensa": null,
+              "tipo": "Simple"
+            },
+            "estado": "Completada",
+            "fecha": "2026-01-01",
+            "id_registro": "CLI-R",
+            "tipo_evento": "RECETA"
+          },
+          {
+            "detalle": {
+              "dispensas_autorizadas": 1,
+              "dispensas_realizadas": 1,
+              "medico": "Médico prueba",
+              "proxima_dispensa": null,
+              "tipo": "Simple"
+            },
+            "estado": "Completada",
+            "fecha": "2026-01-01",
+            "id_registro": "CLI-R2",
+            "tipo_evento": "RECETA"
+          },
+          {
+            "detalle": {
+              "id_receta": "CLI-R",
+              "items": [
+                {
+                  "cantidad": 2,
+                  "id_detalle": "D1",
+                  "id_producto": "CLI-P",
+                  "nombre_al_vender": "Nombre anterior",
+                  "orden": 0,
+                  "precio_unit": 100,
+                  "subtotal": 200
+                },
+                {
+                  "cantidad": 1,
+                  "id_detalle": "D2",
+                  "id_producto": "CLI-P",
+                  "nombre_al_vender": null,
+                  "orden": 1,
+                  "precio_unit": 120,
+                  "subtotal": 120
+                }
+              ],
+              "medio_pago": "Efectivo",
+              "tipo": "Con receta",
+              "total": 320
+            },
+            "estado": "Pendiente",
+            "fecha": "2026-01-02",
+            "id_registro": "CLI-V",
+            "tipo_evento": "VENTA"
+          }
+        ]
+      },
+      "stderr": "Received notification from DBMS server: <GqlStatusObject gql_status='01N52', status_description='warn: property key does not exist. The property `proxima_dispensa` does not exist. Verify that the spelling is correct.', position=<SummaryInputPosition line=29, column=36, offset=1218>, raw_classification='UNRECOGNIZED', classification=<NotificationClassification.UNRECOGNIZED: 'UNRECOGNIZED'>, raw_severity='WARNING', severity=<NotificationSeverity.WARNING: 'WARNING'>, diagnostic_record={'_classification': 'UNRECOGNIZED', '_severity': 'WARNING', '_position': {'offset': 1218, 'line': 29, 'column': 36}, 'OPERATION': '', 'OPERATION_CODE': '0', 'CURRENT_SCHEMA': '/'}> for query: \"\\nMATCH (c:Cliente {id: $id_cliente})\\nCALL (c) {\\n    MATCH (c)-[:REALIZO]->(v:Venta)\\n    WITH DISTINCT v\\n    CALL (v) {\\n        OPTIONAL MATCH (v)-[i:CONTIENE]->(p:Producto)\\n        WITH i, p ORDER BY i.orden, i.id_detalle\\n        RETURN collect(CASE WHEN i IS NULL THEN null ELSE {\\n            id_detalle: i.id_detalle, orden: i.orden, id_producto: p.id,\\n            nombre_al_vender: i.nombre_al_vender, cantidad: i.cantidad,\\n            precio_unit: i.precio_unit, subtotal: i.subtotal\\n        } END) AS items\\n    }\\n    RETURN v.fecha AS fecha, 'VENTA' AS tipo_evento, v.id AS id_registro,\\n           v.estado AS estado, {\\n               tipo: v.tipo, total: v.total, medio_pago: v.medio_pago,\\n               id_receta: head([(v)-[:USA_RECETA]->(r:Receta) | r.id]),\\n               items: items\\n           } AS detalle\\n    UNION ALL\\n    MATCH (c)-[:TIENE_RECETA]->(r:Receta)\\n    WITH DISTINCT r\\n    RETURN r.fecha_emision AS fecha, 'RECETA' AS tipo_evento, r.id AS id_registro,\\n           r.estado AS estado, {\\n               tipo: r.tipo, medico: r.medico,\\n               dispensas_realizadas: r.dispensas_realizadas,\\n               dispensas_autorizadas: r.dispensas_autorizadas,\\n               proxima_dispensa: r.proxima_dispensa\\n           } AS detalle\\n}\\nRETURN fecha, tipo_evento, id_registro, estado, detalle\\nORDER BY fecha, tipo_evento, id_registro\\n\""
+    },
+    {
+      "comando": [
+        "python",
+        "-m",
+        "farmared",
+        "q04"
+      ],
+      "exit_code": 0,
+      "stdout": {
+        "consulta": "q04",
+        "proyeccion": "eventualmente_consistente",
+        "resultados": [
+          {
+            "apellido": "Prueba",
+            "cantidad": 2,
+            "id_cliente": "CLI-C",
+            "nombre": "Ana"
+          }
+        ]
+      },
+      "stderr": ""
+    },
+    {
+      "comando": [
+        "python",
+        "-m",
+        "farmared",
+        "q10",
+        "--id-sucursal",
+        "CLI-S"
+      ],
+      "exit_code": 0,
+      "stdout": {
+        "consulta": "q10",
+        "id_sucursal": "CLI-S",
+        "proyeccion": "eventualmente_consistente",
+        "resultados": [
+          {
+            "apellido": "Prueba",
+            "id_cliente": "CLI-C",
+            "nombre": "Ana"
+          }
+        ]
+      },
+      "stderr": ""
+    },
+    {
+      "comando": [
+        "python",
+        "-m",
+        "farmared",
+        "sync",
+        "--base",
+        "farmared_test_d_cli",
+        "--lock-path",
+        "<LOCK_COMPARTIDO>"
+      ],
+      "exit_code": 0,
+      "stdout": {
+        "base": "farmared_test_d_cli",
+        "comando": "sync",
+        "estado": "sin_pendientes_observados",
+        "eventos_procesados": [],
+        "fallidos": [],
+        "limite_alcanzado": false,
+        "pendientes_observados": 0,
+        "procesados": 0
+      },
+      "stderr": ""
+    },
+    {
+      "comando": [
+        "python",
+        "-m",
+        "farmared",
+        "q03",
+        "--id-cliente",
+        "INEXISTENTE"
+      ],
+      "exit_code": 0,
+      "stdout": {
+        "consulta": "q03",
+        "id_cliente": "INEXISTENTE",
+        "proyeccion": "eventualmente_consistente",
+        "resultados": []
+      },
+      "stderr": "Received notification from DBMS server: <GqlStatusObject gql_status='01N52', status_description='warn: property key does not exist. The property `proxima_dispensa` does not exist. Verify that the spelling is correct.', position=<SummaryInputPosition line=29, column=36, offset=1218>, raw_classification='UNRECOGNIZED', classification=<NotificationClassification.UNRECOGNIZED: 'UNRECOGNIZED'>, raw_severity='WARNING', severity=<NotificationSeverity.WARNING: 'WARNING'>, diagnostic_record={'_classification': 'UNRECOGNIZED', '_severity': 'WARNING', '_position': {'offset': 1218, 'line': 29, 'column': 36}, 'OPERATION': '', 'OPERATION_CODE': '0', 'CURRENT_SCHEMA': '/'}> for query: \"\\nMATCH (c:Cliente {id: $id_cliente})\\nCALL (c) {\\n    MATCH (c)-[:REALIZO]->(v:Venta)\\n    WITH DISTINCT v\\n    CALL (v) {\\n        OPTIONAL MATCH (v)-[i:CONTIENE]->(p:Producto)\\n        WITH i, p ORDER BY i.orden, i.id_detalle\\n        RETURN collect(CASE WHEN i IS NULL THEN null ELSE {\\n            id_detalle: i.id_detalle, orden: i.orden, id_producto: p.id,\\n            nombre_al_vender: i.nombre_al_vender, cantidad: i.cantidad,\\n            precio_unit: i.precio_unit, subtotal: i.subtotal\\n        } END) AS items\\n    }\\n    RETURN v.fecha AS fecha, 'VENTA' AS tipo_evento, v.id AS id_registro,\\n           v.estado AS estado, {\\n               tipo: v.tipo, total: v.total, medio_pago: v.medio_pago,\\n               id_receta: head([(v)-[:USA_RECETA]->(r:Receta) | r.id]),\\n               items: items\\n           } AS detalle\\n    UNION ALL\\n    MATCH (c)-[:TIENE_RECETA]->(r:Receta)\\n    WITH DISTINCT r\\n    RETURN r.fecha_emision AS fecha, 'RECETA' AS tipo_evento, r.id AS id_registro,\\n           r.estado AS estado, {\\n               tipo: r.tipo, medico: r.medico,\\n               dispensas_realizadas: r.dispensas_realizadas,\\n               dispensas_autorizadas: r.dispensas_autorizadas,\\n               proxima_dispensa: r.proxima_dispensa\\n           } AS detalle\\n}\\nRETURN fecha, tipo_evento, id_registro, estado, detalle\\nORDER BY fecha, tipo_evento, id_registro\\n\""
+    },
+    {
+      "comando": [
+        "python",
+        "-m",
+        "farmared",
+        "q10",
+        "--id-sucursal",
+        "INEXISTENTE"
+      ],
+      "exit_code": 0,
+      "stdout": {
+        "consulta": "q10",
+        "id_sucursal": "INEXISTENTE",
+        "proyeccion": "eventualmente_consistente",
+        "resultados": []
+      },
+      "stderr": ""
+    },
+    {
+      "comando": [
+        "python",
+        "-m",
+        "farmared",
+        "sync",
+        "--base",
+        "farmared_test_d_cli",
+        "--lock-path",
+        "<LOCK_COMPARTIDO>"
+      ],
+      "exit_code": 1,
+      "stdout": null,
+      "stderr": "CONEXION: No se pudo conectar a Neo4j; revisar destino y credenciales."
+    },
+    {
+      "comando": [
+        "python",
+        "-m",
+        "farmared",
+        "sync",
+        "--base",
+        "farmared_test_d_cli",
+        "--lock-path",
+        "<LOCK_COMPARTIDO>"
+      ],
+      "exit_code": 0,
+      "stdout": {
+        "base": "farmared_test_d_cli",
+        "comando": "sync",
+        "estado": "sin_pendientes_observados",
+        "eventos_procesados": [
+          "CLI-E00"
+        ],
+        "fallidos": [],
+        "limite_alcanzado": false,
+        "pendientes_observados": 0,
+        "procesados": 1
+      },
+      "stderr": ""
+    },
+    {
+      "comando": [
+        "python",
+        "-m",
+        "farmared",
+        "grafo-verify",
+        "--base",
+        "farmared_test_d_cli",
+        "--lock-path",
+        "<LOCK_COMPARTIDO>",
+        "--confirmar-escrituras-pausadas"
+      ],
+      "exit_code": 0,
+      "stdout": {
+        "alcance": "estado_estable_declarado",
+        "base": "farmared_test_d_cli",
+        "comando": "grafo-verify",
+        "conteos": {
+          "nodos_esperados": 7,
+          "nodos_observados": 7,
+          "relaciones_esperadas": 8,
+          "relaciones_observadas": 8
+        },
+        "diferencias": [],
+        "equivalente": true,
+        "precondiciones": {
+          "escrituras_pausadas_confirmadas": true,
+          "exclusion_compartida": true
+        }
+      },
+      "stderr": ""
+    },
+    {
+      "comando": [
+        "python",
+        "-m",
+        "farmared",
+        "grafo-rebuild",
+        "--base",
+        "farmared_test_d_cli",
+        "--lock-path",
+        "<LOCK_COMPARTIDO>"
+      ],
+      "exit_code": 1,
+      "stdout": null,
+      "stderr": "VALIDACION: Confirmar entorno aislado, escrituras pausadas y sincronizador pausado antes de conectar."
+    },
+    {
+      "comando": [
+        "python",
+        "-m",
+        "farmared",
+        "grafo-rebuild",
+        "--base",
+        "farmared_test_d_cli",
+        "--lock-path",
+        "<LOCK_COMPARTIDO>",
+        "--confirmar-entorno-aislado",
+        "--confirmar-escrituras-pausadas",
+        "--confirmar-sincronizador-pausado"
+      ],
+      "exit_code": 1,
+      "stdout": {
+        "base": "farmared_test_d_cli",
+        "comando": "grafo-rebuild",
+        "commit_neo4j": "no_confirmado",
+        "error": {
+          "causa": "El destino no está vacío; confirmar explícitamente la actualización de propiedades y relaciones.",
+          "codigo": "ACTUALIZACION_NO_CONFIRMADA"
+        },
+        "estado": "error",
+        "fase": "validacion_destino",
+        "habilitable": false,
+        "mongo_modificado": false,
+        "outbox_modificada": false,
+        "precondiciones": {
+          "actualizacion_existente_confirmada": false,
+          "entorno_aislado_confirmado": true,
+          "escrituras_pausadas_confirmadas": true,
+          "exclusion_compartida": true
+        },
+        "recuperable": true,
+        "sincronizador_pausado_confirmado": true,
+        "verificacion": null
+      },
+      "stderr": ""
+    },
+    {
+      "comando": [
+        "python",
+        "-m",
+        "farmared",
+        "grafo-rebuild",
+        "--base",
+        "farmared_test_d_cli",
+        "--lock-path",
+        "<LOCK_COMPARTIDO>",
+        "--confirmar-entorno-aislado",
+        "--confirmar-escrituras-pausadas",
+        "--confirmar-sincronizador-pausado",
+        "--confirmar-actualizacion-existente"
+      ],
+      "exit_code": 0,
+      "stdout": {
+        "base": "farmared_test_d_cli",
+        "comando": "grafo-rebuild",
+        "commit_neo4j": "confirmado",
+        "error": null,
+        "estado": "verificada",
+        "fase": "finalizada",
+        "habilitable": true,
+        "mongo_modificado": false,
+        "outbox_modificada": false,
+        "precondiciones": {
+          "actualizacion_existente_confirmada": true,
+          "entorno_aislado_confirmado": true,
+          "escrituras_pausadas_confirmadas": true,
+          "exclusion_compartida": true
+        },
+        "recuperable": false,
+        "sincronizador_pausado_confirmado": true,
+        "verificacion": {
+          "conteos": {
+            "nodos_esperados": 7,
+            "nodos_observados": 7,
+            "relaciones_esperadas": 8,
+            "relaciones_observadas": 8
+          },
+          "diferencias": [],
+          "equivalente": true
+        }
+      },
+      "stderr": ""
+    }
+  ]
+}

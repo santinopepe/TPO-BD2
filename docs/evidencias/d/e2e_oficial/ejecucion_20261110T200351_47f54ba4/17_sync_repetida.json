@@ -1,0 +1,25 @@
+{
+  "comando": [
+    "python",
+    "-m",
+    "farmared",
+    "sync",
+    "--base",
+    "farmared_demo_d_oficial_e3311eda",
+    "--lock-path",
+    "<LOCK_COMPARTIDO>"
+  ],
+  "exit_code": 0,
+  "segundos_observados": 1.06,
+  "stdout": {
+    "base": "farmared_demo_d_oficial_e3311eda",
+    "comando": "sync",
+    "estado": "sin_pendientes_observados",
+    "eventos_procesados": [],
+    "fallidos": [],
+    "limite_alcanzado": false,
+    "pendientes_observados": 0,
+    "procesados": 0
+  },
+  "stderr": ""
+}

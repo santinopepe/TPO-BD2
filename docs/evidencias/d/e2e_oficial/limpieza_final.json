@@ -1,0 +1,9 @@
+{
+  "contenedores_activos": [],
+  "volumenes_restantes": [
+    "MyMySql-data",
+    "ophtha-platform_backend_files",
+    "ophtha-platform_postgres_data"
+  ],
+  "fuentes_intactas_tras_suites": true
+}

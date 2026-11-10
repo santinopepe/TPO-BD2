@@ -1,0 +1,271 @@
+{
+  "q03": {
+    "filtro": {
+      "id_cliente": "C001"
+    },
+    "resultado": [
+      {
+        "fecha": "2026-09-10",
+        "tipo_evento": "RECETA",
+        "id_registro": "RC001",
+        "estado": "Completada",
+        "detalle": {
+          "tipo": "Simple",
+          "medico": "Dr. Alejandro Vidal",
+          "dispensas_realizadas": 1,
+          "dispensas_autorizadas": 1,
+          "proxima_dispensa": null
+        }
+      },
+      {
+        "fecha": "2026-09-10",
+        "tipo_evento": "VENTA",
+        "id_registro": "V003",
+        "estado": "Completada",
+        "detalle": {
+          "tipo": "Con receta",
+          "total": 9800,
+          "medio_pago": "Obra social",
+          "id_receta": "RC001",
+          "items": [
+            {
+              "id_detalle": "D004",
+              "orden": 0,
+              "id_producto": "PRD003",
+              "nombre_al_vender": null,
+              "cantidad": 1,
+              "precio_unit": 9800,
+              "subtotal": 9800
+            }
+          ]
+        }
+      },
+      {
+        "fecha": "2026-09-25",
+        "tipo_evento": "VENTA",
+        "id_registro": "V015",
+        "estado": "Anulada",
+        "detalle": {
+          "tipo": "Venta libre",
+          "total": 3500,
+          "medio_pago": "Débito",
+          "id_receta": null,
+          "items": [
+            {
+              "id_detalle": "D020",
+              "orden": 0,
+              "id_producto": "PRD002",
+              "nombre_al_vender": null,
+              "cantidad": 1,
+              "precio_unit": 3500,
+              "subtotal": 3500
+            }
+          ]
+        }
+      },
+      {
+        "fecha": "2026-10-02",
+        "tipo_evento": "VENTA",
+        "id_registro": "V013",
+        "estado": "Completada",
+        "detalle": {
+          "tipo": "Venta libre",
+          "total": 4400,
+          "medio_pago": "Efectivo",
+          "id_receta": null,
+          "items": [
+            {
+              "id_detalle": "D017",
+              "orden": 0,
+              "id_producto": "PRD011",
+              "nombre_al_vender": null,
+              "cantidad": 2,
+              "precio_unit": 2200,
+              "subtotal": 4400
+            }
+          ]
+        }
+      },
+      {
+        "fecha": "2026-10-08",
+        "tipo_evento": "RECETA",
+        "id_registro": "RC008",
+        "estado": "Completada",
+        "detalle": {
+          "tipo": "Simple",
+          "medico": "Dra. Mónica Salas",
+          "dispensas_realizadas": 1,
+          "dispensas_autorizadas": 1,
+          "proxima_dispensa": null
+        }
+      },
+      {
+        "fecha": "2026-10-08",
+        "tipo_evento": "VENTA",
+        "id_registro": "V010",
+        "estado": "Completada",
+        "detalle": {
+          "tipo": "Con receta",
+          "total": 7100,
+          "medio_pago": "Crédito",
+          "id_receta": "RC008",
+          "items": [
+            {
+              "id_detalle": "D013",
+              "orden": 0,
+              "id_producto": "PRD010",
+              "nombre_al_vender": null,
+              "cantidad": 1,
+              "precio_unit": 7100,
+              "subtotal": 7100
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "q04": {
+    "pipeline": [
+      {
+        "$group": {
+          "_id": "$id_cliente",
+          "cantidad": {
+            "$sum": 1
+          }
+        }
+      },
+      {
+        "$match": {
+          "cantidad": {
+            "$gt": 1
+          }
+        }
+      },
+      {
+        "$lookup": {
+          "from": "clientes",
+          "localField": "_id",
+          "foreignField": "_id",
+          "as": "cliente"
+        }
+      },
+      {
+        "$unwind": "$cliente"
+      },
+      {
+        "$project": {
+          "_id": 0,
+          "id_cliente": "$_id",
+          "nombre": "$cliente.nombre",
+          "apellido": "$cliente.apellido",
+          "cantidad": 1
+        }
+      },
+      {
+        "$sort": {
+          "cantidad": -1,
+          "id_cliente": 1
+        }
+      }
+    ],
+    "resultado": [
+      {
+        "cantidad": 2,
+        "id_cliente": "A-C001",
+        "nombre": "Cliente adicional 1",
+        "apellido": "Ficticio"
+      },
+      {
+        "cantidad": 2,
+        "id_cliente": "A-C008",
+        "nombre": "Cliente adicional 8",
+        "apellido": "Ficticio"
+      },
+      {
+        "cantidad": 2,
+        "id_cliente": "C001",
+        "nombre": "Lucía",
+        "apellido": "Fernández"
+      },
+      {
+        "cantidad": 2,
+        "id_cliente": "C002",
+        "nombre": "Martín",
+        "apellido": "Gómez"
+      },
+      {
+        "cantidad": 2,
+        "id_cliente": "C006",
+        "nombre": "Ricardo",
+        "apellido": "Paz"
+      }
+    ]
+  },
+  "q10": {
+    "pipeline": [
+      {
+        "$lookup": {
+          "from": "farmaceuticos",
+          "localField": "id_farmaceutico",
+          "foreignField": "_id",
+          "as": "f"
+        }
+      },
+      {
+        "$unwind": "$f"
+      },
+      {
+        "$match": {
+          "f.id_sucursal": "A-S002"
+        }
+      },
+      {
+        "$group": {
+          "_id": "$id_cliente"
+        }
+      },
+      {
+        "$lookup": {
+          "from": "clientes",
+          "localField": "_id",
+          "foreignField": "_id",
+          "as": "c"
+        }
+      },
+      {
+        "$unwind": "$c"
+      },
+      {
+        "$project": {
+          "_id": 0,
+          "id_cliente": "$_id",
+          "nombre": "$c.nombre",
+          "apellido": "$c.apellido"
+        }
+      },
+      {
+        "$sort": {
+          "id_cliente": 1
+        }
+      }
+    ],
+    "resultado": [
+      {
+        "id_cliente": "A-C002",
+        "nombre": "Cliente adicional 2",
+        "apellido": "Ficticio"
+      },
+      {
+        "id_cliente": "A-C003",
+        "nombre": "Cliente adicional 3",
+        "apellido": "Ficticio"
+      },
+      {
+        "id_cliente": "A-C009",
+        "nombre": "Cliente adicional 9",
+        "apellido": "Ficticio"
+      }
+    ]
+  },
+  "comparacion_exacta": true
+}

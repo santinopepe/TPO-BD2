@@ -1,0 +1,94 @@
+{
+  "comando": [
+    "python",
+    "-m",
+    "farmared",
+    "seed",
+    "--base",
+    "farmared_demo_d_oficial_e3311eda",
+    "--directorio",
+    "data/originales",
+    "--directorio",
+    "data/adicionales"
+  ],
+  "exit_code": 0,
+  "segundos_observados": 0.903,
+  "stdout": {
+    "base": "farmared_demo_d_oficial_e3311eda",
+    "carga": "completa",
+    "reutilizada": false,
+    "huella": "c2bbc4cb4e97de5cef6c17d09522ef172041e8ee08a2a6a8529533cf4f31e2e0",
+    "base_date": "2026-11-10",
+    "conteos_iniciales": {
+      "clientes": 18,
+      "sucursales": 15,
+      "farmaceuticos": 17,
+      "proveedores": 15,
+      "productos": 23,
+      "stock_lotes": 34,
+      "recetas": 19,
+      "ventas": 28
+    },
+    "eventos_emitidos": 120,
+    "avisos": [
+      {
+        "archivo": "data\\originales\\ventas.csv",
+        "fila": 2,
+        "campo": "id_farmaceutico",
+        "codigo": "HISTORICO",
+        "motivo": "Referencia actualmente inactiva; no se revalida la actividad de una operación histórica."
+      },
+      {
+        "archivo": "data\\originales\\detalle_ventas.csv",
+        "fila": 20,
+        "campo": "id_producto",
+        "codigo": "HISTORICO",
+        "motivo": "Producto actualmente inactivo; se conserva el detalle histórico."
+      },
+      {
+        "archivo": "data\\adicionales\\ventas.csv",
+        "fila": 3,
+        "campo": "id_farmaceutico",
+        "codigo": "HISTORICO",
+        "motivo": "Referencia actualmente inactiva; no se revalida la actividad de una operación histórica."
+      },
+      {
+        "archivo": "data\\adicionales\\ventas.csv",
+        "fila": 4,
+        "campo": "id_farmaceutico",
+        "codigo": "HISTORICO",
+        "motivo": "Referencia actualmente inactiva; no se revalida la actividad de una operación histórica."
+      },
+      {
+        "archivo": "data\\adicionales\\ventas.csv",
+        "fila": 10,
+        "campo": "id_cliente",
+        "codigo": "HISTORICO",
+        "motivo": "Referencia actualmente inactiva; no se revalida la actividad de una operación histórica."
+      },
+      {
+        "archivo": "data\\adicionales\\ventas.csv",
+        "fila": 10,
+        "campo": "id_farmaceutico",
+        "codigo": "HISTORICO",
+        "motivo": "Referencia actualmente inactiva; no se revalida la actividad de una operación histórica."
+      },
+      {
+        "archivo": "data\\adicionales\\detalle_ventas.csv",
+        "fila": 11,
+        "campo": "id_producto",
+        "codigo": "HISTORICO",
+        "motivo": "Producto actualmente inactivo; se conserva el detalle histórico."
+      },
+      {
+        "archivo": "data\\originales\\recetas.csv",
+        "fila": 3,
+        "campo": "proxima_dispensa",
+        "codigo": "HISTORICO",
+        "motivo": "Fecha informada 2026-09-15 distinta de última venta +30 días (2026-09-14); se conserva sin corregir."
+      }
+    ],
+    "proyeccion": "no_comprobada"
+  },
+  "stderr": ""
+}

@@ -1,0 +1,246 @@
+{
+  "comando": [
+    "python",
+    "-m",
+    "farmared",
+    "validar-datasets",
+    "--directorio",
+    "data/originales",
+    "--directorio",
+    "data/adicionales"
+  ],
+  "exit_code": 0,
+  "segundos_observados": 0.236,
+  "stdout": {
+    "valido": true,
+    "version_validacion": 1,
+    "conteos": {
+      "clientes": 18,
+      "sucursales": 15,
+      "farmaceuticos": 17,
+      "proveedores": 15,
+      "productos": 23,
+      "stock_lotes": 34,
+      "recetas": 19,
+      "ventas": 28,
+      "detalle_ventas": 38
+    },
+    "huella": "c2bbc4cb4e97de5cef6c17d09522ef172041e8ee08a2a6a8529533cf4f31e2e0",
+    "fuentes": [
+      {
+        "tabla": "clientes",
+        "orden": 0,
+        "archivo": "data\\originales\\clientes.csv",
+        "sha256": "afaddcaa8762b619dd46b3e21acd4544b0f034550493b76832e774a4ef21d9ed",
+        "bytes": 908,
+        "filas_leidas": 8
+      },
+      {
+        "tabla": "clientes",
+        "orden": 1,
+        "archivo": "data\\adicionales\\clientes.csv",
+        "sha256": "80bd39404be0b45f3579b1f23eafa7a6b544a45e8054b100a5d18cc59f428b1a",
+        "bytes": 1328,
+        "filas_leidas": 10
+      },
+      {
+        "tabla": "sucursales",
+        "orden": 0,
+        "archivo": "data\\originales\\sucursales.csv",
+        "sha256": "89210e743de64f168c684a51cde82b3feeda27d794b5dd586f57b102b6d1e7b7",
+        "bytes": 513,
+        "filas_leidas": 5
+      },
+      {
+        "tabla": "sucursales",
+        "orden": 1,
+        "archivo": "data\\adicionales\\sucursales.csv",
+        "sha256": "533a8ad3025ec4417f59ef474a76eea160bbf21dbaee73c7188f7aa5c8874dbf",
+        "bytes": 1032,
+        "filas_leidas": 10
+      },
+      {
+        "tabla": "farmaceuticos",
+        "orden": 0,
+        "archivo": "data\\originales\\farmaceuticos.csv",
+        "sha256": "03db193b616a41954589703a349ba5b427e05c8ee431ca5c18f1f7dc3f31e021",
+        "bytes": 471,
+        "filas_leidas": 7
+      },
+      {
+        "tabla": "farmaceuticos",
+        "orden": 1,
+        "archivo": "data\\adicionales\\farmaceuticos.csv",
+        "sha256": "9810b0c81b89356388ef55d1be3f9b635a8d8d7a958171d6b536ac9ef641b2da",
+        "bytes": 809,
+        "filas_leidas": 10
+      },
+      {
+        "tabla": "proveedores",
+        "orden": 0,
+        "archivo": "data\\originales\\proveedores.csv",
+        "sha256": "609b89e2038ae7ce586baa2cbac24f54b76d6610792844028a3d8543a1beeb23",
+        "bytes": 536,
+        "filas_leidas": 5
+      },
+      {
+        "tabla": "proveedores",
+        "orden": 1,
+        "archivo": "data\\adicionales\\proveedores.csv",
+        "sha256": "d1299690f249f733d7b090a7c601263802a4ff1c272d6dfb68ba4f562c0caf18",
+        "bytes": 1046,
+        "filas_leidas": 10
+      },
+      {
+        "tabla": "productos",
+        "orden": 0,
+        "archivo": "data\\originales\\productos.csv",
+        "sha256": "cd0bde7d1da5de4cb96ccbd9b7a0218e670e075e4c75179145bbd2a9c572f0f8",
+        "bytes": 1431,
+        "filas_leidas": 13
+      },
+      {
+        "tabla": "productos",
+        "orden": 1,
+        "archivo": "data\\adicionales\\productos.csv",
+        "sha256": "3307fb35a8548b0326ea97ae27c15419448d1b270a241e9b78fcc324c3383652",
+        "bytes": 1099,
+        "filas_leidas": 10
+      },
+      {
+        "tabla": "stock_lotes",
+        "orden": 0,
+        "archivo": "data\\originales\\stock_lotes.csv",
+        "sha256": "7dc07e052cabede0cdfa425315699d38de88f921d9a11e061bd377d6842e30ad",
+        "bytes": 772,
+        "filas_leidas": 18
+      },
+      {
+        "tabla": "stock_lotes",
+        "orden": 1,
+        "archivo": "data\\adicionales\\stock_lotes.csv",
+        "sha256": "4bfc407afb8dfbaf70507df99288952eebf0f756b3c7e9e29d616c1bd8ce781a",
+        "bytes": 803,
+        "filas_leidas": 16
+      },
+      {
+        "tabla": "recetas",
+        "orden": 0,
+        "archivo": "data\\originales\\recetas.csv",
+        "sha256": "021f56ef49addd28b71076d44bdeabbcf3ffde0f04a9a7c950e792c3e8213ec9",
+        "bytes": 871,
+        "filas_leidas": 9
+      },
+      {
+        "tabla": "recetas",
+        "orden": 1,
+        "archivo": "data\\adicionales\\recetas.csv",
+        "sha256": "c5108fdfca6442aba6ba6bd8571d951c78fb68a59ae6c0c180ddc986987f7ac5",
+        "bytes": 941,
+        "filas_leidas": 10
+      },
+      {
+        "tabla": "ventas",
+        "orden": 0,
+        "archivo": "data\\originales\\ventas.csv",
+        "sha256": "a8009f4bccdccd7b0679c7518935cb985f31a9bbdb6788172a58998a1f230ab8",
+        "bytes": 1165,
+        "filas_leidas": 16
+      },
+      {
+        "tabla": "ventas",
+        "orden": 1,
+        "archivo": "data\\adicionales\\ventas.csv",
+        "sha256": "697e1995fbd914e8b20f9b517177f54d6fb1ad9cd9b77cdab6cb0d94f7349fa7",
+        "bytes": 924,
+        "filas_leidas": 12
+      },
+      {
+        "tabla": "detalle_ventas",
+        "orden": 0,
+        "archivo": "data\\originales\\detalle_ventas.csv",
+        "sha256": "cb57f070e1e2a12727d19ec799a2002398fc5ddc686ba370c6d9f14f654d085d",
+        "bytes": 581,
+        "filas_leidas": 22
+      },
+      {
+        "tabla": "detalle_ventas",
+        "orden": 1,
+        "archivo": "data\\adicionales\\detalle_ventas.csv",
+        "sha256": "cb6d2a748a51247cc053c38920bb0974c2b8ddcb203f6ea361af7b00fd503b9b",
+        "bytes": 526,
+        "filas_leidas": 16
+      }
+    ],
+    "errores": [],
+    "avisos": [
+      {
+        "archivo": "data\\originales\\ventas.csv",
+        "fila": 2,
+        "campo": "id_farmaceutico",
+        "codigo": "HISTORICO",
+        "motivo": "Referencia actualmente inactiva; no se revalida la actividad de una operación histórica."
+      },
+      {
+        "archivo": "data\\originales\\detalle_ventas.csv",
+        "fila": 20,
+        "campo": "id_producto",
+        "codigo": "HISTORICO",
+        "motivo": "Producto actualmente inactivo; se conserva el detalle histórico."
+      },
+      {
+        "archivo": "data\\adicionales\\ventas.csv",
+        "fila": 3,
+        "campo": "id_farmaceutico",
+        "codigo": "HISTORICO",
+        "motivo": "Referencia actualmente inactiva; no se revalida la actividad de una operación histórica."
+      },
+      {
+        "archivo": "data\\adicionales\\ventas.csv",
+        "fila": 4,
+        "campo": "id_farmaceutico",
+        "codigo": "HISTORICO",
+        "motivo": "Referencia actualmente inactiva; no se revalida la actividad de una operación histórica."
+      },
+      {
+        "archivo": "data\\adicionales\\ventas.csv",
+        "fila": 10,
+        "campo": "id_cliente",
+        "codigo": "HISTORICO",
+        "motivo": "Referencia actualmente inactiva; no se revalida la actividad de una operación histórica."
+      },
+      {
+        "archivo": "data\\adicionales\\ventas.csv",
+        "fila": 10,
+        "campo": "id_farmaceutico",
+        "codigo": "HISTORICO",
+        "motivo": "Referencia actualmente inactiva; no se revalida la actividad de una operación histórica."
+      },
+      {
+        "archivo": "data\\adicionales\\detalle_ventas.csv",
+        "fila": 11,
+        "campo": "id_producto",
+        "codigo": "HISTORICO",
+        "motivo": "Producto actualmente inactivo; se conserva el detalle histórico."
+      },
+      {
+        "archivo": "data\\originales\\recetas.csv",
+        "fila": 3,
+        "campo": "proxima_dispensa",
+        "codigo": "HISTORICO",
+        "motivo": "Fecha informada 2026-09-15 distinta de última venta +30 días (2026-09-14); se conserva sin corregir."
+      }
+    ],
+    "escrituras": 0,
+    "generaciones": [
+      {
+        "archivo": "data\\adicionales\\manifiesto.json",
+        "orden": 1,
+        "sha256": "db74749e2a29a1e4d09c8be2dd18f7e54817c86d0f2c31a77ff3e4e106a9175c",
+        "base_date": "2026-11-10",
+        "version_generador": 1
+      }
+    ]
+  },
+  "stderr": ""
+}

@@ -1,0 +1,47 @@
+{
+  "comando": [
+    "python",
+    "-m",
+    "farmared",
+    "q04"
+  ],
+  "exit_code": 0,
+  "segundos_observados": 1.202,
+  "stdout": {
+    "consulta": "q04",
+    "proyeccion": "eventualmente_consistente",
+    "resultados": [
+      {
+        "apellido": "Ficticio",
+        "cantidad": 2,
+        "id_cliente": "A-C001",
+        "nombre": "Cliente adicional 1"
+      },
+      {
+        "apellido": "Ficticio",
+        "cantidad": 2,
+        "id_cliente": "A-C008",
+        "nombre": "Cliente adicional 8"
+      },
+      {
+        "apellido": "Fernández",
+        "cantidad": 2,
+        "id_cliente": "C001",
+        "nombre": "Lucía"
+      },
+      {
+        "apellido": "Gómez",
+        "cantidad": 2,
+        "id_cliente": "C002",
+        "nombre": "Martín"
+      },
+      {
+        "apellido": "Paz",
+        "cantidad": 2,
+        "id_cliente": "C006",
+        "nombre": "Ricardo"
+      }
+    ]
+  },
+  "stderr": ""
+}

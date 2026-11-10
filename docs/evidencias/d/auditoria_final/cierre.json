@@ -1,0 +1,44 @@
+{
+  "dictamen": "contribucion_D_lista_para_integracion; publicar_archivos_y_completar_entrega_conjunta",
+  "pruebas": [
+    {
+      "suite": "persona_d",
+      "exit_code": 0,
+      "resultado": "271 passed in 233.32s (0:03:53)"
+    },
+    {
+      "suite": "general",
+      "exit_code": 0,
+      "resultado": "550 passed, 2 skipped in 324.52s (0:05:24)"
+    }
+  ],
+  "git_diff_check": {
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  "git_status_final": {
+    "exit_code": 0,
+    "stdout": " M data/adicionales/clientes.csv\n M data/adicionales/detalle_ventas.csv\n M data/adicionales/farmaceuticos.csv\n M data/adicionales/manifiesto.json\n M data/adicionales/productos.csv\n M data/adicionales/proveedores.csv\n M data/adicionales/recetas.csv\n M data/adicionales/stock_lotes.csv\n M data/adicionales/sucursales.csv\n M data/adicionales/ventas.csv\n M data/originales/clientes.csv\n M data/originales/detalle_ventas.csv\n M data/originales/farmaceuticos.csv\n M data/originales/productos.csv\n M data/originales/proveedores.csv\n M data/originales/recetas.csv\n M data/originales/stock_lotes.csv\n M data/originales/sucursales.csv\n M data/originales/ventas.csv\n M src/farmared/__main__.py\n M tests/carga/test_base.py\n M tests/infra/test_conexiones.py\n?? .gitattributes\n?? docs/evidencias/\n?? docs/informe/d_auditoria_final.md\n?? docs/informe/d_bloque_readme.md\n?? docs/informe/d_grafo_y_sincronizacion.md\n?? docs/informe/d_resumen_para_integracion.md\n?? docs/portabilidad_datasets.md\n?? src/farmared/cli_grafo.py\n?? src/farmared/consultas/\n?? src/farmared/grafo/\n?? src/farmared/proyeccion/\n?? tests/carga/test_portabilidad.py\n?? tests/d_grafo/\n",
+    "stderr": ""
+  },
+  "fuentes_sha256_conservadas": true,
+  "compose_sha256_conservado": true,
+  "fuentes_iguales_a_head": true,
+  "contenedores_activos": {
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  "volumenes_finales": {
+    "exit_code": 0,
+    "stdout": "MyMySql-data\nophtha-platform_backend_files\nophtha-platform_postgres_data\n",
+    "stderr": ""
+  },
+  "recursos_previos_conservados": true,
+  "enlaces_faltantes": [],
+  "e2e_oficial_regenerado": false,
+  "codigo_productivo_modificado": false,
+  "tests_modificados": false,
+  "commits_o_push": false
+}

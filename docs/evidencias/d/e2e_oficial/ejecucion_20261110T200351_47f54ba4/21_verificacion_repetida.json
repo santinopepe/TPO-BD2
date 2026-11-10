@@ -1,0 +1,33 @@
+{
+  "comando": [
+    "python",
+    "-m",
+    "farmared",
+    "grafo-verify",
+    "--base",
+    "farmared_demo_d_oficial_e3311eda",
+    "--lock-path",
+    "<LOCK_COMPARTIDO>",
+    "--confirmar-escrituras-pausadas"
+  ],
+  "exit_code": 0,
+  "segundos_observados": 1.135,
+  "stdout": {
+    "alcance": "estado_estable_declarado",
+    "base": "farmared_demo_d_oficial_e3311eda",
+    "comando": "grafo-verify",
+    "conteos": {
+      "nodos_esperados": 120,
+      "nodos_observados": 120,
+      "relaciones_esperadas": 142,
+      "relaciones_observadas": 142
+    },
+    "diferencias": [],
+    "equivalente": true,
+    "precondiciones": {
+      "escrituras_pausadas_confirmadas": true,
+      "exclusion_compartida": true
+    }
+  },
+  "stderr": ""
+}

@@ -6,8 +6,10 @@ from importlib import import_module
 from importlib.metadata import version
 
 from farmared.errores import ErrorDominio
+from farmared.cli_grafo import COMANDOS_GRAFO, registrar_comandos
 
 COMANDOS = {
+    **COMANDOS_GRAFO,
     "estado": ("farmared.cli.estado", "ejecutar"),
     "salud": ("farmared.cli.salud", "ejecutar"),
     "preparar-mongo": ("farmared.cli.preparar_mongo", "ejecutar"),
@@ -18,9 +20,9 @@ COMANDOS = {
     "reset-demo": ("farmared.cli.reset_demo", "ejecutar"),
 }
 PENDIENTES = {
-    **{f"q{i:02}": "D" if i in (3, 4, 10) else "B" if i in (14, 15) else "C"
-       for i in range(1, 16)},
-    "sync": "D", "demo-transaccion": "B",
+    **{f"q{i:02}": "B" if i in (14, 15) else "C"
+       for i in range(1, 16) if i not in (3, 4, 10)},
+    "demo-transaccion": "B",
 }
 
 
@@ -50,6 +52,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     reset.add_argument("--base", required=True, help="Base farmared_demo_* que se inspecciona o elimina.")
     reset.add_argument("--solo-mongo", required=True, action="store_true", help="Alcance explícito: Neo4j no se reinicia.")
     reset.add_argument("--confirmar-base", help="Repetir exactamente --base para borrar toda esa base. Sin esta opción: vista previa.")
+    registrar_comandos(subparsers)
     for comando, responsable in PENDIENTES.items():
         subparsers.add_parser(comando, help=f"Pendiente de implementación/integración ({responsable}).")
     args = parser.parse_args(argv)

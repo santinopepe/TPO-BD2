@@ -1,0 +1,28 @@
+{
+  "comando": [
+    "python",
+    "-m",
+    "farmared",
+    "preparar-mongo",
+    "--base",
+    "farmared_demo_d_oficial_e3311eda"
+  ],
+  "exit_code": 0,
+  "segundos_observados": 1.41,
+  "stdout": {
+    "base": "farmared_demo_d_oficial_e3311eda",
+    "esquema": "listo",
+    "colecciones": [
+      "clientes",
+      "sucursales",
+      "farmaceuticos",
+      "proveedores",
+      "productos",
+      "stock_lotes",
+      "recetas",
+      "ventas",
+      "outbox"
+    ]
+  },
+  "stderr": ""
+}

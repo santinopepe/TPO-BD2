@@ -1,0 +1,30 @@
+{
+  "comando": [
+    "python",
+    "-m",
+    "farmared",
+    "q10",
+    "--id-sucursal",
+    "S003"
+  ],
+  "exit_code": 0,
+  "segundos_observados": 0.53,
+  "stdout": {
+    "consulta": "q10",
+    "id_sucursal": "S003",
+    "proyeccion": "eventualmente_consistente",
+    "resultados": [
+      {
+        "apellido": "Gómez",
+        "id_cliente": "C002",
+        "nombre": "Martín"
+      },
+      {
+        "apellido": "Benavídez",
+        "id_cliente": "C005",
+        "nombre": "Sofía"
+      }
+    ]
+  },
+  "stderr": ""
+}

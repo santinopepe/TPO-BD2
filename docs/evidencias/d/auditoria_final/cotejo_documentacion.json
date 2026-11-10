@@ -1,0 +1,9 @@
+{
+  "cypher_definitivo_coincide": {
+    "q03": true,
+    "q04": true,
+    "q10": true
+  },
+  "archivos_d_sin_espacios_finales": true,
+  "enlaces_informe_auditoria_resumen_comprobados": true
+}

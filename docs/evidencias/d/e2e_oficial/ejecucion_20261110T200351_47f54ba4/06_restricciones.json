@@ -1,0 +1,68 @@
+[
+  {
+    "name": "uq_cliente_id",
+    "type": "UNIQUENESS",
+    "entityType": "NODE",
+    "labelsOrTypes": [
+      "Cliente"
+    ],
+    "properties": [
+      "id"
+    ]
+  },
+  {
+    "name": "uq_farmaceutico_id",
+    "type": "UNIQUENESS",
+    "entityType": "NODE",
+    "labelsOrTypes": [
+      "Farmaceutico"
+    ],
+    "properties": [
+      "id"
+    ]
+  },
+  {
+    "name": "uq_producto_id",
+    "type": "UNIQUENESS",
+    "entityType": "NODE",
+    "labelsOrTypes": [
+      "Producto"
+    ],
+    "properties": [
+      "id"
+    ]
+  },
+  {
+    "name": "uq_receta_id",
+    "type": "UNIQUENESS",
+    "entityType": "NODE",
+    "labelsOrTypes": [
+      "Receta"
+    ],
+    "properties": [
+      "id"
+    ]
+  },
+  {
+    "name": "uq_sucursal_id",
+    "type": "UNIQUENESS",
+    "entityType": "NODE",
+    "labelsOrTypes": [
+      "Sucursal"
+    ],
+    "properties": [
+      "id"
+    ]
+  },
+  {
+    "name": "uq_venta_id",
+    "type": "UNIQUENESS",
+    "entityType": "NODE",
+    "labelsOrTypes": [
+      "Venta"
+    ],
+    "properties": [
+      "id"
+    ]
+  }
+]

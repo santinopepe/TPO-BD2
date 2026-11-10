@@ -1,0 +1,138 @@
+{
+  "comando": [
+    "python",
+    "-m",
+    "farmared",
+    "q03",
+    "--id-cliente",
+    "C001"
+  ],
+  "exit_code": 0,
+  "segundos_observados": 0.544,
+  "stdout": {
+    "consulta": "q03",
+    "id_cliente": "C001",
+    "proyeccion": "eventualmente_consistente",
+    "resultados": [
+      {
+        "detalle": {
+          "dispensas_autorizadas": 1,
+          "dispensas_realizadas": 1,
+          "medico": "Dr. Alejandro Vidal",
+          "proxima_dispensa": null,
+          "tipo": "Simple"
+        },
+        "estado": "Completada",
+        "fecha": "2026-09-10",
+        "id_registro": "RC001",
+        "tipo_evento": "RECETA"
+      },
+      {
+        "detalle": {
+          "id_receta": "RC001",
+          "items": [
+            {
+              "cantidad": 1,
+              "id_detalle": "D004",
+              "id_producto": "PRD003",
+              "nombre_al_vender": null,
+              "orden": 0,
+              "precio_unit": 9800,
+              "subtotal": 9800
+            }
+          ],
+          "medio_pago": "Obra social",
+          "tipo": "Con receta",
+          "total": 9800
+        },
+        "estado": "Completada",
+        "fecha": "2026-09-10",
+        "id_registro": "V003",
+        "tipo_evento": "VENTA"
+      },
+      {
+        "detalle": {
+          "id_receta": null,
+          "items": [
+            {
+              "cantidad": 1,
+              "id_detalle": "D020",
+              "id_producto": "PRD002",
+              "nombre_al_vender": null,
+              "orden": 0,
+              "precio_unit": 3500,
+              "subtotal": 3500
+            }
+          ],
+          "medio_pago": "Débito",
+          "tipo": "Venta libre",
+          "total": 3500
+        },
+        "estado": "Anulada",
+        "fecha": "2026-09-25",
+        "id_registro": "V015",
+        "tipo_evento": "VENTA"
+      },
+      {
+        "detalle": {
+          "id_receta": null,
+          "items": [
+            {
+              "cantidad": 2,
+              "id_detalle": "D017",
+              "id_producto": "PRD011",
+              "nombre_al_vender": null,
+              "orden": 0,
+              "precio_unit": 2200,
+              "subtotal": 4400
+            }
+          ],
+          "medio_pago": "Efectivo",
+          "tipo": "Venta libre",
+          "total": 4400
+        },
+        "estado": "Completada",
+        "fecha": "2026-10-02",
+        "id_registro": "V013",
+        "tipo_evento": "VENTA"
+      },
+      {
+        "detalle": {
+          "dispensas_autorizadas": 1,
+          "dispensas_realizadas": 1,
+          "medico": "Dra. Mónica Salas",
+          "proxima_dispensa": null,
+          "tipo": "Simple"
+        },
+        "estado": "Completada",
+        "fecha": "2026-10-08",
+        "id_registro": "RC008",
+        "tipo_evento": "RECETA"
+      },
+      {
+        "detalle": {
+          "id_receta": "RC008",
+          "items": [
+            {
+              "cantidad": 1,
+              "id_detalle": "D013",
+              "id_producto": "PRD010",
+              "nombre_al_vender": null,
+              "orden": 0,
+              "precio_unit": 7100,
+              "subtotal": 7100
+            }
+          ],
+          "medio_pago": "Crédito",
+          "tipo": "Con receta",
+          "total": 7100
+        },
+        "estado": "Completada",
+        "fecha": "2026-10-08",
+        "id_registro": "V010",
+        "tipo_evento": "VENTA"
+      }
+    ]
+  },
+  "stderr": "Received notification from DBMS server: <GqlStatusObject gql_status='01N52', status_description='warn: property key does not exist. The property `nombre_al_vender` does not exist. Verify that the spelling is correct.', position=<SummaryInputPosition line=11, column=33, offset=387>, raw_classification='UNRECOGNIZED', classification=<NotificationClassification.UNRECOGNIZED: 'UNRECOGNIZED'>, raw_severity='WARNING', severity=<NotificationSeverity.WARNING: 'WARNING'>, diagnostic_record={'_classification': 'UNRECOGNIZED', '_severity': 'WARNING', '_position': {'offset': 387, 'line': 11, 'column': 33}, 'OPERATION': '', 'OPERATION_CODE': '0', 'CURRENT_SCHEMA': '/'}> for query: \"\\nMATCH (c:Cliente {id: $id_cliente})\\nCALL (c) {\\n    MATCH (c)-[:REALIZO]->(v:Venta)\\n    WITH DISTINCT v\\n    CALL (v) {\\n        OPTIONAL MATCH (v)-[i:CONTIENE]->(p:Producto)\\n        WITH i, p ORDER BY i.orden, i.id_detalle\\n        RETURN collect(CASE WHEN i IS NULL THEN null ELSE {\\n            id_detalle: i.id_detalle, orden: i.orden, id_producto: p.id,\\n            nombre_al_vender: i.nombre_al_vender, cantidad: i.cantidad,\\n            precio_unit: i.precio_unit, subtotal: i.subtotal\\n        } END) AS items\\n    }\\n    RETURN v.fecha AS fecha, 'VENTA' AS tipo_evento, v.id AS id_registro,\\n           v.estado AS estado, {\\n               tipo: v.tipo, total: v.total, medio_pago: v.medio_pago,\\n               id_receta: head([(v)-[:USA_RECETA]->(r:Receta) | r.id]),\\n               items: items\\n           } AS detalle\\n    UNION ALL\\n    MATCH (c)-[:TIENE_RECETA]->(r:Receta)\\n    WITH DISTINCT r\\n    RETURN r.fecha_emision AS fecha, 'RECETA' AS tipo_evento, r.id AS id_registro,\\n           r.estado AS estado, {\\n               tipo: r.tipo, medico: r.medico,\\n               dispensas_realizadas: r.dispensas_realizadas,\\n               dispensas_autorizadas: r.dispensas_autorizadas,\\n               proxima_dispensa: r.proxima_dispensa\\n           } AS detalle\\n}\\nRETURN fecha, tipo_evento, id_registro, estado, detalle\\nORDER BY fecha, tipo_evento, id_registro\\n\""
+}
