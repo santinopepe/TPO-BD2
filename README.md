@@ -62,8 +62,25 @@ set, sesiones y primario; usa fechas conscientes de zona UTC y write concern
 autenticación y conectividad verificadas; el llamador lo cierra o usa `with`.
 Ninguna función conecta al otro motor, crea esquema, carga datos o sincroniza.
 Los errores de conexión usan `ErrorDominio("CONEXION", mensaje)` sin imprimir URI
-ni credenciales. `preparar_mongo_base(db)` y `cargar_mongo(db, rutas)` siguen
-pendientes para las partes 3 y 5; no se publican stubs que aparenten funcionar.
+ni credenciales. `preparar_mongo_base(db)` ya está disponible en
+`farmared.esquema.base_mongo`. `cargar_mongo(db, rutas)` sigue pendiente para la
+parte 5; no se publican stubs que aparenten funcionar.
+
+## Esquema MongoDB base
+
+Con MongoDB listo y **escritores pausados**, preparar un destino explícito:
+
+```bash
+uv run --locked --env-file .env farmared preparar-mongo --base farmared
+```
+
+Se crean/aseguran ocho colecciones de negocio y `outbox`, validadores `strict/error`
+e índices comunes: DNI y matrícula únicos globales, FEFO y cola outbox. No carga
+CSV, ejecuta servicios ni sincroniza. `setup` completo sigue pendiente.
+En bases existentes verifica documentos/índices antes del DDL, preserva datos y
+rechaza definiciones incompatibles sin reemplazarlas. El DDL no es atómico entre
+colecciones y requiere escritores pausados; ante una falla no se anuncia éxito.
+
 
 ## Entorno local: Docker Compose
 
@@ -135,14 +152,17 @@ la ejecución alojada en GitHub Codespaces debe comprobarse allí por separado.
 ## Pruebas de infraestructura y aislamiento
 
 ```bash
-# Sin requerir motores: omite explícitamente las dos pruebas de integración.
+# Sin requerir motores: omite explícitamente las pruebas de integración.
 uv run --locked pytest
+# Solo MongoDB: esquema real, sin requerir Neo4j.
+FARMARED_TEST_MONGO=1 uv run --locked --env-file .env pytest
 # Con los motores seleccionados en .env:
 FARMARED_TEST_INTEGRACION=1 uv run --locked --env-file .env pytest
 ```
 
-La integración usa MongoDB real con bases `farmared_test_a_infra_<UUID>` y comprueba
-commit/rollback multidocumento y BSON Date. Neo4j usa únicamente un nodo temporal
+La integración usa MongoDB real con bases `farmared_test_a_infra_<UUID>` y
+`farmared_test_a_esquema_<UUID>`, y comprueba commit/rollback, BSON Date, validadores,
+unicidad, idempotencia del esquema y rechazo de conflictos. Neo4j usa un nodo temporal
 `AInfraPrueba` con ID aleatorio para verificar rollback. La limpieza se limita a
 esas bases/IDs; no llama a reset de demo ni borra entidades de negocio.
 
@@ -162,13 +182,8 @@ de datasets, junto con referencias, importes, totales y diagnósticos de filas.
 
 1. Paquete, contratos, configuración, reloj y CLI mínima: implementado.
 2. Compose/devcontainer, conexiones y readiness con primario real: implementado.
-3. Colecciones, validadores e índices base MongoDB.
+3. Colecciones, validadores e índices base MongoDB: implementado.
 4. Lectura, conversión y validación integral de los nueve CSV.
 5. Carga idempotente, manifiesto/huellas, historia y outbox transaccional.
 6. Adicionales reproducibles con `base_date` persistida y casos borde.
 7. Integración disponible de B/C/D, CI, evidencias, diagramas y ensamblado del informe.
-
-Cada parte incluye sus pruebas y documentación, y se revisa antes de continuar.
-El fragmento de A está en `docs/informe/a_infra_y_carga.md`; la evidencia de esta
-entrega está en `docs/evidencias/a/parte_01.md` y `parte_02.md`. Las pruebas actuales
-están en `tests/carga/` y `tests/infra/`.

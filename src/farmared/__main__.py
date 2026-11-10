@@ -10,6 +10,7 @@ from farmared.errores import ErrorDominio
 COMANDOS = {
     "estado": ("farmared.cli.estado", "ejecutar"),
     "salud": ("farmared.cli.salud", "ejecutar"),
+    "preparar-mongo": ("farmared.cli.preparar_mongo", "ejecutar"),
 }
 PENDIENTES = {
     **{f"q{i:02}": "D" if i in (3, 4, 10) else "B" if i in (14, 15) else "C"
@@ -26,6 +27,8 @@ def main(argv: Sequence[str] | None = None) -> int:
     subparsers.add_parser("estado", help="Versión y reloj local; no comprueba motores.")
     salud = subparsers.add_parser("salud", help="Comprueba primario MongoDB y/o conectividad Neo4j.")
     salud.add_argument("--motor", choices=("mongo", "neo4j", "ambos"), default="ambos")
+    preparar = subparsers.add_parser("preparar-mongo", help="Crea/asegura el esquema base; requiere escritores pausados.")
+    preparar.add_argument("--base", required=True, help="Nombre explícito de la base destino.")
     for comando, responsable in PENDIENTES.items():
         subparsers.add_parser(comando, help=f"Pendiente de implementación/integración ({responsable}).")
     args = parser.parse_args(argv)
