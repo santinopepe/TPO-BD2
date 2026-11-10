@@ -8,7 +8,7 @@ import sys
 from concurrent.futures import ThreadPoolExecutor
 from copy import deepcopy
 from dataclasses import replace
-from datetime import UTC, datetime
+from datetime import UTC, date, datetime
 from pathlib import Path
 from threading import Barrier, Lock, get_ident
 from uuid import uuid4
@@ -19,6 +19,7 @@ from pymongo.synchronous.client_session import ClientSession
 from pymongo.errors import OperationFailure
 
 from farmared.carga import mongo as loader
+from farmared.carga.adicionales import generar_adicionales
 from farmared.carga.modelos import ErrorDatasets
 from farmared.carga.validacion import rutas_desde_directorios
 from farmared.clock import FixedClock
@@ -257,3 +258,71 @@ def test_cli_seed_sin_neo4j_y_reintento(db):
     assert segunda.returncode == 0, segunda.stderr
     assert json.loads(segunda.stdout)["reutilizada"] is True
     assert json.loads(segunda.stdout)["eventos_emitidos"] == 0
+
+
+def test_adicionales_fecha_persistida_minimos_y_repeticion(db, tmp_path, monkeypatch):
+    adicionales = tmp_path / "adicionales"
+    generar_adicionales(adicionales, ORIGINALES, base_date=date(2026, 11, 10))
+    rutas = rutas_desde_directorios(ORIGINALES, adicionales)
+    instante = datetime(2030, 1, 1, 12, tzinfo=UTC)
+    monkeypatch.setattr(loader, "SystemClock", lambda: FixedClock(instante))
+    primera = loader.cargar_mongo(db, rutas)
+    m = primera["documento"]
+    base = datetime(2026, 11, 10, 3, tzinfo=UTC)
+    assert m["base_date"] == m["generaciones"][0]["base_date"] == base
+    assert m["creado_en"] == instante  # El seed no vuelve a usar hoy para los casos.
+    assert sum(m["conteos"].values()) == 169
+    assert len(primera["eventos"]) == db.outbox.count_documents({}) == 120
+    for coleccion, cantidad in m["conteos"].items():
+        assert db[coleccion].count_documents({}) == cantidad
+        assert db[coleccion].count_documents({"_id": {"$regex": "^A-"}}) >= 10
+    assert sum(len(v["items"]) for v in db.ventas.find({"_id": {"$regex": "^A-"}})) == 16
+    assert db.stock_lotes.find_one({"_id": "A-L002"})["vencimiento"] == base
+    assert db.recetas.find_one({"_id": "A-RC001"})["dispensas_realizadas"] == 1
+    assert db.ventas.find_one({"_id": "A-V001"})["items"][0]["asignaciones_lotes"] is None
+    for id_venta in ("A-V005", "A-V006"):
+        venta = db.ventas.find_one({"_id": id_venta})
+        assert venta["stock_aplicado"] is venta["receta_aplicada"] is False
+        assert all(i["asignaciones_lotes"] == [] for i in venta["items"])
+    # Fixtures operacionales: los servicios B/C/D continúan fuera de alcance.
+    db.stock_lotes.update_one({"_id": "A-L002"}, {"$set": {"unidades": 2}})
+    db.recetas.update_one({"_id": "A-RC001"}, {"$set": {"dispensas_realizadas": 2}})
+    db.outbox.update_one({"_id": primera["eventos"][0]}, {"$set": {"procesado": True}})
+    antes = snapshot(db)
+    monkeypatch.setattr(loader, "SystemClock", lambda: FixedClock(datetime(2035, 1, 1, 12, tzinfo=UTC)))
+    segunda = loader.cargar_mongo(db, rutas)
+    assert segunda["reutilizada"] is True and segunda["eventos"] == []
+    assert segunda["documento"]["base_date"] == base
+    assert snapshot(db) == antes
+
+
+def test_otra_generacion_no_migra_ni_reemplaza_destino(db, tmp_path):
+    uno, dos = tmp_path / "uno", tmp_path / "dos"
+    generar_adicionales(uno, ORIGINALES, base_date=date(2026, 11, 10))
+    generar_adicionales(dos, ORIGINALES, base_date=date(2026, 11, 11))
+    loader.cargar_mongo(db, rutas_desde_directorios(ORIGINALES, uno))
+    antes = snapshot(db)
+    with pytest.raises(ErrorDominio) as exc:
+        loader.cargar_mongo(db, rutas_desde_directorios(ORIGINALES, dos))
+    assert exc.value.codigo == "CONFLICTO_ID"
+    assert snapshot(db) == antes
+
+
+@pytest.mark.parametrize("campo,valor", [
+    ("generaciones.0.base_date", "2026-11-10"),
+    ("generaciones.0.sha256", "0" * 64),
+    ("base_date", datetime(2026, 11, 11, 3, tzinfo=UTC)),
+])
+def test_manifiesto_generado_danado_no_se_reutiliza(db, tmp_path, campo, valor):
+    adicionales = tmp_path / "adicionales"
+    generar_adicionales(adicionales, ORIGINALES, base_date=date(2026, 11, 10))
+    rutas = rutas_desde_directorios(ORIGINALES, adicionales)
+    loader.cargar_mongo(db, rutas)
+    db[COLECCION_MANIFIESTOS].update_one(
+        {"_id": ID_MANIFIESTO}, {"$set": {campo: valor}}, bypass_document_validation=True,
+    )
+    antes = snapshot(db)
+    with pytest.raises(ErrorDominio) as exc:
+        loader.cargar_mongo(db, rutas)
+    assert exc.value.codigo == "INTEGRIDAD"
+    assert snapshot(db) == antes

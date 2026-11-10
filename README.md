@@ -21,7 +21,7 @@ Las versiones se verificaron en [PyPI: PyMongo](https://pypi.org/project/pymongo
 [Neo4j](https://pypi.org/project/neo4j/6.4.1/) y [pytest](https://pypi.org/project/pytest/9.2.0/).
 
 `estado` informa versión y reloj, con motores/proyección **no comprobados**.
-`q01`–`q15`, `seed`, `setup`, `reset-demo`, `sync` y
+`q01`–`q15`, `setup`, `reset-demo`, `sync` y
 `demo-transaccion` están anunciados como pendientes: invocarlos termina con código
 3 y explica el responsable. Todavía no reciben parámetros de negocio.
 Los códigos de salida son 0 (éxito), 1 (error de dominio), 2 (uso inválido) y
@@ -63,8 +63,8 @@ autenticación y conectividad verificadas; el llamador lo cierra o usa `with`.
 Ninguna función conecta al otro motor, crea esquema, carga datos o sincroniza.
 Los errores de conexión usan `ErrorDominio("CONEXION", mensaje)` sin imprimir URI
 ni credenciales. `preparar_mongo_base(db)` ya está disponible en
-`farmared.esquema.base_mongo`. `cargar_mongo(db, rutas)` sigue pendiente para la
-parte 5; no se publican stubs que aparenten funcionar.
+`farmared.esquema.base_mongo`. `cargar_mongo(db, rutas)` está disponible en
+`farmared.carga.mongo`; devuelve manifiesto, eventos nuevos y marca de reutilización.
 
 ## Esquema MongoDB base
 
@@ -95,7 +95,45 @@ cargar. No necesita `.env`, MongoDB ni Neo4j, y no realiza escrituras.
 
 `--directorio` es repetible para validar originales y adicionales como una unión.
 El contrato y la clasificación de errores/avisos están en
-[docs/validacion_datasets.md](docs/validacion_datasets.md). El loader aún está pendiente.
+[docs/validacion_datasets.md](docs/validacion_datasets.md).
+
+## Carga MongoDB idempotente
+
+Con el replica set listo, desde la raíz y con escritores pausados en el bootstrap:
+
+```bash
+uv run --locked --env-file .env farmared seed --base farmared --directorio data/originales
+```
+
+La primera carga exige vacías las colecciones de negocio/outbox y confirma juntos
+81 documentos, 58 eventos iniciales y un manifiesto técnico. Embebe detalles,
+preserva precios/marcas históricas y no reproduce descuentos ni dispensas.
+Repetir verifica huella e identidades sin restaurar stock, recetas o eventos ya
+procesados. Fuente distinta, destino ajeno o carga dañada producen conflicto/error.
+
+## Adicionales reproducibles y casos borde
+
+`data/adicionales/` incluye los nueve CSV propios y un manifiesto con fecha base
+**2026-11-10**, IDs `A-`, hashes y catorce escenarios. Verificar/reutilizar:
+
+```bash
+uv run --locked farmared generar-adicionales --directorio data/adicionales
+uv run --locked farmared validar-datasets --directorio data/originales --directorio data/adicionales
+uv run --locked --env-file .env farmared seed --base farmared_completo --directorio data/originales --directorio data/adicionales
+```
+
+La unión aporta **169 documentos de negocio, 120 eventos iniciales y un manifiesto**;
+cada colección de negocio tiene al menos diez entidades nuevas. Los 38 detalles
+se embeben en las 28 ventas. El seed usa la fecha persistida de generación aunque
+se ejecute otro día; no mueve escenarios ni restaura valores operacionales.
+
+Para generar casos relativos al día actual, elegir un **directorio nuevo**:
+`uv run --locked farmared generar-adicionales --directorio data/adicionales_hoy`.
+`--base-date YYYY-MM-DD` permite una fecha deliberada. No se sobrescribe un destino
+existente ni se actualiza una base ya cargada con otras fuentes. La fecha del
+manifiesto debe usarse con `FixedClock` al verificar estos casos en B/C/D.
+
+
 
 ## Entorno local: Docker Compose
 
@@ -176,8 +214,9 @@ FARMARED_TEST_INTEGRACION=1 uv run --locked --env-file .env pytest
 ```
 
 La integración usa MongoDB real con bases `farmared_test_a_infra_<UUID>` y
-`farmared_test_a_esquema_<UUID>`, y comprueba commit/rollback, BSON Date, validadores,
-unicidad, idempotencia del esquema y rechazo de conflictos. Neo4j usa un nodo temporal
+`farmared_test_a_esquema_<UUID>` y `farmared_test_a_loader_<UUID>`, y comprueba
+commit/rollback, BSON Date, validadores, unicidad, carga repetible y conflictos de
+fuente/manifiesto. Neo4j usa un nodo temporal
 `AInfraPrueba` con ID aleatorio para verificar rollback. La limpieza se limita a
 esas bases/IDs; no llama a reset de demo ni borra entidades de negocio.
 

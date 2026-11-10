@@ -1,6 +1,7 @@
 """Resultados explícitos: un dataset inválido nunca se devuelve como listo para cargar."""
 
 from dataclasses import asdict, dataclass
+from datetime import date
 from typing import Any
 
 from farmared.errores import CodigoError, ErrorDominio
@@ -35,20 +36,36 @@ class FuenteCSV:
 
 
 @dataclass(frozen=True)
+class GeneracionCSV:
+    archivo: str
+    orden: int
+    sha256: str
+    base_date: date
+    version_generador: int
+
+    def documento(self) -> dict:
+        return {**asdict(self), "base_date": self.base_date.isoformat()}
+
+
+@dataclass(frozen=True)
 class DatasetValidado:
     filas: dict[str, list[FilaCSV]]
     fuentes: tuple[FuenteCSV, ...]
     huella: str
     avisos: tuple[DiagnosticoCSV, ...]
+    generaciones: tuple[GeneracionCSV, ...] = ()
 
     def resumen(self) -> dict:
-        return {
+        resultado = {
             "valido": True, "version_validacion": VERSION_VALIDACION,
             "conteos": {k: len(v) for k, v in self.filas.items()},
             "huella": self.huella, "fuentes": [asdict(f) for f in self.fuentes],
             "errores": [], "avisos": [asdict(a) for a in self.avisos],
             "escrituras": 0,
         }
+        if self.generaciones:
+            resultado["generaciones"] = [g.documento() for g in self.generaciones]
+        return resultado
 
 
 class ErrorDatasets(ErrorDominio):

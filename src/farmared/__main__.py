@@ -13,6 +13,7 @@ COMANDOS = {
     "preparar-mongo": ("farmared.cli.preparar_mongo", "ejecutar"),
     "validar-datasets": ("farmared.cli.validar_datasets", "ejecutar"),
     "seed": ("farmared.cli.seed", "ejecutar"),
+    "generar-adicionales": ("farmared.cli.generar_adicionales", "ejecutar"),
 }
 PENDIENTES = {
     **{f"q{i:02}": "D" if i in (3, 4, 10) else "B" if i in (14, 15) else "C"
@@ -36,6 +37,10 @@ def main(argv: Sequence[str] | None = None) -> int:
     seed = subparsers.add_parser("seed", help="Carga MongoDB de forma idempotente; no sincroniza Neo4j.")
     seed.add_argument("--base", required=True, help="Nombre explícito de la base destino.")
     seed.add_argument("--directorio", required=True, action="append", help="Directorio con nueve CSV; repetible.")
+    adicionales = subparsers.add_parser("generar-adicionales", help="Genera o verifica nueve CSV propios sin motores.")
+    adicionales.add_argument("--directorio", required=True, help="Directorio nuevo de destino o generación existente para verificar.")
+    adicionales.add_argument("--originales", default="data/originales", help="Directorio de los nueve CSV originales.")
+    adicionales.add_argument("--base-date", help="Fecha ISO explícita; por defecto hoy solo al crear.")
     for comando, responsable in PENDIENTES.items():
         subparsers.add_parser(comando, help=f"Pendiente de implementación/integración ({responsable}).")
     args = parser.parse_args(argv)

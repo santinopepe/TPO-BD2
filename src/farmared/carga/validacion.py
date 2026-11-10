@@ -3,12 +3,13 @@
 import csv
 import hashlib
 import io
-import json
 from collections.abc import Mapping, Sequence
 from pathlib import Path
 
 from farmared.carga.formatos import CAMPOS, convertir
-from farmared.carga.modelos import DatasetValidado, DiagnosticoCSV, ErrorDatasets, FilaCSV, FuenteCSV, VERSION_VALIDACION
+from farmared.carga.modelos import DatasetValidado, DiagnosticoCSV, ErrorDatasets, FilaCSV, FuenteCSV
+from farmared.carga.huellas import huella_fuentes
+from farmared.carga.metadatos import validar_generaciones
 from farmared.carga.reglas import validar_relaciones
 
 RutasDataset = Mapping[str, Sequence[str | Path] | str | Path]
@@ -100,11 +101,8 @@ def validar_datasets(rutas: RutasDataset) -> DatasetValidado:
             if not filas[tabla]:
                 errores.append(DiagnosticoCSV(str(paths[0]), 0, "fila", "VACIO", "La tabla no contiene registros."))
     avisos = validar_relaciones(filas, completas, errores)
+    generaciones = validar_generaciones(rutas, fuentes, filas, errores)
     if errores:
         raise ErrorDatasets(errores, fuentes, avisos)
-    identidad = {
-        "version_validacion": VERSION_VALIDACION,
-        "fuentes": [{"tabla": f.tabla, "orden": f.orden, "sha256": f.sha256} for f in fuentes],
-    }
-    huella = hashlib.sha256(json.dumps(identidad, sort_keys=True, separators=(",", ":")).encode()).hexdigest()
-    return DatasetValidado(filas, tuple(fuentes), huella, tuple(avisos))
+    huella = huella_fuentes(fuentes, generaciones)
+    return DatasetValidado(filas, tuple(fuentes), huella, tuple(avisos), generaciones)

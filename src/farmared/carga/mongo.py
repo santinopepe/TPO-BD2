@@ -66,10 +66,27 @@ def _verificar(db, sesion, manifiesto, esperado):
     base_utc = base.replace(tzinfo=UTC) if base.tzinfo is None else base.astimezone(UTC)
     if base_utc != inicio_dia_utc(base_utc.astimezone(ZONA_COMERCIAL).date()):
         raise ErrorDominio(CodigoError.INTEGRIDAD, "base_date no representa un inicio de día comercial.")
-    creado = manifiesto["creado_en"]
-    creado_utc = creado.replace(tzinfo=UTC) if creado.tzinfo is None else creado.astimezone(UTC)
-    if base_utc != inicio_dia_utc(creado_utc.astimezone(ZONA_COMERCIAL).date()):
-        raise ErrorDominio(CodigoError.INTEGRIDAD, "base_date no corresponde al día comercial de esta carga inicial.")
+    generaciones = manifiesto.get("generaciones", [])
+    esperadas = esperado.get("generaciones", [])
+    if not isinstance(generaciones, list) or len(generaciones) != len(esperadas):
+        raise ErrorDominio(CodigoError.INTEGRIDAD, "El manifiesto no conserva las generaciones de las fuentes.")
+    for actual, origen in zip(generaciones, esperadas):
+        if not isinstance(actual, dict) or any(actual.get(k) != origen[k] for k in ("orden", "sha256", "version_generador")):
+            raise ErrorDominio(CodigoError.INTEGRIDAD, "El manifiesto de generación fue alterado.")
+        fecha = actual.get("base_date")
+        if not isinstance(fecha, datetime):
+            raise ErrorDominio(CodigoError.INTEGRIDAD, "Falta la fecha BSON de generación.")
+        fecha_utc = fecha.replace(tzinfo=UTC) if fecha.tzinfo is None else fecha.astimezone(UTC)
+        if fecha_utc != origen["base_date"]:
+            raise ErrorDominio(CodigoError.INTEGRIDAD, "La fecha de generación no coincide con las fuentes.")
+    if esperadas:
+        if base_utc != esperado["base_date"]:
+            raise ErrorDominio(CodigoError.INTEGRIDAD, "base_date no coincide con la generación persistida.")
+    else:
+        creado = manifiesto["creado_en"]
+        creado_utc = creado.replace(tzinfo=UTC) if creado.tzinfo is None else creado.astimezone(UTC)
+        if base_utc != inicio_dia_utc(creado_utc.astimezone(ZONA_COMERCIAL).date()):
+            raise ErrorDominio(CodigoError.INTEGRIDAD, "base_date no corresponde al día comercial de esta carga inicial.")
     for coleccion, ids in manifiesto["identidades"].items():
         if db[coleccion].count_documents({"_id": {"$in": ids}}, session=sesion) != len(ids):
             raise ErrorDominio(CodigoError.INTEGRIDAD, f"Faltan identidades importadas en {coleccion}; no se restauran desde CSV.")
@@ -101,15 +118,18 @@ def cargar_mongo(db, rutas):
     # BSON Date conserva milisegundos; usar la misma precisión en el retorno y el motor.
     instante = instante.replace(microsecond=instante.microsecond // 1000 * 1000)
     eventos = _eventos(documentos, validado.huella, instante)
+    base = validado.generaciones[0].base_date if validado.generaciones else instante.astimezone(ZONA_COMERCIAL).date()
     manifiesto = {
         "_id": ID_MANIFIESTO, "version_carga": VERSION_CARGA,
         "version_validacion": VERSION_VALIDACION, "huella": validado.huella,
-        "estado": "completa", "base_date": inicio_dia_utc(instante.astimezone(ZONA_COMERCIAL).date()),
+        "estado": "completa", "base_date": inicio_dia_utc(base),
         "creado_en": instante, "fuentes": [asdict(f) for f in validado.fuentes],
         "conteos": {c: len(docs) for c, docs in documentos.items()},
         "identidades": {c: [d["_id"] for d in docs] for c, docs in documentos.items()},
         "eventos_iniciales": [e["_id"] for e in eventos], "avisos": [asdict(a) for a in validado.avisos],
     }
+    if validado.generaciones:
+        manifiesto["generaciones"] = [{**g.documento(), "base_date": inicio_dia_utc(g.base_date)} for g in validado.generaciones]
 
     def ejecutar(sesion):
         existente = _buscar_manifiesto(db, sesion)
