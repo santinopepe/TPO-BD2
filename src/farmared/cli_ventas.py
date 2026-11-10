@@ -48,8 +48,12 @@ def registrar_comandos(subparsers) -> None:
 def ejecutar(args: argparse.Namespace) -> int:
     if args.comando == "demo-transaccion" and (not args.base.startswith(PREFIJO_DEMO) or args.base == PREFIJO_DEMO):
         raise ErrorDominio(CodigoError.VALIDACION, "demo-transaccion modifica datos: solo admite bases farmared_demo_<sufijo>.")
-    if getattr(args, "salida", None) and Path(args.salida).exists():
-        raise ErrorDominio(CodigoError.VALIDACION, f"{args.salida} ya existe; no se sobrescribe evidencia.")
+    if getattr(args, "salida", None):
+        # Se verifica antes de conectar: la demo modifica datos y la evidencia no debe perderse.
+        if Path(args.salida).exists():
+            raise ErrorDominio(CodigoError.VALIDACION, f"{args.salida} ya existe; no se sobrescribe evidencia.")
+        if not Path(args.salida).resolve().parent.is_dir():
+            raise ErrorDominio(CodigoError.VALIDACION, f"No existe la carpeta de {args.salida}; crearla antes de ejecutar la demo.")
     pedido = _leer_pedido(args.pedido) if args.comando == "q14" else None
 
     from farmared.conexiones import obtener_mongo

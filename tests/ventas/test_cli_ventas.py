@@ -80,6 +80,12 @@ def test_demo_no_sobrescribe_evidencia_existente_sin_conectar(tmp_path):
     assert exc.value.codigo == "VALIDACION" and existente.read_text(encoding="utf-8") == "{}"
 
 
+def test_demo_exige_carpeta_de_evidencia_existente_sin_conectar(tmp_path):
+    with pytest.raises(ErrorDominio) as exc:
+        ejecutar(parsear("demo-transaccion", "--base", "farmared_demo_x", "--salida", str(tmp_path / "no" / "e.json")))
+    assert exc.value.codigo == "VALIDACION" and "carpeta" in exc.value.mensaje
+
+
 @pytest.mark.parametrize("contenido", [None, "{no es json", "[1, 2]"])
 def test_pedido_ilegible_se_rechaza_sin_conectar(tmp_path, contenido):
     ruta = tmp_path / "pedido.json"
