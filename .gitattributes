@@ -1,0 +1,4 @@
+# Exact bytes are part of FarmaRed dataset integrity.
+data/originales/*.csv text eol=lf
+data/adicionales/*.csv text eol=lf
+data/adicionales/manifiesto.json text eol=lf
