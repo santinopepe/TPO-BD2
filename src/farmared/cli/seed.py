@@ -7,7 +7,7 @@ from dataclasses import replace
 from farmared.carga.modelos import ErrorDatasets
 from farmared.carga.mongo import cargar_mongo
 from farmared.carga.validacion import rutas_desde_directorios
-from farmared.clock import ZONA_COMERCIAL
+from farmared.cli.salidas import resumen_carga
 from farmared.config import Config
 from farmared.conexiones import obtener_mongo
 
@@ -20,13 +20,7 @@ def ejecutar(args: argparse.Namespace) -> int:
         except ErrorDatasets as error:
             print(json.dumps(error.resumen(), ensure_ascii=False))
             return 1
-        m = resultado["documento"]
-        print(json.dumps({
-            "base": db.name, "carga": m["estado"], "reutilizada": resultado["reutilizada"],
-            "huella": m["huella"], "base_date": m["base_date"].astimezone(ZONA_COMERCIAL).date().isoformat(),
-            "conteos_iniciales": m["conteos"], "eventos_emitidos": len(resultado["eventos"]),
-            "avisos": m["avisos"], "proyeccion": "no_comprobada",
-        }, ensure_ascii=False))
+        print(json.dumps(resumen_carga(db.name, resultado), ensure_ascii=False))
         return 0
     finally:
         db.client.close()

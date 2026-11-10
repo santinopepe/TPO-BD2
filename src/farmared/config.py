@@ -22,6 +22,8 @@ class Config:
                 raise ErrorDominio(CodigoError.VALIDACION, f"{nombre} no puede estar vacío.")
         if any(c in self.mongo_db for c in '/\\. "$*<>:|?\x00'):
             raise ErrorDominio(CodigoError.VALIDACION, "MONGO_DB contiene caracteres inválidos.")
+        if len(self.mongo_db.encode("utf-8")) > 63:
+            raise ErrorDominio(CodigoError.VALIDACION, "MONGO_DB no puede exceder 63 bytes UTF-8.")
         if type(self.db_timeout_ms) is not int or not 1 <= self.db_timeout_ms <= 300000:
             raise ErrorDominio(CodigoError.VALIDACION, "DB_TIMEOUT_MS debe estar entre 1 y 300000.")
 

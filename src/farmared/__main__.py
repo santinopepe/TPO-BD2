@@ -14,11 +14,12 @@ COMANDOS = {
     "validar-datasets": ("farmared.cli.validar_datasets", "ejecutar"),
     "seed": ("farmared.cli.seed", "ejecutar"),
     "generar-adicionales": ("farmared.cli.generar_adicionales", "ejecutar"),
+    "setup": ("farmared.cli.setup", "ejecutar"),
+    "reset-demo": ("farmared.cli.reset_demo", "ejecutar"),
 }
 PENDIENTES = {
     **{f"q{i:02}": "D" if i in (3, 4, 10) else "B" if i in (14, 15) else "C"
        for i in range(1, 16)},
-    "setup": "A", "reset-demo": "A",
     "sync": "D", "demo-transaccion": "B",
 }
 
@@ -41,6 +42,14 @@ def main(argv: Sequence[str] | None = None) -> int:
     adicionales.add_argument("--directorio", required=True, help="Directorio nuevo de destino o generación existente para verificar.")
     adicionales.add_argument("--originales", default="data/originales", help="Directorio de los nueve CSV originales.")
     adicionales.add_argument("--base-date", help="Fecha ISO explícita; por defecto hoy solo al crear.")
+    setup = subparsers.add_parser("setup", help="Prepara/carga MongoDB; integración completa C/D pendiente.")
+    setup.add_argument("--base", required=True, help="Nombre explícito de la base destino.")
+    setup.add_argument("--directorio", required=True, action="append", help="Directorio con nueve CSV; repetible.")
+    setup.add_argument("--solo-mongo", action="store_true", help="Ejecuta solo el bootstrap de A, sin vistas C ni grafo/sync D.")
+    reset = subparsers.add_parser("reset-demo", help="Vista previa o borrado confirmado de una base farmared_demo_*. PAUSAR escritores.")
+    reset.add_argument("--base", required=True, help="Base farmared_demo_* que se inspecciona o elimina.")
+    reset.add_argument("--solo-mongo", required=True, action="store_true", help="Alcance explícito: Neo4j no se reinicia.")
+    reset.add_argument("--confirmar-base", help="Repetir exactamente --base para borrar toda esa base. Sin esta opción: vista previa.")
     for comando, responsable in PENDIENTES.items():
         subparsers.add_parser(comando, help=f"Pendiente de implementación/integración ({responsable}).")
     args = parser.parse_args(argv)

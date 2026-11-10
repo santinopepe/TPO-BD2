@@ -21,7 +21,7 @@ Las versiones se verificaron en [PyPI: PyMongo](https://pypi.org/project/pymongo
 [Neo4j](https://pypi.org/project/neo4j/6.4.1/) y [pytest](https://pypi.org/project/pytest/9.2.0/).
 
 `estado` informa versión y reloj, con motores/proyección **no comprobados**.
-`q01`–`q15`, `setup`, `reset-demo`, `sync` y
+`q01`–`q15`, `sync` y
 `demo-transaccion` están anunciados como pendientes: invocarlos termina con código
 3 y explica el responsable. Todavía no reciben parámetros de negocio.
 Los códigos de salida son 0 (éxito), 1 (error de dominio), 2 (uso inválido) y
@@ -34,7 +34,8 @@ Copiar `.env.example` a `.env` cuando se necesite configuración local. No conti
 credenciales reales; `NEO4J_PASSWORD` queda vacío hasta configurar el motor.
 `Config.from_env()` lee `MONGO_URI`, `MONGO_DB`, `NEO4J_URI`, `NEO4J_USER`,
 `NEO4J_PASSWORD` y `DB_TIMEOUT_MS` (1–300000, por defecto 10000).
-No abre conexiones ni lee `.env` automáticamente. Para cargarlo con uv:
+Los nombres de base tienen un máximo de 63 bytes UTF-8. No abre conexiones ni
+lee `.env` automáticamente. Para cargarlo con uv:
 
 ```bash
 uv run --locked --env-file .env python -m farmared estado
@@ -132,6 +133,26 @@ Para generar casos relativos al día actual, elegir un **directorio nuevo**:
 `--base-date YYYY-MM-DD` permite una fecha deliberada. No se sobrescribe un destino
 existente ni se actualiza una base ya cargada con otras fuentes. La fecha del
 manifiesto debe usarse con `FixedClock` al verificar estos casos en B/C/D.
+
+## Setup disponible y reset explícito de demo
+
+`setup --solo-mongo` ejecuta el bootstrap de A: valida fuentes antes de conectar,
+asegura esquema/índices mediante el loader y carga o reutiliza el manifiesto.
+Solo devuelve `setup=mongo_listo`; las vistas de C y grafo/sync de D siguen
+pendientes. El setup completo, sin esa opción, termina con código 3 y lista esas
+interfaces antes de abrir conexiones o escribir.
+
+```bash
+uv run --locked --env-file .env farmared setup --solo-mongo --base farmared_demo_equipo --directorio data/originales --directorio data/adicionales
+uv run --locked --env-file .env farmared reset-demo --solo-mongo --base farmared_demo_equipo
+uv run --locked --env-file .env farmared reset-demo --solo-mongo --base farmared_demo_equipo --confirmar-base farmared_demo_equipo
+```
+
+Reset admite únicamente `farmared_demo_` más un sufijo, exige coincidencia exacta
+de la confirmación y anuncia el destino en stderr antes de borrar la base completa.
+No regenera archivos, recarga datos ni elimina Neo4j o volúmenes. Después de un
+reset, volver a ejecutar setup es una carga nueva; el grafo requiere reconstrucción
+de D antes de usarlo para lecturas exactas. Ver [docs/setup_y_demo.md](docs/setup_y_demo.md).
 
 
 
