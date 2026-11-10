@@ -8,7 +8,7 @@ from farmared.errores import CodigoError, ErrorDominio
 
 @dataclass(frozen=True)
 class Config:
-    mongo_uri: str = field(default="mongodb://localhost:27017/?replicaSet=rs0", repr=False)
+    mongo_uri: str = field(default="mongodb://localhost:27017/?replicaSet=rs0&directConnection=true", repr=False)
     mongo_db: str = "farmared"
     neo4j_uri: str = field(default="bolt://localhost:7687", repr=False)
     neo4j_user: str = "neo4j"

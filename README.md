@@ -1,8 +1,5 @@
 # FarmaRed — TPO de Bases de Datos 2
 
-MongoDB será la fuente de verdad y Neo4j una proyección eventualmente consistente.
-Esta primera entrega proporciona el paquete Python, contratos comunes, configuración,
-reloj y router CLI. Los motores, la carga y q01–q15 todavía no están implementados.
 
 ## Instalación y verificación de esta entrega
 
@@ -44,7 +41,7 @@ uv run --locked --env-file .env python -m farmared estado
 ```
 
 El comando anterior solo comprueba el paquete/reloj. Las URI por defecto apuntan
-al host local; los nombres de servicio y readiness vendrán con Compose.
+al host local; dentro del devcontainer se usan los servicios `mongodb` y `neo4j`.
 Los secretos y URI se omiten de `repr(Config)`.
 
 - `farmared.clock.Clock`: protocolo `today() -> date`, `now_utc() -> datetime`.
@@ -58,9 +55,101 @@ Los secretos y URI se omiten de `repr(Config)`.
   Aplicar también a resultados de sumas/productos antes de persistir. No convierte CSV.
 - IDs, DNI, CUIT y teléfonos permanecen strings; los detalles irán en `ventas.items`.
 
-Las interfaces `obtener_mongo(config)`, `obtener_neo4j(config)`,
-`preparar_mongo_base(db)` y `cargar_mongo(db, rutas)` se implementarán en las partes
-2, 3 y 5 respectivamente. No se publican stubs que aparenten funcionar.
+`obtener_mongo(config)` devuelve un `Database` PyMongo después de verificar replica
+set, sesiones y primario; usa fechas conscientes de zona UTC y write concern
+`majority`. El llamador inicia sesiones con `db.client.start_session()` y cierra
+`db.client.close()` al terminar. `obtener_neo4j(config)` devuelve un `Driver` con
+autenticación y conectividad verificadas; el llamador lo cierra o usa `with`.
+Ninguna función conecta al otro motor, crea esquema, carga datos o sincroniza.
+Los errores de conexión usan `ErrorDominio("CONEXION", mensaje)` sin imprimir URI
+ni credenciales. `preparar_mongo_base(db)` y `cargar_mongo(db, rutas)` siguen
+pendientes para las partes 3 y 5; no se publican stubs que aparenten funcionar.
+
+## Entorno local: Docker Compose
+
+Requisitos: Docker con Compose v2.24 o posterior, daemon encendido, Python/uv según
+la instalación anterior y puertos disponibles. Ejecutar **desde la raíz**:
+
+```bash
+python3 infra/preparar_env.py
+docker compose --env-file .env -f infra/docker-compose.yml up -d mongodb neo4j
+docker compose --env-file .env -f infra/docker-compose.yml run --rm mongodb-init
+docker compose --env-file .env -f infra/docker-compose.yml up -d --wait --wait-timeout 180 mongodb neo4j
+uv run --locked --env-file .env farmared salud
+```
+
+`preparar_env.py` crea `.env` con permisos 0600 y contraseña Neo4j aleatoria, y
+`infra/.env` como enlace al mismo archivo para Dev Containers. Ambos están ignorados.
+Conserva cualquier `.env` existente: si se copió el ejemplo con contraseña vacía,
+completarla (mínimo 8 caracteres) antes de iniciar. No versionar estos archivos.
+
+El inicializador espera conexión, inicia `rs0` solo si falta y espera un primario
+real. En un volumen existente verifica la configuración; no ejecuta `reconfig`,
+reset ni carga. Los healthchecks solo observan: Mongo exige `isWritablePrimary`
+y `setName=rs0`; Neo4j ejecuta `RETURN 1` autenticado por Bolt. El orden explícito
+evita depender de una pausa fija o esperar el healthcheck antes de inicializar.
+
+Las imágenes MongoDB **8.0.15**, Neo4j Community **5.26.12**, Python **3.12.12** y
+uv **0.13.7** tienen tag y digest fijados. Los paquetes de sistema del Dockerfile
+se instalan desde los repositorios Debian; su resolución no está congelada.
+MongoDB y Neo4j tienen volúmenes persistentes por proyecto. Los límites son 1 GiB
+y 1.5 GiB respectivamente, más el proceso de desarrollo y el sistema anfitrión.
+Un solo miembro permite transacciones; no proporciona alta disponibilidad.
+
+Los puertos se publican solo en `127.0.0.1`. MongoDB no tiene autenticación en este
+entorno de desarrollo; Neo4j sí. Browser está en `http://localhost:7474`, con usuario
+`neo4j` y el secreto local de `.env`. Cambiar ese archivo no rota la contraseña de
+un volumen Neo4j existente. No exponer MongoDB mediante un puerto público.
+
+Desde el host, `MONGO_URI` incluye `directConnection=true`: el miembro anuncia
+`mongodb:27017`, nombre que solo resuelve dentro de la red Compose. Dentro del
+devcontainer se usa `mongodb://mongodb:27017/?replicaSet=rs0` con descubrimiento.
+
+```bash
+# Comprobaciones independientes; MongoDB no requiere credenciales de Neo4j.
+uv run --locked --env-file .env farmared salud --motor mongo
+uv run --locked --env-file .env farmared salud --motor neo4j
+# Detener conservando los volúmenes:
+docker compose --env-file .env -f infra/docker-compose.yml down
+```
+
+`salud` devuelve JSON y código 0 solo si están listos los motores seleccionados;
+si alguno falla, informa cada resultado y devuelve 1. Siempre declara la proyección
+`no_comprobada`: disponibilidad no implica sincronización del grafo.
+
+## Codespaces y Dev Containers
+
+Crear el Codespace desde esta rama o usar **Reopen in Container**. La configuración
+`.devcontainer/devcontainer.json` ejecuta el preparador local, construye el servicio
+`dev`, espera inicializador exitoso y ambos motores saludables, y ejecuta
+`uv sync --locked` seguido de `farmared salud`. Dentro, trabajar en
+`/workspaces/farmared` y ejecutar `uv run --locked pytest` o `uv run --locked farmared salud`.
+No hace falta cargar `.env` otra vez: el servicio recibe las URI internas.
+
+El entorno Python vive en el volumen `/opt/farmared-venv`, separado de `.venv` del
+host para evitar mezclar binarios macOS/Linux. Cerrar el devcontainer detiene Compose
+conservando volúmenes. Solo se solicita reenviar Browser; conservar su visibilidad
+privada. La validación local con la CLI oficial está en la evidencia de la parte 2;
+la ejecución alojada en GitHub Codespaces debe comprobarse allí por separado.
+
+## Pruebas de infraestructura y aislamiento
+
+```bash
+# Sin requerir motores: omite explícitamente las dos pruebas de integración.
+uv run --locked pytest
+# Con los motores seleccionados en .env:
+FARMARED_TEST_INTEGRACION=1 uv run --locked --env-file .env pytest
+```
+
+La integración usa MongoDB real con bases `farmared_test_a_infra_<UUID>` y comprueba
+commit/rollback multidocumento y BSON Date. Neo4j usa únicamente un nodo temporal
+`AInfraPrueba` con ID aleatorio para verificar rollback. La limpieza se limita a
+esas bases/IDs; no llama a reset de demo ni borra entidades de negocio.
+
+Si se comparte un host, usar un `COMPOSE_PROJECT_NAME` distinto y otros
+`MONGO_PORT`, `NEO4J_HTTP_PORT`, `NEO4J_BOLT_PORT`; actualizar también las URI del
+host en `.env` para esos puertos. Los nombres de servicio y puertos internos no
+cambian. No reutilizar volúmenes/bases de demo mutables entre integrantes.
 
 ## Datos disponibles y secuencia de entregas
 
@@ -71,8 +160,8 @@ Esto **no** constituye validación integral ni una carga. Los originales permane
 intactos. Su incorporación versionada en `data/originales/` queda para la entrega
 de datasets, junto con referencias, importes, totales y diagnósticos de filas.
 
-1. Paquete, contratos, configuración, reloj y CLI mínima: esta entrega.
-2. Compose/devcontainer, conexiones y readiness con primario real.
+1. Paquete, contratos, configuración, reloj y CLI mínima: implementado.
+2. Compose/devcontainer, conexiones y readiness con primario real: implementado.
 3. Colecciones, validadores e índices base MongoDB.
 4. Lectura, conversión y validación integral de los nueve CSV.
 5. Carga idempotente, manifiesto/huellas, historia y outbox transaccional.
@@ -81,5 +170,5 @@ de datasets, junto con referencias, importes, totales y diagnósticos de filas.
 
 Cada parte incluye sus pruebas y documentación, y se revisa antes de continuar.
 El fragmento de A está en `docs/informe/a_infra_y_carga.md`; la evidencia de esta
-entrega está en `docs/evidencias/a/parte_01.md`. Las pruebas propias van en
-`tests/a_carga/`; no utilizan bases compartidas.
+entrega está en `docs/evidencias/a/parte_01.md` y `parte_02.md`. Las pruebas actuales
+están en `tests/carga/` y `tests/infra/`.

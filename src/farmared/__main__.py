@@ -7,7 +7,10 @@ from importlib.metadata import version
 
 from farmared.errores import ErrorDominio
 
-COMANDOS = {"estado": ("farmared.cli.estado", "ejecutar")}
+COMANDOS = {
+    "estado": ("farmared.cli.estado", "ejecutar"),
+    "salud": ("farmared.cli.salud", "ejecutar"),
+}
 PENDIENTES = {
     **{f"q{i:02}": "D" if i in (3, 4, 10) else "B" if i in (14, 15) else "C"
        for i in range(1, 16)},
@@ -21,6 +24,8 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("--version", action="version", version=version("farmared"))
     subparsers = parser.add_subparsers(dest="comando", required=True)
     subparsers.add_parser("estado", help="Versión y reloj local; no comprueba motores.")
+    salud = subparsers.add_parser("salud", help="Comprueba primario MongoDB y/o conectividad Neo4j.")
+    salud.add_argument("--motor", choices=("mongo", "neo4j", "ambos"), default="ambos")
     for comando, responsable in PENDIENTES.items():
         subparsers.add_parser(comando, help=f"Pendiente de implementación/integración ({responsable}).")
     args = parser.parse_args(argv)

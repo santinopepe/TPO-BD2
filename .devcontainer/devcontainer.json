@@ -1,0 +1,16 @@
+{
+  "name": "FarmaRed BD2",
+  "dockerComposeFile": ["../infra/docker-compose.yml", "docker-compose.yml"],
+  "service": "dev",
+  "workspaceFolder": "/workspaces/farmared",
+  "remoteUser": "root",
+  "initializeCommand": "python3 infra/preparar_env.py",
+  "postCreateCommand": "uv sync --locked && uv run --locked farmared salud",
+  "overrideCommand": false,
+  "shutdownAction": "stopCompose",
+  "forwardPorts": [7474],
+  "portsAttributes": {
+    "7474": {"label": "Neo4j Browser", "onAutoForward": "silent"}
+  },
+  "otherPortsAttributes": {"onAutoForward": "ignore"}
+}

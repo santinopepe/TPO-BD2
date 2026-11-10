@@ -3,6 +3,7 @@ from enum import StrEnum
 
 
 class CodigoError(StrEnum):
+    CONEXION = "CONEXION"
     NO_EXISTE = "NO_EXISTE"
     VALIDACION = "VALIDACION"
     DNI_DUPLICADO = "DNI_DUPLICADO"
