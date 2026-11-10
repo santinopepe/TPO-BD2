@@ -1,0 +1,707 @@
+{
+  "exit_code_antes": 1,
+  "validacion_antes": {
+    "valido": false,
+    "version_validacion": 1,
+    "huella": null,
+    "fuentes": [
+      {
+        "tabla": "clientes",
+        "orden": 0,
+        "archivo": "data\\originales\\clientes.csv",
+        "sha256": "e79217742f1536f8ddb2ed3472da2716d7335df437dd533b92dece01ed66c6f5",
+        "bytes": 917,
+        "filas_leidas": 8
+      },
+      {
+        "tabla": "clientes",
+        "orden": 1,
+        "archivo": "data\\adicionales\\clientes.csv",
+        "sha256": "1feab7c5d15bc7139c5fa03dba0aaf57850b349101f670af0a23e45b6c96ff9e",
+        "bytes": 1339,
+        "filas_leidas": 10
+      },
+      {
+        "tabla": "sucursales",
+        "orden": 0,
+        "archivo": "data\\originales\\sucursales.csv",
+        "sha256": "1a2cb1121a0c395428d338ddc6b65a394ad0f7669f88b82529b12ee396ff6629",
+        "bytes": 519,
+        "filas_leidas": 5
+      },
+      {
+        "tabla": "sucursales",
+        "orden": 1,
+        "archivo": "data\\adicionales\\sucursales.csv",
+        "sha256": "6a9be1aa58e2f3f7f2a299a239be7457ab5007c2f755c6d8a4ea9a6353140f9c",
+        "bytes": 1043,
+        "filas_leidas": 10
+      },
+      {
+        "tabla": "farmaceuticos",
+        "orden": 0,
+        "archivo": "data\\originales\\farmaceuticos.csv",
+        "sha256": "5facf310e65fb66ddf326893d57ab696855e2dbbd1879574fa8419d1e6735fec",
+        "bytes": 479,
+        "filas_leidas": 7
+      },
+      {
+        "tabla": "farmaceuticos",
+        "orden": 1,
+        "archivo": "data\\adicionales\\farmaceuticos.csv",
+        "sha256": "1ed849536a70f4d9fe943e0398f777212fa4ae0d5159bc58d2079a3a7dee19ea",
+        "bytes": 820,
+        "filas_leidas": 10
+      },
+      {
+        "tabla": "proveedores",
+        "orden": 0,
+        "archivo": "data\\originales\\proveedores.csv",
+        "sha256": "f9403cc274dc5a5ab3b4d1c99b69b766a07771abd8877a00a95ba446bf45a632",
+        "bytes": 542,
+        "filas_leidas": 5
+      },
+      {
+        "tabla": "proveedores",
+        "orden": 1,
+        "archivo": "data\\adicionales\\proveedores.csv",
+        "sha256": "7d59fe71fc16b48300887c47994d7f4ffbaec5cddeeccc0a7244fd0297a05d6d",
+        "bytes": 1057,
+        "filas_leidas": 10
+      },
+      {
+        "tabla": "productos",
+        "orden": 0,
+        "archivo": "data\\originales\\productos.csv",
+        "sha256": "adefa18abb0f941ba3de813fa9b0322c6c61d0bb43187b693b090b2054b8f34c",
+        "bytes": 1445,
+        "filas_leidas": 13
+      },
+      {
+        "tabla": "productos",
+        "orden": 1,
+        "archivo": "data\\adicionales\\productos.csv",
+        "sha256": "44c4ca7041d638c8ee7a83309466ff692186a2bbb7fa9a1573f138c7c85ea711",
+        "bytes": 1110,
+        "filas_leidas": 10
+      },
+      {
+        "tabla": "stock_lotes",
+        "orden": 0,
+        "archivo": "data\\originales\\stock_lotes.csv",
+        "sha256": "cb33f64fa56b373ec9a6305fa9ae86210bb8bce3922be386ef18f7db3cb35654",
+        "bytes": 791,
+        "filas_leidas": 18
+      },
+      {
+        "tabla": "stock_lotes",
+        "orden": 1,
+        "archivo": "data\\adicionales\\stock_lotes.csv",
+        "sha256": "0cd29e7d05770957735426fb26a050b9fa5563f5916484ae729e8fa3e9e1b9f1",
+        "bytes": 820,
+        "filas_leidas": 16
+      },
+      {
+        "tabla": "recetas",
+        "orden": 0,
+        "archivo": "data\\originales\\recetas.csv",
+        "sha256": "590ef23335b57075ee1458c470b99a67fdcda613684c7cb3f15a86b0fb1da898",
+        "bytes": 881,
+        "filas_leidas": 9
+      },
+      {
+        "tabla": "recetas",
+        "orden": 1,
+        "archivo": "data\\adicionales\\recetas.csv",
+        "sha256": "b41be49d4993dc5fba6dc5ccedc8090164886bda8fe3fa229df2a87dba70679e",
+        "bytes": 952,
+        "filas_leidas": 10
+      },
+      {
+        "tabla": "ventas",
+        "orden": 0,
+        "archivo": "data\\originales\\ventas.csv",
+        "sha256": "6f6e7ee3cdb4626e87371dc04bf800c6116a1ec07e780c0f68ca7600e73dd0ff",
+        "bytes": 1182,
+        "filas_leidas": 16
+      },
+      {
+        "tabla": "ventas",
+        "orden": 1,
+        "archivo": "data\\adicionales\\ventas.csv",
+        "sha256": "8ad3e48dfc6163f07c92650bd9f7fe86fc97cf6e9b2644cbc8950906f98ff933",
+        "bytes": 937,
+        "filas_leidas": 12
+      },
+      {
+        "tabla": "detalle_ventas",
+        "orden": 0,
+        "archivo": "data\\originales\\detalle_ventas.csv",
+        "sha256": "55140f0e6265cadbfd95f23695892778b0460fa9312ea0ad924b7f5818652636",
+        "bytes": 604,
+        "filas_leidas": 22
+      },
+      {
+        "tabla": "detalle_ventas",
+        "orden": 1,
+        "archivo": "data\\adicionales\\detalle_ventas.csv",
+        "sha256": "deeb0194091c121a088e04a7079eae08d5d7166cdb96b19406cdb3a744ffa28f",
+        "bytes": 543,
+        "filas_leidas": 16
+      }
+    ],
+    "errores": [
+      {
+        "archivo": "data\\adicionales\\manifiesto.json",
+        "fila": 0,
+        "campo": "huella_originales",
+        "codigo": "GENERACION",
+        "motivo": "Se requieren los originales vinculados por el manifiesto, sin cambios."
+      },
+      {
+        "archivo": "data\\adicionales\\manifiesto.json",
+        "fila": 0,
+        "campo": "perfil",
+        "codigo": "GENERACION",
+        "motivo": "El manifiesto no corresponde al perfil determinista de esa fecha/originales/versión."
+      },
+      {
+        "archivo": "data\\adicionales\\manifiesto.json",
+        "fila": 0,
+        "campo": "clientes",
+        "codigo": "GENERACION",
+        "motivo": "Hash/conteo del CSV no coincide con el manifiesto; no se regenera al cargar."
+      },
+      {
+        "archivo": "data\\adicionales\\manifiesto.json",
+        "fila": 0,
+        "campo": "sucursales",
+        "codigo": "GENERACION",
+        "motivo": "Hash/conteo del CSV no coincide con el manifiesto; no se regenera al cargar."
+      },
+      {
+        "archivo": "data\\adicionales\\manifiesto.json",
+        "fila": 0,
+        "campo": "farmaceuticos",
+        "codigo": "GENERACION",
+        "motivo": "Hash/conteo del CSV no coincide con el manifiesto; no se regenera al cargar."
+      },
+      {
+        "archivo": "data\\adicionales\\manifiesto.json",
+        "fila": 0,
+        "campo": "proveedores",
+        "codigo": "GENERACION",
+        "motivo": "Hash/conteo del CSV no coincide con el manifiesto; no se regenera al cargar."
+      },
+      {
+        "archivo": "data\\adicionales\\manifiesto.json",
+        "fila": 0,
+        "campo": "productos",
+        "codigo": "GENERACION",
+        "motivo": "Hash/conteo del CSV no coincide con el manifiesto; no se regenera al cargar."
+      },
+      {
+        "archivo": "data\\adicionales\\manifiesto.json",
+        "fila": 0,
+        "campo": "stock_lotes",
+        "codigo": "GENERACION",
+        "motivo": "Hash/conteo del CSV no coincide con el manifiesto; no se regenera al cargar."
+      },
+      {
+        "archivo": "data\\adicionales\\manifiesto.json",
+        "fila": 0,
+        "campo": "recetas",
+        "codigo": "GENERACION",
+        "motivo": "Hash/conteo del CSV no coincide con el manifiesto; no se regenera al cargar."
+      },
+      {
+        "archivo": "data\\adicionales\\manifiesto.json",
+        "fila": 0,
+        "campo": "ventas",
+        "codigo": "GENERACION",
+        "motivo": "Hash/conteo del CSV no coincide con el manifiesto; no se regenera al cargar."
+      },
+      {
+        "archivo": "data\\adicionales\\manifiesto.json",
+        "fila": 0,
+        "campo": "detalle_ventas",
+        "codigo": "GENERACION",
+        "motivo": "Hash/conteo del CSV no coincide con el manifiesto; no se regenera al cargar."
+      }
+    ],
+    "avisos": [
+      {
+        "archivo": "data\\originales\\ventas.csv",
+        "fila": 2,
+        "campo": "id_farmaceutico",
+        "codigo": "HISTORICO",
+        "motivo": "Referencia actualmente inactiva; no se revalida la actividad de una operación histórica."
+      },
+      {
+        "archivo": "data\\originales\\detalle_ventas.csv",
+        "fila": 20,
+        "campo": "id_producto",
+        "codigo": "HISTORICO",
+        "motivo": "Producto actualmente inactivo; se conserva el detalle histórico."
+      },
+      {
+        "archivo": "data\\adicionales\\ventas.csv",
+        "fila": 3,
+        "campo": "id_farmaceutico",
+        "codigo": "HISTORICO",
+        "motivo": "Referencia actualmente inactiva; no se revalida la actividad de una operación histórica."
+      },
+      {
+        "archivo": "data\\adicionales\\ventas.csv",
+        "fila": 4,
+        "campo": "id_farmaceutico",
+        "codigo": "HISTORICO",
+        "motivo": "Referencia actualmente inactiva; no se revalida la actividad de una operación histórica."
+      },
+      {
+        "archivo": "data\\adicionales\\ventas.csv",
+        "fila": 10,
+        "campo": "id_cliente",
+        "codigo": "HISTORICO",
+        "motivo": "Referencia actualmente inactiva; no se revalida la actividad de una operación histórica."
+      },
+      {
+        "archivo": "data\\adicionales\\ventas.csv",
+        "fila": 10,
+        "campo": "id_farmaceutico",
+        "codigo": "HISTORICO",
+        "motivo": "Referencia actualmente inactiva; no se revalida la actividad de una operación histórica."
+      },
+      {
+        "archivo": "data\\adicionales\\detalle_ventas.csv",
+        "fila": 11,
+        "campo": "id_producto",
+        "codigo": "HISTORICO",
+        "motivo": "Producto actualmente inactivo; se conserva el detalle histórico."
+      },
+      {
+        "archivo": "data\\originales\\recetas.csv",
+        "fila": 3,
+        "campo": "proxima_dispensa",
+        "codigo": "HISTORICO",
+        "motivo": "Fecha informada 2026-09-15 distinta de última venta +30 días (2026-09-14); se conserva sin corregir."
+      }
+    ],
+    "escrituras": 0
+  },
+  "archivos": [
+    {
+      "archivo": "data/originales/clientes.csv",
+      "sha256_antes": "e79217742f1536f8ddb2ed3472da2716d7335df437dd533b92dece01ed66c6f5",
+      "sha256_head": "afaddcaa8762b619dd46b3e21acd4544b0f034550493b76832e774a4ef21d9ed",
+      "sha256_manifiesto": null,
+      "eol_antes": "CRLF",
+      "crlf": 9,
+      "lf_sin_cr": 0,
+      "cr_sueltos": 0,
+      "misma_informacion": true,
+      "solo_finales_de_linea": true,
+      "registros": 8
+    },
+    {
+      "archivo": "data/originales/detalle_ventas.csv",
+      "sha256_antes": "55140f0e6265cadbfd95f23695892778b0460fa9312ea0ad924b7f5818652636",
+      "sha256_head": "cb57f070e1e2a12727d19ec799a2002398fc5ddc686ba370c6d9f14f654d085d",
+      "sha256_manifiesto": null,
+      "eol_antes": "CRLF",
+      "crlf": 23,
+      "lf_sin_cr": 0,
+      "cr_sueltos": 0,
+      "misma_informacion": true,
+      "solo_finales_de_linea": true,
+      "registros": 22
+    },
+    {
+      "archivo": "data/originales/farmaceuticos.csv",
+      "sha256_antes": "5facf310e65fb66ddf326893d57ab696855e2dbbd1879574fa8419d1e6735fec",
+      "sha256_head": "03db193b616a41954589703a349ba5b427e05c8ee431ca5c18f1f7dc3f31e021",
+      "sha256_manifiesto": null,
+      "eol_antes": "CRLF",
+      "crlf": 8,
+      "lf_sin_cr": 0,
+      "cr_sueltos": 0,
+      "misma_informacion": true,
+      "solo_finales_de_linea": true,
+      "registros": 7
+    },
+    {
+      "archivo": "data/originales/productos.csv",
+      "sha256_antes": "adefa18abb0f941ba3de813fa9b0322c6c61d0bb43187b693b090b2054b8f34c",
+      "sha256_head": "cd0bde7d1da5de4cb96ccbd9b7a0218e670e075e4c75179145bbd2a9c572f0f8",
+      "sha256_manifiesto": null,
+      "eol_antes": "CRLF",
+      "crlf": 14,
+      "lf_sin_cr": 0,
+      "cr_sueltos": 0,
+      "misma_informacion": true,
+      "solo_finales_de_linea": true,
+      "registros": 13
+    },
+    {
+      "archivo": "data/originales/proveedores.csv",
+      "sha256_antes": "f9403cc274dc5a5ab3b4d1c99b69b766a07771abd8877a00a95ba446bf45a632",
+      "sha256_head": "609b89e2038ae7ce586baa2cbac24f54b76d6610792844028a3d8543a1beeb23",
+      "sha256_manifiesto": null,
+      "eol_antes": "CRLF",
+      "crlf": 6,
+      "lf_sin_cr": 0,
+      "cr_sueltos": 0,
+      "misma_informacion": true,
+      "solo_finales_de_linea": true,
+      "registros": 5
+    },
+    {
+      "archivo": "data/originales/recetas.csv",
+      "sha256_antes": "590ef23335b57075ee1458c470b99a67fdcda613684c7cb3f15a86b0fb1da898",
+      "sha256_head": "021f56ef49addd28b71076d44bdeabbcf3ffde0f04a9a7c950e792c3e8213ec9",
+      "sha256_manifiesto": null,
+      "eol_antes": "CRLF",
+      "crlf": 10,
+      "lf_sin_cr": 0,
+      "cr_sueltos": 0,
+      "misma_informacion": true,
+      "solo_finales_de_linea": true,
+      "registros": 9
+    },
+    {
+      "archivo": "data/originales/stock_lotes.csv",
+      "sha256_antes": "cb33f64fa56b373ec9a6305fa9ae86210bb8bce3922be386ef18f7db3cb35654",
+      "sha256_head": "7dc07e052cabede0cdfa425315699d38de88f921d9a11e061bd377d6842e30ad",
+      "sha256_manifiesto": null,
+      "eol_antes": "CRLF",
+      "crlf": 19,
+      "lf_sin_cr": 0,
+      "cr_sueltos": 0,
+      "misma_informacion": true,
+      "solo_finales_de_linea": true,
+      "registros": 18
+    },
+    {
+      "archivo": "data/originales/sucursales.csv",
+      "sha256_antes": "1a2cb1121a0c395428d338ddc6b65a394ad0f7669f88b82529b12ee396ff6629",
+      "sha256_head": "89210e743de64f168c684a51cde82b3feeda27d794b5dd586f57b102b6d1e7b7",
+      "sha256_manifiesto": null,
+      "eol_antes": "CRLF",
+      "crlf": 6,
+      "lf_sin_cr": 0,
+      "cr_sueltos": 0,
+      "misma_informacion": true,
+      "solo_finales_de_linea": true,
+      "registros": 5
+    },
+    {
+      "archivo": "data/originales/ventas.csv",
+      "sha256_antes": "6f6e7ee3cdb4626e87371dc04bf800c6116a1ec07e780c0f68ca7600e73dd0ff",
+      "sha256_head": "a8009f4bccdccd7b0679c7518935cb985f31a9bbdb6788172a58998a1f230ab8",
+      "sha256_manifiesto": null,
+      "eol_antes": "CRLF",
+      "crlf": 17,
+      "lf_sin_cr": 0,
+      "cr_sueltos": 0,
+      "misma_informacion": true,
+      "solo_finales_de_linea": true,
+      "registros": 16
+    },
+    {
+      "archivo": "data/adicionales/clientes.csv",
+      "sha256_antes": "1feab7c5d15bc7139c5fa03dba0aaf57850b349101f670af0a23e45b6c96ff9e",
+      "sha256_head": "80bd39404be0b45f3579b1f23eafa7a6b544a45e8054b100a5d18cc59f428b1a",
+      "sha256_manifiesto": "80bd39404be0b45f3579b1f23eafa7a6b544a45e8054b100a5d18cc59f428b1a",
+      "eol_antes": "CRLF",
+      "crlf": 11,
+      "lf_sin_cr": 0,
+      "cr_sueltos": 0,
+      "misma_informacion": true,
+      "solo_finales_de_linea": true,
+      "registros": 10
+    },
+    {
+      "archivo": "data/adicionales/detalle_ventas.csv",
+      "sha256_antes": "deeb0194091c121a088e04a7079eae08d5d7166cdb96b19406cdb3a744ffa28f",
+      "sha256_head": "cb6d2a748a51247cc053c38920bb0974c2b8ddcb203f6ea361af7b00fd503b9b",
+      "sha256_manifiesto": "cb6d2a748a51247cc053c38920bb0974c2b8ddcb203f6ea361af7b00fd503b9b",
+      "eol_antes": "CRLF",
+      "crlf": 17,
+      "lf_sin_cr": 0,
+      "cr_sueltos": 0,
+      "misma_informacion": true,
+      "solo_finales_de_linea": true,
+      "registros": 16
+    },
+    {
+      "archivo": "data/adicionales/farmaceuticos.csv",
+      "sha256_antes": "1ed849536a70f4d9fe943e0398f777212fa4ae0d5159bc58d2079a3a7dee19ea",
+      "sha256_head": "9810b0c81b89356388ef55d1be3f9b635a8d8d7a958171d6b536ac9ef641b2da",
+      "sha256_manifiesto": "9810b0c81b89356388ef55d1be3f9b635a8d8d7a958171d6b536ac9ef641b2da",
+      "eol_antes": "CRLF",
+      "crlf": 11,
+      "lf_sin_cr": 0,
+      "cr_sueltos": 0,
+      "misma_informacion": true,
+      "solo_finales_de_linea": true,
+      "registros": 10
+    },
+    {
+      "archivo": "data/adicionales/productos.csv",
+      "sha256_antes": "44c4ca7041d638c8ee7a83309466ff692186a2bbb7fa9a1573f138c7c85ea711",
+      "sha256_head": "3307fb35a8548b0326ea97ae27c15419448d1b270a241e9b78fcc324c3383652",
+      "sha256_manifiesto": "3307fb35a8548b0326ea97ae27c15419448d1b270a241e9b78fcc324c3383652",
+      "eol_antes": "CRLF",
+      "crlf": 11,
+      "lf_sin_cr": 0,
+      "cr_sueltos": 0,
+      "misma_informacion": true,
+      "solo_finales_de_linea": true,
+      "registros": 10
+    },
+    {
+      "archivo": "data/adicionales/proveedores.csv",
+      "sha256_antes": "7d59fe71fc16b48300887c47994d7f4ffbaec5cddeeccc0a7244fd0297a05d6d",
+      "sha256_head": "d1299690f249f733d7b090a7c601263802a4ff1c272d6dfb68ba4f562c0caf18",
+      "sha256_manifiesto": "d1299690f249f733d7b090a7c601263802a4ff1c272d6dfb68ba4f562c0caf18",
+      "eol_antes": "CRLF",
+      "crlf": 11,
+      "lf_sin_cr": 0,
+      "cr_sueltos": 0,
+      "misma_informacion": true,
+      "solo_finales_de_linea": true,
+      "registros": 10
+    },
+    {
+      "archivo": "data/adicionales/recetas.csv",
+      "sha256_antes": "b41be49d4993dc5fba6dc5ccedc8090164886bda8fe3fa229df2a87dba70679e",
+      "sha256_head": "c5108fdfca6442aba6ba6bd8571d951c78fb68a59ae6c0c180ddc986987f7ac5",
+      "sha256_manifiesto": "c5108fdfca6442aba6ba6bd8571d951c78fb68a59ae6c0c180ddc986987f7ac5",
+      "eol_antes": "CRLF",
+      "crlf": 11,
+      "lf_sin_cr": 0,
+      "cr_sueltos": 0,
+      "misma_informacion": true,
+      "solo_finales_de_linea": true,
+      "registros": 10
+    },
+    {
+      "archivo": "data/adicionales/stock_lotes.csv",
+      "sha256_antes": "0cd29e7d05770957735426fb26a050b9fa5563f5916484ae729e8fa3e9e1b9f1",
+      "sha256_head": "4bfc407afb8dfbaf70507df99288952eebf0f756b3c7e9e29d616c1bd8ce781a",
+      "sha256_manifiesto": "4bfc407afb8dfbaf70507df99288952eebf0f756b3c7e9e29d616c1bd8ce781a",
+      "eol_antes": "CRLF",
+      "crlf": 17,
+      "lf_sin_cr": 0,
+      "cr_sueltos": 0,
+      "misma_informacion": true,
+      "solo_finales_de_linea": true,
+      "registros": 16
+    },
+    {
+      "archivo": "data/adicionales/sucursales.csv",
+      "sha256_antes": "6a9be1aa58e2f3f7f2a299a239be7457ab5007c2f755c6d8a4ea9a6353140f9c",
+      "sha256_head": "533a8ad3025ec4417f59ef474a76eea160bbf21dbaee73c7188f7aa5c8874dbf",
+      "sha256_manifiesto": "533a8ad3025ec4417f59ef474a76eea160bbf21dbaee73c7188f7aa5c8874dbf",
+      "eol_antes": "CRLF",
+      "crlf": 11,
+      "lf_sin_cr": 0,
+      "cr_sueltos": 0,
+      "misma_informacion": true,
+      "solo_finales_de_linea": true,
+      "registros": 10
+    },
+    {
+      "archivo": "data/adicionales/ventas.csv",
+      "sha256_antes": "8ad3e48dfc6163f07c92650bd9f7fe86fc97cf6e9b2644cbc8950906f98ff933",
+      "sha256_head": "697e1995fbd914e8b20f9b517177f54d6fb1ad9cd9b77cdab6cb0d94f7349fa7",
+      "sha256_manifiesto": "697e1995fbd914e8b20f9b517177f54d6fb1ad9cd9b77cdab6cb0d94f7349fa7",
+      "eol_antes": "CRLF",
+      "crlf": 13,
+      "lf_sin_cr": 0,
+      "cr_sueltos": 0,
+      "misma_informacion": true,
+      "solo_finales_de_linea": true,
+      "registros": 12
+    },
+    {
+      "archivo": "data/adicionales/manifiesto.json",
+      "sha256_antes": "4009200e1b88693fd5856cc650f0686bfc6c18e891b433e857dbd926383ac423",
+      "sha256_head": "db74749e2a29a1e4d09c8be2dd18f7e54817c86d0f2c31a77ff3e4e106a9175c",
+      "sha256_manifiesto": null,
+      "eol_antes": "CRLF",
+      "crlf": 169,
+      "lf_sin_cr": 0,
+      "cr_sueltos": 0,
+      "misma_informacion": true,
+      "solo_finales_de_linea": true,
+      "registros": null
+    }
+  ],
+  "variantes": [
+    {
+      "variante": "actual",
+      "errores": [
+        {
+          "codigo": "GENERACION",
+          "campo": "huella_originales",
+          "motivo": "Se requieren los originales vinculados por el manifiesto, sin cambios."
+        },
+        {
+          "codigo": "GENERACION",
+          "campo": "perfil",
+          "motivo": "El manifiesto no corresponde al perfil determinista de esa fecha/originales/versión."
+        },
+        {
+          "codigo": "GENERACION",
+          "campo": "clientes",
+          "motivo": "Hash/conteo del CSV no coincide con el manifiesto; no se regenera al cargar."
+        },
+        {
+          "codigo": "GENERACION",
+          "campo": "sucursales",
+          "motivo": "Hash/conteo del CSV no coincide con el manifiesto; no se regenera al cargar."
+        },
+        {
+          "codigo": "GENERACION",
+          "campo": "farmaceuticos",
+          "motivo": "Hash/conteo del CSV no coincide con el manifiesto; no se regenera al cargar."
+        },
+        {
+          "codigo": "GENERACION",
+          "campo": "proveedores",
+          "motivo": "Hash/conteo del CSV no coincide con el manifiesto; no se regenera al cargar."
+        },
+        {
+          "codigo": "GENERACION",
+          "campo": "productos",
+          "motivo": "Hash/conteo del CSV no coincide con el manifiesto; no se regenera al cargar."
+        },
+        {
+          "codigo": "GENERACION",
+          "campo": "stock_lotes",
+          "motivo": "Hash/conteo del CSV no coincide con el manifiesto; no se regenera al cargar."
+        },
+        {
+          "codigo": "GENERACION",
+          "campo": "recetas",
+          "motivo": "Hash/conteo del CSV no coincide con el manifiesto; no se regenera al cargar."
+        },
+        {
+          "codigo": "GENERACION",
+          "campo": "ventas",
+          "motivo": "Hash/conteo del CSV no coincide con el manifiesto; no se regenera al cargar."
+        },
+        {
+          "codigo": "GENERACION",
+          "campo": "detalle_ventas",
+          "motivo": "Hash/conteo del CSV no coincide con el manifiesto; no se regenera al cargar."
+        }
+      ]
+    },
+    {
+      "variante": "solo_adicionales_LF",
+      "errores": [
+        {
+          "codigo": "GENERACION",
+          "campo": "huella_originales",
+          "motivo": "Se requieren los originales vinculados por el manifiesto, sin cambios."
+        },
+        {
+          "codigo": "GENERACION",
+          "campo": "perfil",
+          "motivo": "El manifiesto no corresponde al perfil determinista de esa fecha/originales/versión."
+        }
+      ]
+    },
+    {
+      "variante": "solo_originales_LF",
+      "errores": [
+        {
+          "codigo": "GENERACION",
+          "campo": "clientes",
+          "motivo": "Hash/conteo del CSV no coincide con el manifiesto; no se regenera al cargar."
+        },
+        {
+          "codigo": "GENERACION",
+          "campo": "sucursales",
+          "motivo": "Hash/conteo del CSV no coincide con el manifiesto; no se regenera al cargar."
+        },
+        {
+          "codigo": "GENERACION",
+          "campo": "farmaceuticos",
+          "motivo": "Hash/conteo del CSV no coincide con el manifiesto; no se regenera al cargar."
+        },
+        {
+          "codigo": "GENERACION",
+          "campo": "proveedores",
+          "motivo": "Hash/conteo del CSV no coincide con el manifiesto; no se regenera al cargar."
+        },
+        {
+          "codigo": "GENERACION",
+          "campo": "productos",
+          "motivo": "Hash/conteo del CSV no coincide con el manifiesto; no se regenera al cargar."
+        },
+        {
+          "codigo": "GENERACION",
+          "campo": "stock_lotes",
+          "motivo": "Hash/conteo del CSV no coincide con el manifiesto; no se regenera al cargar."
+        },
+        {
+          "codigo": "GENERACION",
+          "campo": "recetas",
+          "motivo": "Hash/conteo del CSV no coincide con el manifiesto; no se regenera al cargar."
+        },
+        {
+          "codigo": "GENERACION",
+          "campo": "ventas",
+          "motivo": "Hash/conteo del CSV no coincide con el manifiesto; no se regenera al cargar."
+        },
+        {
+          "codigo": "GENERACION",
+          "campo": "detalle_ventas",
+          "motivo": "Hash/conteo del CSV no coincide con el manifiesto; no se regenera al cargar."
+        }
+      ]
+    },
+    {
+      "variante": "ambos_csv_LF",
+      "errores": [],
+      "huella": "ae75889f75795378eee8b2d1315d6364991adbe7911865ad628f019632f32ec9",
+      "conteos": {
+        "clientes": 18,
+        "sucursales": 15,
+        "farmaceuticos": 17,
+        "proveedores": 15,
+        "productos": 23,
+        "stock_lotes": 34,
+        "recetas": 19,
+        "ventas": 28,
+        "detalle_ventas": 38
+      }
+    },
+    {
+      "variante": "csv_y_manifiesto_LF",
+      "errores": [],
+      "huella": "c2bbc4cb4e97de5cef6c17d09522ef172041e8ee08a2a6a8529533cf4f31e2e0",
+      "conteos": {
+        "clientes": 18,
+        "sucursales": 15,
+        "farmaceuticos": 17,
+        "proveedores": 15,
+        "productos": 23,
+        "stock_lotes": 34,
+        "recetas": 19,
+        "ventas": 28,
+        "detalle_ventas": 38
+      }
+    }
+  ],
+  "perfil_con_huella_referencia_coincide": true,
+  "manifiesto_head_es_reproducible": true,
+  "ls_files_eol": "i/lf    w/crlf  attr/                 \tdata/adicionales/clientes.csv\ni/lf    w/crlf  attr/                 \tdata/adicionales/detalle_ventas.csv\ni/lf    w/crlf  attr/                 \tdata/adicionales/farmaceuticos.csv\ni/lf    w/crlf  attr/                 \tdata/adicionales/manifiesto.json\ni/lf    w/crlf  attr/                 \tdata/adicionales/productos.csv\ni/lf    w/crlf  attr/                 \tdata/adicionales/proveedores.csv\ni/lf    w/crlf  attr/                 \tdata/adicionales/recetas.csv\ni/lf    w/crlf  attr/                 \tdata/adicionales/stock_lotes.csv\ni/lf    w/crlf  attr/                 \tdata/adicionales/sucursales.csv\ni/lf    w/crlf  attr/                 \tdata/adicionales/ventas.csv\ni/lf    w/crlf  attr/                 \tdata/originales/clientes.csv\ni/lf    w/crlf  attr/                 \tdata/originales/detalle_ventas.csv\ni/lf    w/crlf  attr/                 \tdata/originales/farmaceuticos.csv\ni/lf    w/crlf  attr/                 \tdata/originales/productos.csv\ni/lf    w/crlf  attr/                 \tdata/originales/proveedores.csv\ni/lf    w/crlf  attr/                 \tdata/originales/recetas.csv\ni/lf    w/crlf  attr/                 \tdata/originales/stock_lotes.csv\ni/lf    w/crlf  attr/                 \tdata/originales/sucursales.csv\ni/lf    w/crlf  attr/                 \tdata/originales/ventas.csv\n",
+  "atributos": "data/adicionales/clientes.csv: text: unspecified\ndata/adicionales/clientes.csv: eol: unspecified\ndata/originales/clientes.csv: text: unspecified\ndata/originales/clientes.csv: eol: unspecified\n",
+  "config": "file:C:/Users/SANTIAGO/AppData/Local/GitHubDesktop/app-3.6.10/resources/app/git/etc/gitconfig\tcore.autocrlf true\n",
+  "huella_originales_checkout": "bb01ed1c5a62615868d0bfb211989ea3be171d955aba65018da2318f5f3f9d7a",
+  "huella_originales_referencia": "e08cdbc0108e00916bddf3b26a9c28cfedf009792ff21ae74e623b4a66407407"
+}

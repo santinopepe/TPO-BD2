@@ -1,0 +1,27 @@
+{
+  "archivos_restaurados": 19,
+  "informacion_csv_preservada": true,
+  "bytes_finales_iguales_a_head": true,
+  "manifiesto_valores_y_referencias_preservados": true,
+  "huella_windows": "c2bbc4cb4e97de5cef6c17d09522ef172041e8ee08a2a6a8529533cf4f31e2e0",
+  "huella_linux": "c2bbc4cb4e97de5cef6c17d09522ef172041e8ee08a2a6a8529533cf4f31e2e0",
+  "conteos": {
+    "clientes": 18,
+    "sucursales": 15,
+    "farmaceuticos": 17,
+    "proveedores": 15,
+    "productos": 23,
+    "stock_lotes": 34,
+    "recetas": 19,
+    "ventas": 28,
+    "detalle_ventas": 38
+  },
+  "git_diff_datos": "",
+  "eol_final": "i/lf    w/lf    attr/text eol=lf      \tdata/adicionales/clientes.csv\ni/lf    w/lf    attr/text eol=lf      \tdata/adicionales/detalle_ventas.csv\ni/lf    w/lf    attr/text eol=lf      \tdata/adicionales/farmaceuticos.csv\ni/lf    w/lf    attr/text eol=lf      \tdata/adicionales/manifiesto.json\ni/lf    w/lf    attr/text eol=lf      \tdata/adicionales/productos.csv\ni/lf    w/lf    attr/text eol=lf      \tdata/adicionales/proveedores.csv\ni/lf    w/lf    attr/text eol=lf      \tdata/adicionales/recetas.csv\ni/lf    w/lf    attr/text eol=lf      \tdata/adicionales/stock_lotes.csv\ni/lf    w/lf    attr/text eol=lf      \tdata/adicionales/sucursales.csv\ni/lf    w/lf    attr/text eol=lf      \tdata/adicionales/ventas.csv\ni/lf    w/lf    attr/text eol=lf      \tdata/originales/clientes.csv\ni/lf    w/lf    attr/text eol=lf      \tdata/originales/detalle_ventas.csv\ni/lf    w/lf    attr/text eol=lf      \tdata/originales/farmaceuticos.csv\ni/lf    w/lf    attr/text eol=lf      \tdata/originales/productos.csv\ni/lf    w/lf    attr/text eol=lf      \tdata/originales/proveedores.csv\ni/lf    w/lf    attr/text eol=lf      \tdata/originales/recetas.csv\ni/lf    w/lf    attr/text eol=lf      \tdata/originales/stock_lotes.csv\ni/lf    w/lf    attr/text eol=lf      \tdata/originales/sucursales.csv\ni/lf    w/lf    attr/text eol=lf      \tdata/originales/ventas.csv\n",
+  "atributos_finales": "data/adicionales/clientes.csv: text: set\ndata/adicionales/clientes.csv: eol: lf\ndata/originales/clientes.csv: text: set\ndata/originales/clientes.csv: eol: lf\ndata/adicionales/manifiesto.json: text: set\ndata/adicionales/manifiesto.json: eol: lf\n",
+  "git_version": "git version 2.56.0.windows.4",
+  "core_autocrlf_final": "file:C:/Users/SANTIAGO/AppData/Local/GitHubDesktop/app-3.6.10/resources/app/git/etc/gitconfig\ttrue",
+  "seed_ejecutado": false,
+  "reconstruccion_neo4j_ejecutada": false,
+  "e2e_ejecutado": false
+}
