@@ -1,0 +1,1109 @@
+{
+  "base": "farmared_demo_b",
+  "fecha_comercial": "2026-11-10",
+  "instante_utc": "2026-11-10T23:07:13.066085+00:00",
+  "pasos": [
+    {
+      "paso": "q14_exito_receta_fefo",
+      "descripcion": "Venta Completada con receta de tratamiento prolongado: FEFO omite vencidos, usa primero el lote que vence antes y consume una dispensa.",
+      "operacion": "q14",
+      "parametros": {
+        "id_venta": "B-DEMO-V1",
+        "id_cliente": "A-C001",
+        "id_farmaceutico": "A-F001",
+        "id_receta": "A-RC001",
+        "medio_pago": "Obra social",
+        "items": [
+          {
+            "id_producto": "A-PRD003",
+            "cantidad": 6
+          },
+          {
+            "id_producto": "A-PRD001",
+            "cantidad": 2
+          }
+        ]
+      },
+      "resultado": {
+        "estado": "ok",
+        "reutilizada": false,
+        "eventos": [
+          "0f3f208b-e250-4a4c-a652-5106fb7a34e1"
+        ]
+      },
+      "antes": {
+        "stock_lotes": {
+          "A-L001": {
+            "_id": "A-L001",
+            "id_producto": "A-PRD003",
+            "id_sucursal": "A-S001",
+            "nro_lote": "A-NRO001",
+            "unidades": 100,
+            "vencimiento": "2026-11-09",
+            "importacion": {
+              "huella": "c2bbc4cb4e97de5cef6c17d09522ef172041e8ee08a2a6a8529533cf4f31e2e0",
+              "archivo": "data/adicionales/stock_lotes.csv",
+              "fila": 2
+            }
+          },
+          "A-L002": {
+            "_id": "A-L002",
+            "id_producto": "A-PRD003",
+            "id_sucursal": "A-S001",
+            "nro_lote": "A-NRO002",
+            "unidades": 4,
+            "vencimiento": "2026-11-10",
+            "importacion": {
+              "huella": "c2bbc4cb4e97de5cef6c17d09522ef172041e8ee08a2a6a8529533cf4f31e2e0",
+              "archivo": "data/adicionales/stock_lotes.csv",
+              "fila": 3
+            }
+          },
+          "A-L003": {
+            "_id": "A-L003",
+            "id_producto": "A-PRD003",
+            "id_sucursal": "A-S001",
+            "nro_lote": "A-NRO003",
+            "unidades": 10,
+            "vencimiento": "2026-12-10",
+            "importacion": {
+              "huella": "c2bbc4cb4e97de5cef6c17d09522ef172041e8ee08a2a6a8529533cf4f31e2e0",
+              "archivo": "data/adicionales/stock_lotes.csv",
+              "fila": 4
+            }
+          },
+          "A-L004": {
+            "_id": "A-L004",
+            "id_producto": "A-PRD003",
+            "id_sucursal": "A-S001",
+            "nro_lote": "A-NRO004",
+            "unidades": 20,
+            "vencimiento": "2027-01-09",
+            "importacion": {
+              "huella": "c2bbc4cb4e97de5cef6c17d09522ef172041e8ee08a2a6a8529533cf4f31e2e0",
+              "archivo": "data/adicionales/stock_lotes.csv",
+              "fila": 5
+            }
+          },
+          "A-L006": {
+            "_id": "A-L006",
+            "id_producto": "A-PRD001",
+            "id_sucursal": "A-S001",
+            "nro_lote": "A-NRO-P001",
+            "unidades": 49,
+            "vencimiento": "2027-01-09",
+            "importacion": {
+              "huella": "c2bbc4cb4e97de5cef6c17d09522ef172041e8ee08a2a6a8529533cf4f31e2e0",
+              "archivo": "data/adicionales/stock_lotes.csv",
+              "fila": 7
+            }
+          },
+          "A-L016": {
+            "_id": "A-L016",
+            "id_producto": "A-PRD001",
+            "id_sucursal": "A-S001",
+            "nro_lote": "A-NRO016",
+            "unidades": 10,
+            "vencimiento": "2026-10-11",
+            "importacion": {
+              "huella": "c2bbc4cb4e97de5cef6c17d09522ef172041e8ee08a2a6a8529533cf4f31e2e0",
+              "archivo": "data/adicionales/stock_lotes.csv",
+              "fila": 17
+            }
+          }
+        },
+        "recetas": {
+          "A-RC001": {
+            "_id": "A-RC001",
+            "id_cliente": "A-C001",
+            "medico": "Médico ficticio",
+            "matricula_medico": "A-MP001",
+            "fecha_emision": "2026-10-01",
+            "tipo": "Tratamiento prolongado",
+            "dispensas_autorizadas": 3,
+            "dispensas_realizadas": 1,
+            "proxima_dispensa": "2026-11-09",
+            "estado": "Vigente",
+            "importacion": {
+              "huella": "c2bbc4cb4e97de5cef6c17d09522ef172041e8ee08a2a6a8529533cf4f31e2e0",
+              "archivo": "data/adicionales/recetas.csv",
+              "fila": 2
+            }
+          }
+        },
+        "ventas": {
+          "B-DEMO-V1": null
+        }
+      },
+      "despues": {
+        "stock_lotes": {
+          "A-L001": {
+            "_id": "A-L001",
+            "id_producto": "A-PRD003",
+            "id_sucursal": "A-S001",
+            "nro_lote": "A-NRO001",
+            "unidades": 100,
+            "vencimiento": "2026-11-09",
+            "importacion": {
+              "huella": "c2bbc4cb4e97de5cef6c17d09522ef172041e8ee08a2a6a8529533cf4f31e2e0",
+              "archivo": "data/adicionales/stock_lotes.csv",
+              "fila": 2
+            }
+          },
+          "A-L002": {
+            "_id": "A-L002",
+            "id_producto": "A-PRD003",
+            "id_sucursal": "A-S001",
+            "nro_lote": "A-NRO002",
+            "unidades": 0,
+            "vencimiento": "2026-11-10",
+            "importacion": {
+              "huella": "c2bbc4cb4e97de5cef6c17d09522ef172041e8ee08a2a6a8529533cf4f31e2e0",
+              "archivo": "data/adicionales/stock_lotes.csv",
+              "fila": 3
+            }
+          },
+          "A-L003": {
+            "_id": "A-L003",
+            "id_producto": "A-PRD003",
+            "id_sucursal": "A-S001",
+            "nro_lote": "A-NRO003",
+            "unidades": 8,
+            "vencimiento": "2026-12-10",
+            "importacion": {
+              "huella": "c2bbc4cb4e97de5cef6c17d09522ef172041e8ee08a2a6a8529533cf4f31e2e0",
+              "archivo": "data/adicionales/stock_lotes.csv",
+              "fila": 4
+            }
+          },
+          "A-L004": {
+            "_id": "A-L004",
+            "id_producto": "A-PRD003",
+            "id_sucursal": "A-S001",
+            "nro_lote": "A-NRO004",
+            "unidades": 20,
+            "vencimiento": "2027-01-09",
+            "importacion": {
+              "huella": "c2bbc4cb4e97de5cef6c17d09522ef172041e8ee08a2a6a8529533cf4f31e2e0",
+              "archivo": "data/adicionales/stock_lotes.csv",
+              "fila": 5
+            }
+          },
+          "A-L006": {
+            "_id": "A-L006",
+            "id_producto": "A-PRD001",
+            "id_sucursal": "A-S001",
+            "nro_lote": "A-NRO-P001",
+            "unidades": 47,
+            "vencimiento": "2027-01-09",
+            "importacion": {
+              "huella": "c2bbc4cb4e97de5cef6c17d09522ef172041e8ee08a2a6a8529533cf4f31e2e0",
+              "archivo": "data/adicionales/stock_lotes.csv",
+              "fila": 7
+            }
+          },
+          "A-L016": {
+            "_id": "A-L016",
+            "id_producto": "A-PRD001",
+            "id_sucursal": "A-S001",
+            "nro_lote": "A-NRO016",
+            "unidades": 10,
+            "vencimiento": "2026-10-11",
+            "importacion": {
+              "huella": "c2bbc4cb4e97de5cef6c17d09522ef172041e8ee08a2a6a8529533cf4f31e2e0",
+              "archivo": "data/adicionales/stock_lotes.csv",
+              "fila": 17
+            }
+          }
+        },
+        "recetas": {
+          "A-RC001": {
+            "_id": "A-RC001",
+            "id_cliente": "A-C001",
+            "medico": "Médico ficticio",
+            "matricula_medico": "A-MP001",
+            "fecha_emision": "2026-10-01",
+            "tipo": "Tratamiento prolongado",
+            "dispensas_autorizadas": 3,
+            "dispensas_realizadas": 2,
+            "proxima_dispensa": "2026-12-10",
+            "estado": "Vigente",
+            "importacion": {
+              "huella": "c2bbc4cb4e97de5cef6c17d09522ef172041e8ee08a2a6a8529533cf4f31e2e0",
+              "archivo": "data/adicionales/recetas.csv",
+              "fila": 2
+            }
+          }
+        },
+        "ventas": {
+          "B-DEMO-V1": {
+            "_id": "B-DEMO-V1",
+            "id_cliente": "A-C001",
+            "id_farmaceutico": "A-F001",
+            "id_sucursal": "A-S001",
+            "id_receta": "A-RC001",
+            "fecha": "2026-11-10",
+            "tipo": "Con receta",
+            "medio_pago": "Obra social",
+            "estado": "Completada",
+            "total": 15998,
+            "items": [
+              {
+                "id_detalle": "B-DEMO-V1-D1",
+                "id_producto": "A-PRD003",
+                "cantidad": 6,
+                "precio_unit": 1000,
+                "subtotal": 6000,
+                "asignaciones_lotes": [
+                  {
+                    "id_lote": "A-L002",
+                    "cantidad": 4
+                  },
+                  {
+                    "id_lote": "A-L003",
+                    "cantidad": 2
+                  }
+                ]
+              },
+              {
+                "id_detalle": "B-DEMO-V1-D2",
+                "id_producto": "A-PRD001",
+                "cantidad": 2,
+                "precio_unit": 4999,
+                "subtotal": 9998,
+                "asignaciones_lotes": [
+                  {
+                    "id_lote": "A-L006",
+                    "cantidad": 2
+                  }
+                ]
+              }
+            ],
+            "stock_aplicado": true,
+            "receta_aplicada": true,
+            "trazabilidad_lotes": "registrada",
+            "origen": "servicio",
+            "request_hash": "f0629f0cbb2d9e49b044e4fc160952c2929a9efc804fe4e0295ddbaee9de61d6"
+          }
+        }
+      }
+    },
+    {
+      "paso": "q14_rechazo_stock",
+      "descripcion": "Un ítem alcanza y otro no: se rechaza toda la venta; ni lotes ni receta cambian.",
+      "operacion": "q14",
+      "parametros": {
+        "id_venta": "B-DEMO-V2",
+        "id_cliente": "A-C001",
+        "id_farmaceutico": "A-F001",
+        "id_receta": "A-RC001",
+        "medio_pago": "Efectivo",
+        "items": [
+          {
+            "id_producto": "A-PRD003",
+            "cantidad": 1
+          },
+          {
+            "id_producto": "A-PRD001",
+            "cantidad": 1000
+          }
+        ]
+      },
+      "resultado": {
+        "estado": "rechazo",
+        "codigo": "STOCK_INSUFICIENTE",
+        "mensaje": "Stock vigente insuficiente en A-S001; no se modificó ningún lote. A-PRD001: pedido 1000, vigente 47."
+      },
+      "antes": {
+        "stock_lotes": {
+          "A-L001": {
+            "_id": "A-L001",
+            "id_producto": "A-PRD003",
+            "id_sucursal": "A-S001",
+            "nro_lote": "A-NRO001",
+            "unidades": 100,
+            "vencimiento": "2026-11-09",
+            "importacion": {
+              "huella": "c2bbc4cb4e97de5cef6c17d09522ef172041e8ee08a2a6a8529533cf4f31e2e0",
+              "archivo": "data/adicionales/stock_lotes.csv",
+              "fila": 2
+            }
+          },
+          "A-L002": {
+            "_id": "A-L002",
+            "id_producto": "A-PRD003",
+            "id_sucursal": "A-S001",
+            "nro_lote": "A-NRO002",
+            "unidades": 0,
+            "vencimiento": "2026-11-10",
+            "importacion": {
+              "huella": "c2bbc4cb4e97de5cef6c17d09522ef172041e8ee08a2a6a8529533cf4f31e2e0",
+              "archivo": "data/adicionales/stock_lotes.csv",
+              "fila": 3
+            }
+          },
+          "A-L003": {
+            "_id": "A-L003",
+            "id_producto": "A-PRD003",
+            "id_sucursal": "A-S001",
+            "nro_lote": "A-NRO003",
+            "unidades": 8,
+            "vencimiento": "2026-12-10",
+            "importacion": {
+              "huella": "c2bbc4cb4e97de5cef6c17d09522ef172041e8ee08a2a6a8529533cf4f31e2e0",
+              "archivo": "data/adicionales/stock_lotes.csv",
+              "fila": 4
+            }
+          },
+          "A-L004": {
+            "_id": "A-L004",
+            "id_producto": "A-PRD003",
+            "id_sucursal": "A-S001",
+            "nro_lote": "A-NRO004",
+            "unidades": 20,
+            "vencimiento": "2027-01-09",
+            "importacion": {
+              "huella": "c2bbc4cb4e97de5cef6c17d09522ef172041e8ee08a2a6a8529533cf4f31e2e0",
+              "archivo": "data/adicionales/stock_lotes.csv",
+              "fila": 5
+            }
+          },
+          "A-L006": {
+            "_id": "A-L006",
+            "id_producto": "A-PRD001",
+            "id_sucursal": "A-S001",
+            "nro_lote": "A-NRO-P001",
+            "unidades": 47,
+            "vencimiento": "2027-01-09",
+            "importacion": {
+              "huella": "c2bbc4cb4e97de5cef6c17d09522ef172041e8ee08a2a6a8529533cf4f31e2e0",
+              "archivo": "data/adicionales/stock_lotes.csv",
+              "fila": 7
+            }
+          },
+          "A-L016": {
+            "_id": "A-L016",
+            "id_producto": "A-PRD001",
+            "id_sucursal": "A-S001",
+            "nro_lote": "A-NRO016",
+            "unidades": 10,
+            "vencimiento": "2026-10-11",
+            "importacion": {
+              "huella": "c2bbc4cb4e97de5cef6c17d09522ef172041e8ee08a2a6a8529533cf4f31e2e0",
+              "archivo": "data/adicionales/stock_lotes.csv",
+              "fila": 17
+            }
+          }
+        },
+        "recetas": {
+          "A-RC001": {
+            "_id": "A-RC001",
+            "id_cliente": "A-C001",
+            "medico": "Médico ficticio",
+            "matricula_medico": "A-MP001",
+            "fecha_emision": "2026-10-01",
+            "tipo": "Tratamiento prolongado",
+            "dispensas_autorizadas": 3,
+            "dispensas_realizadas": 2,
+            "proxima_dispensa": "2026-12-10",
+            "estado": "Vigente",
+            "importacion": {
+              "huella": "c2bbc4cb4e97de5cef6c17d09522ef172041e8ee08a2a6a8529533cf4f31e2e0",
+              "archivo": "data/adicionales/recetas.csv",
+              "fila": 2
+            }
+          }
+        },
+        "ventas": {
+          "B-DEMO-V2": null
+        }
+      },
+      "despues": {
+        "stock_lotes": {
+          "A-L001": {
+            "_id": "A-L001",
+            "id_producto": "A-PRD003",
+            "id_sucursal": "A-S001",
+            "nro_lote": "A-NRO001",
+            "unidades": 100,
+            "vencimiento": "2026-11-09",
+            "importacion": {
+              "huella": "c2bbc4cb4e97de5cef6c17d09522ef172041e8ee08a2a6a8529533cf4f31e2e0",
+              "archivo": "data/adicionales/stock_lotes.csv",
+              "fila": 2
+            }
+          },
+          "A-L002": {
+            "_id": "A-L002",
+            "id_producto": "A-PRD003",
+            "id_sucursal": "A-S001",
+            "nro_lote": "A-NRO002",
+            "unidades": 0,
+            "vencimiento": "2026-11-10",
+            "importacion": {
+              "huella": "c2bbc4cb4e97de5cef6c17d09522ef172041e8ee08a2a6a8529533cf4f31e2e0",
+              "archivo": "data/adicionales/stock_lotes.csv",
+              "fila": 3
+            }
+          },
+          "A-L003": {
+            "_id": "A-L003",
+            "id_producto": "A-PRD003",
+            "id_sucursal": "A-S001",
+            "nro_lote": "A-NRO003",
+            "unidades": 8,
+            "vencimiento": "2026-12-10",
+            "importacion": {
+              "huella": "c2bbc4cb4e97de5cef6c17d09522ef172041e8ee08a2a6a8529533cf4f31e2e0",
+              "archivo": "data/adicionales/stock_lotes.csv",
+              "fila": 4
+            }
+          },
+          "A-L004": {
+            "_id": "A-L004",
+            "id_producto": "A-PRD003",
+            "id_sucursal": "A-S001",
+            "nro_lote": "A-NRO004",
+            "unidades": 20,
+            "vencimiento": "2027-01-09",
+            "importacion": {
+              "huella": "c2bbc4cb4e97de5cef6c17d09522ef172041e8ee08a2a6a8529533cf4f31e2e0",
+              "archivo": "data/adicionales/stock_lotes.csv",
+              "fila": 5
+            }
+          },
+          "A-L006": {
+            "_id": "A-L006",
+            "id_producto": "A-PRD001",
+            "id_sucursal": "A-S001",
+            "nro_lote": "A-NRO-P001",
+            "unidades": 47,
+            "vencimiento": "2027-01-09",
+            "importacion": {
+              "huella": "c2bbc4cb4e97de5cef6c17d09522ef172041e8ee08a2a6a8529533cf4f31e2e0",
+              "archivo": "data/adicionales/stock_lotes.csv",
+              "fila": 7
+            }
+          },
+          "A-L016": {
+            "_id": "A-L016",
+            "id_producto": "A-PRD001",
+            "id_sucursal": "A-S001",
+            "nro_lote": "A-NRO016",
+            "unidades": 10,
+            "vencimiento": "2026-10-11",
+            "importacion": {
+              "huella": "c2bbc4cb4e97de5cef6c17d09522ef172041e8ee08a2a6a8529533cf4f31e2e0",
+              "archivo": "data/adicionales/stock_lotes.csv",
+              "fila": 17
+            }
+          }
+        },
+        "recetas": {
+          "A-RC001": {
+            "_id": "A-RC001",
+            "id_cliente": "A-C001",
+            "medico": "Médico ficticio",
+            "matricula_medico": "A-MP001",
+            "fecha_emision": "2026-10-01",
+            "tipo": "Tratamiento prolongado",
+            "dispensas_autorizadas": 3,
+            "dispensas_realizadas": 2,
+            "proxima_dispensa": "2026-12-10",
+            "estado": "Vigente",
+            "importacion": {
+              "huella": "c2bbc4cb4e97de5cef6c17d09522ef172041e8ee08a2a6a8529533cf4f31e2e0",
+              "archivo": "data/adicionales/recetas.csv",
+              "fila": 2
+            }
+          }
+        },
+        "ventas": {
+          "B-DEMO-V2": null
+        }
+      }
+    },
+    {
+      "paso": "q14_rechazo_cliente_inactivo",
+      "descripcion": "Cliente dado de baja (C008): rechazo por validación sin efectos.",
+      "operacion": "q14",
+      "parametros": {
+        "id_venta": "B-DEMO-V3",
+        "id_cliente": "C008",
+        "id_farmaceutico": "F001",
+        "medio_pago": "Efectivo",
+        "items": [
+          {
+            "id_producto": "PRD001",
+            "cantidad": 1
+          }
+        ]
+      },
+      "resultado": {
+        "estado": "rechazo",
+        "codigo": "VALIDACION",
+        "mensaje": "El cliente C008 está dado de baja."
+      },
+      "antes": {
+        "stock_lotes": {
+          "L001": {
+            "_id": "L001",
+            "id_producto": "PRD001",
+            "id_sucursal": "S001",
+            "nro_lote": "L-2501A",
+            "unidades": 120,
+            "vencimiento": "2027-08-31",
+            "importacion": {
+              "huella": "c2bbc4cb4e97de5cef6c17d09522ef172041e8ee08a2a6a8529533cf4f31e2e0",
+              "archivo": "data/originales/stock_lotes.csv",
+              "fila": 2
+            }
+          }
+        },
+        "ventas": {
+          "B-DEMO-V3": null
+        }
+      },
+      "despues": {
+        "stock_lotes": {
+          "L001": {
+            "_id": "L001",
+            "id_producto": "PRD001",
+            "id_sucursal": "S001",
+            "nro_lote": "L-2501A",
+            "unidades": 120,
+            "vencimiento": "2027-08-31",
+            "importacion": {
+              "huella": "c2bbc4cb4e97de5cef6c17d09522ef172041e8ee08a2a6a8529533cf4f31e2e0",
+              "archivo": "data/originales/stock_lotes.csv",
+              "fila": 2
+            }
+          }
+        },
+        "ventas": {
+          "B-DEMO-V3": null
+        }
+      }
+    },
+    {
+      "paso": "q14_reintento_idempotente",
+      "descripcion": "Reintento del primer pedido con el mismo id: devuelve la venta confirmada sin nuevos efectos.",
+      "operacion": "q14",
+      "parametros": {
+        "id_venta": "B-DEMO-V1",
+        "id_cliente": "A-C001",
+        "id_farmaceutico": "A-F001",
+        "id_receta": "A-RC001",
+        "medio_pago": "Obra social",
+        "items": [
+          {
+            "id_producto": "A-PRD003",
+            "cantidad": 6
+          },
+          {
+            "id_producto": "A-PRD001",
+            "cantidad": 2
+          }
+        ]
+      },
+      "resultado": {
+        "estado": "ok",
+        "reutilizada": true,
+        "eventos": []
+      },
+      "antes": {
+        "stock_lotes": {
+          "A-L001": {
+            "_id": "A-L001",
+            "id_producto": "A-PRD003",
+            "id_sucursal": "A-S001",
+            "nro_lote": "A-NRO001",
+            "unidades": 100,
+            "vencimiento": "2026-11-09",
+            "importacion": {
+              "huella": "c2bbc4cb4e97de5cef6c17d09522ef172041e8ee08a2a6a8529533cf4f31e2e0",
+              "archivo": "data/adicionales/stock_lotes.csv",
+              "fila": 2
+            }
+          },
+          "A-L002": {
+            "_id": "A-L002",
+            "id_producto": "A-PRD003",
+            "id_sucursal": "A-S001",
+            "nro_lote": "A-NRO002",
+            "unidades": 0,
+            "vencimiento": "2026-11-10",
+            "importacion": {
+              "huella": "c2bbc4cb4e97de5cef6c17d09522ef172041e8ee08a2a6a8529533cf4f31e2e0",
+              "archivo": "data/adicionales/stock_lotes.csv",
+              "fila": 3
+            }
+          },
+          "A-L003": {
+            "_id": "A-L003",
+            "id_producto": "A-PRD003",
+            "id_sucursal": "A-S001",
+            "nro_lote": "A-NRO003",
+            "unidades": 8,
+            "vencimiento": "2026-12-10",
+            "importacion": {
+              "huella": "c2bbc4cb4e97de5cef6c17d09522ef172041e8ee08a2a6a8529533cf4f31e2e0",
+              "archivo": "data/adicionales/stock_lotes.csv",
+              "fila": 4
+            }
+          },
+          "A-L004": {
+            "_id": "A-L004",
+            "id_producto": "A-PRD003",
+            "id_sucursal": "A-S001",
+            "nro_lote": "A-NRO004",
+            "unidades": 20,
+            "vencimiento": "2027-01-09",
+            "importacion": {
+              "huella": "c2bbc4cb4e97de5cef6c17d09522ef172041e8ee08a2a6a8529533cf4f31e2e0",
+              "archivo": "data/adicionales/stock_lotes.csv",
+              "fila": 5
+            }
+          },
+          "A-L006": {
+            "_id": "A-L006",
+            "id_producto": "A-PRD001",
+            "id_sucursal": "A-S001",
+            "nro_lote": "A-NRO-P001",
+            "unidades": 47,
+            "vencimiento": "2027-01-09",
+            "importacion": {
+              "huella": "c2bbc4cb4e97de5cef6c17d09522ef172041e8ee08a2a6a8529533cf4f31e2e0",
+              "archivo": "data/adicionales/stock_lotes.csv",
+              "fila": 7
+            }
+          },
+          "A-L016": {
+            "_id": "A-L016",
+            "id_producto": "A-PRD001",
+            "id_sucursal": "A-S001",
+            "nro_lote": "A-NRO016",
+            "unidades": 10,
+            "vencimiento": "2026-10-11",
+            "importacion": {
+              "huella": "c2bbc4cb4e97de5cef6c17d09522ef172041e8ee08a2a6a8529533cf4f31e2e0",
+              "archivo": "data/adicionales/stock_lotes.csv",
+              "fila": 17
+            }
+          }
+        },
+        "recetas": {
+          "A-RC001": {
+            "_id": "A-RC001",
+            "id_cliente": "A-C001",
+            "medico": "Médico ficticio",
+            "matricula_medico": "A-MP001",
+            "fecha_emision": "2026-10-01",
+            "tipo": "Tratamiento prolongado",
+            "dispensas_autorizadas": 3,
+            "dispensas_realizadas": 2,
+            "proxima_dispensa": "2026-12-10",
+            "estado": "Vigente",
+            "importacion": {
+              "huella": "c2bbc4cb4e97de5cef6c17d09522ef172041e8ee08a2a6a8529533cf4f31e2e0",
+              "archivo": "data/adicionales/recetas.csv",
+              "fila": 2
+            }
+          }
+        }
+      },
+      "despues": {
+        "stock_lotes": {
+          "A-L001": {
+            "_id": "A-L001",
+            "id_producto": "A-PRD003",
+            "id_sucursal": "A-S001",
+            "nro_lote": "A-NRO001",
+            "unidades": 100,
+            "vencimiento": "2026-11-09",
+            "importacion": {
+              "huella": "c2bbc4cb4e97de5cef6c17d09522ef172041e8ee08a2a6a8529533cf4f31e2e0",
+              "archivo": "data/adicionales/stock_lotes.csv",
+              "fila": 2
+            }
+          },
+          "A-L002": {
+            "_id": "A-L002",
+            "id_producto": "A-PRD003",
+            "id_sucursal": "A-S001",
+            "nro_lote": "A-NRO002",
+            "unidades": 0,
+            "vencimiento": "2026-11-10",
+            "importacion": {
+              "huella": "c2bbc4cb4e97de5cef6c17d09522ef172041e8ee08a2a6a8529533cf4f31e2e0",
+              "archivo": "data/adicionales/stock_lotes.csv",
+              "fila": 3
+            }
+          },
+          "A-L003": {
+            "_id": "A-L003",
+            "id_producto": "A-PRD003",
+            "id_sucursal": "A-S001",
+            "nro_lote": "A-NRO003",
+            "unidades": 8,
+            "vencimiento": "2026-12-10",
+            "importacion": {
+              "huella": "c2bbc4cb4e97de5cef6c17d09522ef172041e8ee08a2a6a8529533cf4f31e2e0",
+              "archivo": "data/adicionales/stock_lotes.csv",
+              "fila": 4
+            }
+          },
+          "A-L004": {
+            "_id": "A-L004",
+            "id_producto": "A-PRD003",
+            "id_sucursal": "A-S001",
+            "nro_lote": "A-NRO004",
+            "unidades": 20,
+            "vencimiento": "2027-01-09",
+            "importacion": {
+              "huella": "c2bbc4cb4e97de5cef6c17d09522ef172041e8ee08a2a6a8529533cf4f31e2e0",
+              "archivo": "data/adicionales/stock_lotes.csv",
+              "fila": 5
+            }
+          },
+          "A-L006": {
+            "_id": "A-L006",
+            "id_producto": "A-PRD001",
+            "id_sucursal": "A-S001",
+            "nro_lote": "A-NRO-P001",
+            "unidades": 47,
+            "vencimiento": "2027-01-09",
+            "importacion": {
+              "huella": "c2bbc4cb4e97de5cef6c17d09522ef172041e8ee08a2a6a8529533cf4f31e2e0",
+              "archivo": "data/adicionales/stock_lotes.csv",
+              "fila": 7
+            }
+          },
+          "A-L016": {
+            "_id": "A-L016",
+            "id_producto": "A-PRD001",
+            "id_sucursal": "A-S001",
+            "nro_lote": "A-NRO016",
+            "unidades": 10,
+            "vencimiento": "2026-10-11",
+            "importacion": {
+              "huella": "c2bbc4cb4e97de5cef6c17d09522ef172041e8ee08a2a6a8529533cf4f31e2e0",
+              "archivo": "data/adicionales/stock_lotes.csv",
+              "fila": 17
+            }
+          }
+        },
+        "recetas": {
+          "A-RC001": {
+            "_id": "A-RC001",
+            "id_cliente": "A-C001",
+            "medico": "Médico ficticio",
+            "matricula_medico": "A-MP001",
+            "fecha_emision": "2026-10-01",
+            "tipo": "Tratamiento prolongado",
+            "dispensas_autorizadas": 3,
+            "dispensas_realizadas": 2,
+            "proxima_dispensa": "2026-12-10",
+            "estado": "Vigente",
+            "importacion": {
+              "huella": "c2bbc4cb4e97de5cef6c17d09522ef172041e8ee08a2a6a8529533cf4f31e2e0",
+              "archivo": "data/adicionales/recetas.csv",
+              "fila": 2
+            }
+          }
+        }
+      }
+    },
+    {
+      "paso": "q15_exito_pendiente",
+      "descripcion": "Pendiente V011 (receta simple RC006): se completa hoy, con FEFO en la sucursal del farmacéutico (S004) y la receta pasa a Completada.",
+      "operacion": "q15",
+      "parametros": {
+        "id_venta": "V011"
+      },
+      "resultado": {
+        "estado": "ok",
+        "reutilizada": false,
+        "eventos": [
+          "563e1c3c-1056-4d87-9143-134efd4f4b0a"
+        ]
+      },
+      "antes": {
+        "stock_lotes": {
+          "L014": {
+            "_id": "L014",
+            "id_producto": "PRD007",
+            "id_sucursal": "S004",
+            "nro_lote": "L-2509H",
+            "unidades": 45,
+            "vencimiento": "2027-04-30",
+            "importacion": {
+              "huella": "c2bbc4cb4e97de5cef6c17d09522ef172041e8ee08a2a6a8529533cf4f31e2e0",
+              "archivo": "data/originales/stock_lotes.csv",
+              "fila": 15
+            }
+          }
+        },
+        "recetas": {
+          "RC006": {
+            "_id": "RC006",
+            "id_cliente": "C007",
+            "medico": "Dr. Gustavo Ramírez",
+            "matricula_medico": "MP-47766",
+            "fecha_emision": "2026-10-05",
+            "tipo": "Simple",
+            "dispensas_autorizadas": 1,
+            "dispensas_realizadas": 0,
+            "proxima_dispensa": null,
+            "estado": "Vigente",
+            "importacion": {
+              "huella": "c2bbc4cb4e97de5cef6c17d09522ef172041e8ee08a2a6a8529533cf4f31e2e0",
+              "archivo": "data/originales/recetas.csv",
+              "fila": 7
+            }
+          }
+        },
+        "ventas": {
+          "V011": {
+            "_id": "V011",
+            "id_cliente": "C007",
+            "id_farmaceutico": "F006",
+            "id_receta": "RC006",
+            "fecha": "2026-10-12",
+            "tipo": "Con receta",
+            "medio_pago": "Débito",
+            "total": 4800,
+            "estado": "Pendiente",
+            "importacion": {
+              "huella": "c2bbc4cb4e97de5cef6c17d09522ef172041e8ee08a2a6a8529533cf4f31e2e0",
+              "archivo": "data/originales/ventas.csv",
+              "fila": 12
+            },
+            "id_sucursal": "S004",
+            "items": [
+              {
+                "id_detalle": "D014",
+                "id_producto": "PRD007",
+                "cantidad": 1,
+                "precio_unit": 4800,
+                "subtotal": 4800,
+                "importacion": {
+                  "huella": "c2bbc4cb4e97de5cef6c17d09522ef172041e8ee08a2a6a8529533cf4f31e2e0",
+                  "archivo": "data/originales/detalle_ventas.csv",
+                  "fila": 15
+                },
+                "asignaciones_lotes": []
+              }
+            ],
+            "stock_aplicado": false,
+            "receta_aplicada": false,
+            "origen": "csv",
+            "trazabilidad_lotes": "no_aplicada",
+            "fecha_creacion_pendiente": "2026-10-12"
+          }
+        }
+      },
+      "despues": {
+        "stock_lotes": {
+          "L014": {
+            "_id": "L014",
+            "id_producto": "PRD007",
+            "id_sucursal": "S004",
+            "nro_lote": "L-2509H",
+            "unidades": 44,
+            "vencimiento": "2027-04-30",
+            "importacion": {
+              "huella": "c2bbc4cb4e97de5cef6c17d09522ef172041e8ee08a2a6a8529533cf4f31e2e0",
+              "archivo": "data/originales/stock_lotes.csv",
+              "fila": 15
+            }
+          }
+        },
+        "recetas": {
+          "RC006": {
+            "_id": "RC006",
+            "id_cliente": "C007",
+            "medico": "Dr. Gustavo Ramírez",
+            "matricula_medico": "MP-47766",
+            "fecha_emision": "2026-10-05",
+            "tipo": "Simple",
+            "dispensas_autorizadas": 1,
+            "dispensas_realizadas": 1,
+            "proxima_dispensa": null,
+            "estado": "Completada",
+            "importacion": {
+              "huella": "c2bbc4cb4e97de5cef6c17d09522ef172041e8ee08a2a6a8529533cf4f31e2e0",
+              "archivo": "data/originales/recetas.csv",
+              "fila": 7
+            }
+          }
+        },
+        "ventas": {
+          "V011": {
+            "_id": "V011",
+            "id_cliente": "C007",
+            "id_farmaceutico": "F006",
+            "id_receta": "RC006",
+            "fecha": "2026-11-10",
+            "tipo": "Con receta",
+            "medio_pago": "Débito",
+            "total": 4800,
+            "estado": "Completada",
+            "importacion": {
+              "huella": "c2bbc4cb4e97de5cef6c17d09522ef172041e8ee08a2a6a8529533cf4f31e2e0",
+              "archivo": "data/originales/ventas.csv",
+              "fila": 12
+            },
+            "id_sucursal": "S004",
+            "items": [
+              {
+                "id_detalle": "D014",
+                "id_producto": "PRD007",
+                "cantidad": 1,
+                "precio_unit": 4800,
+                "subtotal": 4800,
+                "importacion": {
+                  "huella": "c2bbc4cb4e97de5cef6c17d09522ef172041e8ee08a2a6a8529533cf4f31e2e0",
+                  "archivo": "data/originales/detalle_ventas.csv",
+                  "fila": 15
+                },
+                "asignaciones_lotes": [
+                  {
+                    "id_lote": "L014",
+                    "cantidad": 1
+                  }
+                ]
+              }
+            ],
+            "stock_aplicado": true,
+            "receta_aplicada": true,
+            "origen": "csv",
+            "trazabilidad_lotes": "registrada",
+            "fecha_creacion_pendiente": "2026-10-12"
+          }
+        }
+      }
+    },
+    {
+      "paso": "q15_rechazo_pendiente",
+      "descripcion": "Pendiente V012: su farmacéutico (F005) está en S003, sin lotes de sus productos. Se rechaza y la pendiente queda igual.",
+      "operacion": "q15",
+      "parametros": {
+        "id_venta": "V012"
+      },
+      "resultado": {
+        "estado": "rechazo",
+        "codigo": "STOCK_INSUFICIENTE",
+        "mensaje": "Stock vigente insuficiente en S003; no se modificó ningún lote. PRD002: pedido 2, vigente 0; PRD011: pedido 1, vigente 0."
+      },
+      "antes": {
+        "ventas": {
+          "V012": {
+            "_id": "V012",
+            "id_cliente": "C002",
+            "id_farmaceutico": "F005",
+            "id_receta": null,
+            "fecha": "2026-10-11",
+            "tipo": "Venta libre",
+            "medio_pago": "Débito",
+            "total": 9200,
+            "estado": "Pendiente",
+            "importacion": {
+              "huella": "c2bbc4cb4e97de5cef6c17d09522ef172041e8ee08a2a6a8529533cf4f31e2e0",
+              "archivo": "data/originales/ventas.csv",
+              "fila": 13
+            },
+            "id_sucursal": "S003",
+            "items": [
+              {
+                "id_detalle": "D015",
+                "id_producto": "PRD002",
+                "cantidad": 2,
+                "precio_unit": 3500,
+                "subtotal": 7000,
+                "importacion": {
+                  "huella": "c2bbc4cb4e97de5cef6c17d09522ef172041e8ee08a2a6a8529533cf4f31e2e0",
+                  "archivo": "data/originales/detalle_ventas.csv",
+                  "fila": 16
+                },
+                "asignaciones_lotes": []
+              },
+              {
+                "id_detalle": "D016",
+                "id_producto": "PRD011",
+                "cantidad": 1,
+                "precio_unit": 2200,
+                "subtotal": 2200,
+                "importacion": {
+                  "huella": "c2bbc4cb4e97de5cef6c17d09522ef172041e8ee08a2a6a8529533cf4f31e2e0",
+                  "archivo": "data/originales/detalle_ventas.csv",
+                  "fila": 17
+                },
+                "asignaciones_lotes": []
+              }
+            ],
+            "stock_aplicado": false,
+            "receta_aplicada": false,
+            "origen": "csv",
+            "trazabilidad_lotes": "no_aplicada",
+            "fecha_creacion_pendiente": "2026-10-11"
+          }
+        }
+      },
+      "despues": {
+        "ventas": {
+          "V012": {
+            "_id": "V012",
+            "id_cliente": "C002",
+            "id_farmaceutico": "F005",
+            "id_receta": null,
+            "fecha": "2026-10-11",
+            "tipo": "Venta libre",
+            "medio_pago": "Débito",
+            "total": 9200,
+            "estado": "Pendiente",
+            "importacion": {
+              "huella": "c2bbc4cb4e97de5cef6c17d09522ef172041e8ee08a2a6a8529533cf4f31e2e0",
+              "archivo": "data/originales/ventas.csv",
+              "fila": 13
+            },
+            "id_sucursal": "S003",
+            "items": [
+              {
+                "id_detalle": "D015",
+                "id_producto": "PRD002",
+                "cantidad": 2,
+                "precio_unit": 3500,
+                "subtotal": 7000,
+                "importacion": {
+                  "huella": "c2bbc4cb4e97de5cef6c17d09522ef172041e8ee08a2a6a8529533cf4f31e2e0",
+                  "archivo": "data/originales/detalle_ventas.csv",
+                  "fila": 16
+                },
+                "asignaciones_lotes": []
+              },
+              {
+                "id_detalle": "D016",
+                "id_producto": "PRD011",
+                "cantidad": 1,
+                "precio_unit": 2200,
+                "subtotal": 2200,
+                "importacion": {
+                  "huella": "c2bbc4cb4e97de5cef6c17d09522ef172041e8ee08a2a6a8529533cf4f31e2e0",
+                  "archivo": "data/originales/detalle_ventas.csv",
+                  "fila": 17
+                },
+                "asignaciones_lotes": []
+              }
+            ],
+            "stock_aplicado": false,
+            "receta_aplicada": false,
+            "origen": "csv",
+            "trazabilidad_lotes": "no_aplicada",
+            "fecha_creacion_pendiente": "2026-10-11"
+          }
+        }
+      }
+    }
+  ]
+}
