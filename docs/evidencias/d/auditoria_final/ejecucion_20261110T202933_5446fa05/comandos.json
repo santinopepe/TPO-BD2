@@ -1,0 +1,144 @@
+[
+  {
+    "paso": "compose",
+    "comando": [
+      "docker",
+      "compose",
+      "--project-name",
+      "farmared_d_oficial_pruebas_0bcd81e085a14b7eb5e686bdc86e5219",
+      "--env-file",
+      "<ENV_TEMPORAL>",
+      "-f",
+      "infra/docker-compose.yml",
+      "up",
+      "-d",
+      "mongodb",
+      "neo4j"
+    ],
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": "Network farmared_d_oficial_pruebas_0bcd81e085a14b7eb5e686bdc86e5219_default Creating \n Volume farmared_d_oficial_pruebas_0bcd81e085a14b7eb5e686bdc86e5219_neo4j_data Creating \n Volume farmared_d_oficial_pruebas_0bcd81e085a14b7eb5e686bdc86e5219_mongo_data Creating \n Volume farmared_d_oficial_pruebas_0bcd81e085a14b7eb5e686bdc86e5219_mongo_data Creating \n Volume farmared_d_oficial_pruebas_0bcd81e085a14b7eb5e686bdc86e5219_neo4j_logs Creating \n Volume farmared_d_oficial_pruebas_0bcd81e085a14b7eb5e686bdc86e5219_neo4j_logs Creating \n Network farmared_d_oficial_pruebas_0bcd81e085a14b7eb5e686bdc86e5219_default Creating \n Volume farmared_d_oficial_pruebas_0bcd81e085a14b7eb5e686bdc86e5219_neo4j_data Creating \n Volume farmared_d_oficial_pruebas_0bcd81e085a14b7eb5e686bdc86e5219_mongo_data Created \n Volume farmared_d_oficial_pruebas_0bcd81e085a14b7eb5e686bdc86e5219_mongo_data Created \n Volume farmared_d_oficial_pruebas_0bcd81e085a14b7eb5e686bdc86e5219_neo4j_data Created \n Volume farmared_d_oficial_pruebas_0bcd81e085a14b7eb5e686bdc86e5219_neo4j_data Created \n Volume farmared_d_oficial_pruebas_0bcd81e085a14b7eb5e686bdc86e5219_neo4j_logs Created \n Volume farmared_d_oficial_pruebas_0bcd81e085a14b7eb5e686bdc86e5219_neo4j_logs Created \n Network farmared_d_oficial_pruebas_0bcd81e085a14b7eb5e686bdc86e5219_default Created \n Network farmared_d_oficial_pruebas_0bcd81e085a14b7eb5e686bdc86e5219_default Created \n Container farmared_d_oficial_pruebas_0bcd81e085a14b7eb5e686bdc86e5219-neo4j-1 Creating \n Container farmared_d_oficial_pruebas_0bcd81e085a14b7eb5e686bdc86e5219-mongodb-1 Creating \n Container farmared_d_oficial_pruebas_0bcd81e085a14b7eb5e686bdc86e5219-neo4j-1 Created \n Container farmared_d_oficial_pruebas_0bcd81e085a14b7eb5e686bdc86e5219-mongodb-1 Created \n Container farmared_d_oficial_pruebas_0bcd81e085a14b7eb5e686bdc86e5219-mongodb-1 Starting \n Container farmared_d_oficial_pruebas_0bcd81e085a14b7eb5e686bdc86e5219-neo4j-1 Starting \n Container farmared_d_oficial_pruebas_0bcd81e085a14b7eb5e686bdc86e5219-mongodb-1 Started \n Container farmared_d_oficial_pruebas_0bcd81e085a14b7eb5e686bdc86e5219-neo4j-1 Started"
+  },
+  {
+    "paso": "compose",
+    "comando": [
+      "docker",
+      "compose",
+      "--project-name",
+      "farmared_d_oficial_pruebas_0bcd81e085a14b7eb5e686bdc86e5219",
+      "--env-file",
+      "<ENV_TEMPORAL>",
+      "-f",
+      "infra/docker-compose.yml",
+      "run",
+      "--rm",
+      "mongodb-init"
+    ],
+    "exit_code": 0,
+    "stdout": "rs0 listo: primario real confirmado; configuración existente conservada.",
+    "stderr": "Container farmared_d_oficial_pruebas_0bcd81e085a14b7eb5e686bdc86e5219-mongodb-1 Running \n Container farmared_d_oficial_pruebas_0bcd81e085a14b7eb5e686bdc86e5219-mongodb-init-run-6851bd9817b4 Creating \n Container farmared_d_oficial_pruebas_0bcd81e085a14b7eb5e686bdc86e5219-mongodb-init-run-6851bd9817b4 Created"
+  },
+  {
+    "paso": "compose",
+    "comando": [
+      "docker",
+      "compose",
+      "--project-name",
+      "farmared_d_oficial_pruebas_0bcd81e085a14b7eb5e686bdc86e5219",
+      "--env-file",
+      "<ENV_TEMPORAL>",
+      "-f",
+      "infra/docker-compose.yml",
+      "up",
+      "-d",
+      "--wait",
+      "--wait-timeout",
+      "180",
+      "mongodb",
+      "neo4j"
+    ],
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": "Container farmared_d_oficial_pruebas_0bcd81e085a14b7eb5e686bdc86e5219-neo4j-1 Running \n Container farmared_d_oficial_pruebas_0bcd81e085a14b7eb5e686bdc86e5219-mongodb-1 Running \n Container farmared_d_oficial_pruebas_0bcd81e085a14b7eb5e686bdc86e5219-neo4j-1 Waiting \n Container farmared_d_oficial_pruebas_0bcd81e085a14b7eb5e686bdc86e5219-mongodb-1 Waiting \n Container farmared_d_oficial_pruebas_0bcd81e085a14b7eb5e686bdc86e5219-mongodb-1 Healthy \n Container farmared_d_oficial_pruebas_0bcd81e085a14b7eb5e686bdc86e5219-neo4j-1 Healthy"
+  },
+  {
+    "paso": "compose",
+    "comando": [
+      "docker",
+      "compose",
+      "--project-name",
+      "farmared_d_oficial_pruebas_0bcd81e085a14b7eb5e686bdc86e5219",
+      "--env-file",
+      "<ENV_TEMPORAL>",
+      "-f",
+      "infra/docker-compose.yml",
+      "port",
+      "neo4j",
+      "7687"
+    ],
+    "exit_code": 0,
+    "stdout": "127.0.0.1:32770",
+    "stderr": ""
+  },
+  {
+    "paso": "compose",
+    "comando": [
+      "docker",
+      "compose",
+      "--project-name",
+      "farmared_d_oficial_pruebas_0bcd81e085a14b7eb5e686bdc86e5219",
+      "--env-file",
+      "<ENV_TEMPORAL>",
+      "-f",
+      "infra/docker-compose.yml",
+      "port",
+      "mongodb",
+      "27017"
+    ],
+    "exit_code": 0,
+    "stdout": "127.0.0.1:32768",
+    "stderr": ""
+  },
+  {
+    "paso": "salud_suites",
+    "comando": [
+      "python",
+      "-m",
+      "farmared",
+      "salud"
+    ],
+    "exit_code": 0,
+    "segundos_observados": 0.864,
+    "stdout": {
+      "proyeccion": "no_comprobada",
+      "mongo": {
+        "estado": "listo",
+        "base": "farmared_test_suite_d",
+        "primario": true
+      },
+      "neo4j": {
+        "estado": "listo"
+      }
+    },
+    "stderr": ""
+  },
+  {
+    "paso": "compose",
+    "comando": [
+      "docker",
+      "compose",
+      "--project-name",
+      "farmared_d_oficial_pruebas_0bcd81e085a14b7eb5e686bdc86e5219",
+      "--env-file",
+      "<ENV_TEMPORAL>",
+      "-f",
+      "infra/docker-compose.yml",
+      "down",
+      "--volumes",
+      "--remove-orphans"
+    ],
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": "Container farmared_d_oficial_pruebas_0bcd81e085a14b7eb5e686bdc86e5219-neo4j-1 Stopping \n Container farmared_d_oficial_pruebas_0bcd81e085a14b7eb5e686bdc86e5219-mongodb-1 Stopping \n Container farmared_d_oficial_pruebas_0bcd81e085a14b7eb5e686bdc86e5219-mongodb-1 Stopped \n Container farmared_d_oficial_pruebas_0bcd81e085a14b7eb5e686bdc86e5219-mongodb-1 Removing \n Container farmared_d_oficial_pruebas_0bcd81e085a14b7eb5e686bdc86e5219-mongodb-1 Removed \n Container farmared_d_oficial_pruebas_0bcd81e085a14b7eb5e686bdc86e5219-neo4j-1 Stopped \n Container farmared_d_oficial_pruebas_0bcd81e085a14b7eb5e686bdc86e5219-neo4j-1 Removing \n Container farmared_d_oficial_pruebas_0bcd81e085a14b7eb5e686bdc86e5219-neo4j-1 Removed \n Volume farmared_d_oficial_pruebas_0bcd81e085a14b7eb5e686bdc86e5219_mongo_data Removing \n Volume farmared_d_oficial_pruebas_0bcd81e085a14b7eb5e686bdc86e5219_neo4j_logs Removing \n Volume farmared_d_oficial_pruebas_0bcd81e085a14b7eb5e686bdc86e5219_neo4j_data Removing \n Network farmared_d_oficial_pruebas_0bcd81e085a14b7eb5e686bdc86e5219_default Removing \n Volume farmared_d_oficial_pruebas_0bcd81e085a14b7eb5e686bdc86e5219_neo4j_data Removed \n Volume farmared_d_oficial_pruebas_0bcd81e085a14b7eb5e686bdc86e5219_mongo_data Removed \n Volume farmared_d_oficial_pruebas_0bcd81e085a14b7eb5e686bdc86e5219_neo4j_logs Removed \n Network farmared_d_oficial_pruebas_0bcd81e085a14b7eb5e686bdc86e5219_default Removed"
+  }
+]

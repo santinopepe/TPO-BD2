@@ -1,0 +1,47 @@
+{
+  "comando": [
+    "python",
+    "-m",
+    "farmared",
+    "grafo-rebuild",
+    "--base",
+    "farmared_demo_d_oficial_e3311eda",
+    "--lock-path",
+    "<LOCK_COMPARTIDO>",
+    "--confirmar-entorno-aislado",
+    "--confirmar-escrituras-pausadas",
+    "--confirmar-sincronizador-pausado"
+  ],
+  "exit_code": 0,
+  "segundos_observados": 7.823,
+  "stdout": {
+    "base": "farmared_demo_d_oficial_e3311eda",
+    "comando": "grafo-rebuild",
+    "commit_neo4j": "confirmado",
+    "error": null,
+    "estado": "verificada",
+    "fase": "finalizada",
+    "habilitable": true,
+    "mongo_modificado": false,
+    "outbox_modificada": false,
+    "precondiciones": {
+      "actualizacion_existente_confirmada": false,
+      "entorno_aislado_confirmado": true,
+      "escrituras_pausadas_confirmadas": true,
+      "exclusion_compartida": true
+    },
+    "recuperable": false,
+    "sincronizador_pausado_confirmado": true,
+    "verificacion": {
+      "conteos": {
+        "nodos_esperados": 120,
+        "nodos_observados": 120,
+        "relaciones_esperadas": 142,
+        "relaciones_observadas": 142
+      },
+      "diferencias": [],
+      "equivalente": true
+    }
+  },
+  "stderr": "Received notification from DBMS server: <GqlStatusObject gql_status='01N52', status_description='warn: property key does not exist. The property `id` does not exist. Verify that the spelling is correct.', position=<SummaryInputPosition line=1, column=44, offset=43>, raw_classification='UNRECOGNIZED', classification=<NotificationClassification.UNRECOGNIZED: 'UNRECOGNIZED'>, raw_severity='WARNING', severity=<NotificationSeverity.WARNING: 'WARNING'>, diagnostic_record={'_classification': 'UNRECOGNIZED', '_severity': 'WARNING', '_position': {'offset': 43, 'line': 1, 'column': 44}, 'OPERATION': '', 'OPERATION_CODE': '0', 'CURRENT_SCHEMA': '/'}> for query: 'MATCH (n) RETURN labels(n) AS etiquetas, n.id AS id, properties(n) AS propiedades'"
+}

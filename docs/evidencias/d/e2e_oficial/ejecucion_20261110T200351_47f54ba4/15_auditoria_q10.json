@@ -1,0 +1,77 @@
+[
+  {
+    "id_sucursal": "A-S001",
+    "clientes": 7,
+    "coincide": true
+  },
+  {
+    "id_sucursal": "A-S002",
+    "clientes": 3,
+    "coincide": true
+  },
+  {
+    "id_sucursal": "A-S003",
+    "clientes": 0,
+    "coincide": true
+  },
+  {
+    "id_sucursal": "A-S004",
+    "clientes": 0,
+    "coincide": true
+  },
+  {
+    "id_sucursal": "A-S005",
+    "clientes": 0,
+    "coincide": true
+  },
+  {
+    "id_sucursal": "A-S006",
+    "clientes": 0,
+    "coincide": true
+  },
+  {
+    "id_sucursal": "A-S007",
+    "clientes": 0,
+    "coincide": true
+  },
+  {
+    "id_sucursal": "A-S008",
+    "clientes": 0,
+    "coincide": true
+  },
+  {
+    "id_sucursal": "A-S009",
+    "clientes": 0,
+    "coincide": true
+  },
+  {
+    "id_sucursal": "A-S010",
+    "clientes": 0,
+    "coincide": true
+  },
+  {
+    "id_sucursal": "S001",
+    "clientes": 2,
+    "coincide": true
+  },
+  {
+    "id_sucursal": "S002",
+    "clientes": 2,
+    "coincide": true
+  },
+  {
+    "id_sucursal": "S003",
+    "clientes": 2,
+    "coincide": true
+  },
+  {
+    "id_sucursal": "S004",
+    "clientes": 2,
+    "coincide": true
+  },
+  {
+    "id_sucursal": "S005",
+    "clientes": 0,
+    "coincide": true
+  }
+]

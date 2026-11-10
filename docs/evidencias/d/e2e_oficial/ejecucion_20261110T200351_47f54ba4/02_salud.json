@@ -1,0 +1,22 @@
+{
+  "comando": [
+    "python",
+    "-m",
+    "farmared",
+    "salud"
+  ],
+  "exit_code": 0,
+  "segundos_observados": 0.959,
+  "stdout": {
+    "proyeccion": "no_comprobada",
+    "mongo": {
+      "estado": "listo",
+      "base": "farmared_demo_d_oficial_e3311eda",
+      "primario": true
+    },
+    "neo4j": {
+      "estado": "listo"
+    }
+  },
+  "stderr": ""
+}

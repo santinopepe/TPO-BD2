@@ -1,0 +1,305 @@
+{
+  "fecha": "2026-11-10T15:56:51.978368-03:00",
+  "comando": [
+    "python",
+    "-m",
+    "farmared",
+    "validar-datasets",
+    "--directorio",
+    "data/originales",
+    "--directorio",
+    "data/adicionales"
+  ],
+  "exit_code": 1,
+  "resultado": {
+    "valido": false,
+    "version_validacion": 1,
+    "huella": null,
+    "fuentes": [
+      {
+        "tabla": "clientes",
+        "orden": 0,
+        "archivo": "data\\originales\\clientes.csv",
+        "sha256": "e79217742f1536f8ddb2ed3472da2716d7335df437dd533b92dece01ed66c6f5",
+        "bytes": 917,
+        "filas_leidas": 8
+      },
+      {
+        "tabla": "clientes",
+        "orden": 1,
+        "archivo": "data\\adicionales\\clientes.csv",
+        "sha256": "1feab7c5d15bc7139c5fa03dba0aaf57850b349101f670af0a23e45b6c96ff9e",
+        "bytes": 1339,
+        "filas_leidas": 10
+      },
+      {
+        "tabla": "sucursales",
+        "orden": 0,
+        "archivo": "data\\originales\\sucursales.csv",
+        "sha256": "1a2cb1121a0c395428d338ddc6b65a394ad0f7669f88b82529b12ee396ff6629",
+        "bytes": 519,
+        "filas_leidas": 5
+      },
+      {
+        "tabla": "sucursales",
+        "orden": 1,
+        "archivo": "data\\adicionales\\sucursales.csv",
+        "sha256": "6a9be1aa58e2f3f7f2a299a239be7457ab5007c2f755c6d8a4ea9a6353140f9c",
+        "bytes": 1043,
+        "filas_leidas": 10
+      },
+      {
+        "tabla": "farmaceuticos",
+        "orden": 0,
+        "archivo": "data\\originales\\farmaceuticos.csv",
+        "sha256": "5facf310e65fb66ddf326893d57ab696855e2dbbd1879574fa8419d1e6735fec",
+        "bytes": 479,
+        "filas_leidas": 7
+      },
+      {
+        "tabla": "farmaceuticos",
+        "orden": 1,
+        "archivo": "data\\adicionales\\farmaceuticos.csv",
+        "sha256": "1ed849536a70f4d9fe943e0398f777212fa4ae0d5159bc58d2079a3a7dee19ea",
+        "bytes": 820,
+        "filas_leidas": 10
+      },
+      {
+        "tabla": "proveedores",
+        "orden": 0,
+        "archivo": "data\\originales\\proveedores.csv",
+        "sha256": "f9403cc274dc5a5ab3b4d1c99b69b766a07771abd8877a00a95ba446bf45a632",
+        "bytes": 542,
+        "filas_leidas": 5
+      },
+      {
+        "tabla": "proveedores",
+        "orden": 1,
+        "archivo": "data\\adicionales\\proveedores.csv",
+        "sha256": "7d59fe71fc16b48300887c47994d7f4ffbaec5cddeeccc0a7244fd0297a05d6d",
+        "bytes": 1057,
+        "filas_leidas": 10
+      },
+      {
+        "tabla": "productos",
+        "orden": 0,
+        "archivo": "data\\originales\\productos.csv",
+        "sha256": "adefa18abb0f941ba3de813fa9b0322c6c61d0bb43187b693b090b2054b8f34c",
+        "bytes": 1445,
+        "filas_leidas": 13
+      },
+      {
+        "tabla": "productos",
+        "orden": 1,
+        "archivo": "data\\adicionales\\productos.csv",
+        "sha256": "44c4ca7041d638c8ee7a83309466ff692186a2bbb7fa9a1573f138c7c85ea711",
+        "bytes": 1110,
+        "filas_leidas": 10
+      },
+      {
+        "tabla": "stock_lotes",
+        "orden": 0,
+        "archivo": "data\\originales\\stock_lotes.csv",
+        "sha256": "cb33f64fa56b373ec9a6305fa9ae86210bb8bce3922be386ef18f7db3cb35654",
+        "bytes": 791,
+        "filas_leidas": 18
+      },
+      {
+        "tabla": "stock_lotes",
+        "orden": 1,
+        "archivo": "data\\adicionales\\stock_lotes.csv",
+        "sha256": "0cd29e7d05770957735426fb26a050b9fa5563f5916484ae729e8fa3e9e1b9f1",
+        "bytes": 820,
+        "filas_leidas": 16
+      },
+      {
+        "tabla": "recetas",
+        "orden": 0,
+        "archivo": "data\\originales\\recetas.csv",
+        "sha256": "590ef23335b57075ee1458c470b99a67fdcda613684c7cb3f15a86b0fb1da898",
+        "bytes": 881,
+        "filas_leidas": 9
+      },
+      {
+        "tabla": "recetas",
+        "orden": 1,
+        "archivo": "data\\adicionales\\recetas.csv",
+        "sha256": "b41be49d4993dc5fba6dc5ccedc8090164886bda8fe3fa229df2a87dba70679e",
+        "bytes": 952,
+        "filas_leidas": 10
+      },
+      {
+        "tabla": "ventas",
+        "orden": 0,
+        "archivo": "data\\originales\\ventas.csv",
+        "sha256": "6f6e7ee3cdb4626e87371dc04bf800c6116a1ec07e780c0f68ca7600e73dd0ff",
+        "bytes": 1182,
+        "filas_leidas": 16
+      },
+      {
+        "tabla": "ventas",
+        "orden": 1,
+        "archivo": "data\\adicionales\\ventas.csv",
+        "sha256": "8ad3e48dfc6163f07c92650bd9f7fe86fc97cf6e9b2644cbc8950906f98ff933",
+        "bytes": 937,
+        "filas_leidas": 12
+      },
+      {
+        "tabla": "detalle_ventas",
+        "orden": 0,
+        "archivo": "data\\originales\\detalle_ventas.csv",
+        "sha256": "55140f0e6265cadbfd95f23695892778b0460fa9312ea0ad924b7f5818652636",
+        "bytes": 604,
+        "filas_leidas": 22
+      },
+      {
+        "tabla": "detalle_ventas",
+        "orden": 1,
+        "archivo": "data\\adicionales\\detalle_ventas.csv",
+        "sha256": "deeb0194091c121a088e04a7079eae08d5d7166cdb96b19406cdb3a744ffa28f",
+        "bytes": 543,
+        "filas_leidas": 16
+      }
+    ],
+    "errores": [
+      {
+        "archivo": "data\\adicionales\\manifiesto.json",
+        "fila": 0,
+        "campo": "huella_originales",
+        "codigo": "GENERACION",
+        "motivo": "Se requieren los originales vinculados por el manifiesto, sin cambios."
+      },
+      {
+        "archivo": "data\\adicionales\\manifiesto.json",
+        "fila": 0,
+        "campo": "perfil",
+        "codigo": "GENERACION",
+        "motivo": "El manifiesto no corresponde al perfil determinista de esa fecha/originales/versión."
+      },
+      {
+        "archivo": "data\\adicionales\\manifiesto.json",
+        "fila": 0,
+        "campo": "clientes",
+        "codigo": "GENERACION",
+        "motivo": "Hash/conteo del CSV no coincide con el manifiesto; no se regenera al cargar."
+      },
+      {
+        "archivo": "data\\adicionales\\manifiesto.json",
+        "fila": 0,
+        "campo": "sucursales",
+        "codigo": "GENERACION",
+        "motivo": "Hash/conteo del CSV no coincide con el manifiesto; no se regenera al cargar."
+      },
+      {
+        "archivo": "data\\adicionales\\manifiesto.json",
+        "fila": 0,
+        "campo": "farmaceuticos",
+        "codigo": "GENERACION",
+        "motivo": "Hash/conteo del CSV no coincide con el manifiesto; no se regenera al cargar."
+      },
+      {
+        "archivo": "data\\adicionales\\manifiesto.json",
+        "fila": 0,
+        "campo": "proveedores",
+        "codigo": "GENERACION",
+        "motivo": "Hash/conteo del CSV no coincide con el manifiesto; no se regenera al cargar."
+      },
+      {
+        "archivo": "data\\adicionales\\manifiesto.json",
+        "fila": 0,
+        "campo": "productos",
+        "codigo": "GENERACION",
+        "motivo": "Hash/conteo del CSV no coincide con el manifiesto; no se regenera al cargar."
+      },
+      {
+        "archivo": "data\\adicionales\\manifiesto.json",
+        "fila": 0,
+        "campo": "stock_lotes",
+        "codigo": "GENERACION",
+        "motivo": "Hash/conteo del CSV no coincide con el manifiesto; no se regenera al cargar."
+      },
+      {
+        "archivo": "data\\adicionales\\manifiesto.json",
+        "fila": 0,
+        "campo": "recetas",
+        "codigo": "GENERACION",
+        "motivo": "Hash/conteo del CSV no coincide con el manifiesto; no se regenera al cargar."
+      },
+      {
+        "archivo": "data\\adicionales\\manifiesto.json",
+        "fila": 0,
+        "campo": "ventas",
+        "codigo": "GENERACION",
+        "motivo": "Hash/conteo del CSV no coincide con el manifiesto; no se regenera al cargar."
+      },
+      {
+        "archivo": "data\\adicionales\\manifiesto.json",
+        "fila": 0,
+        "campo": "detalle_ventas",
+        "codigo": "GENERACION",
+        "motivo": "Hash/conteo del CSV no coincide con el manifiesto; no se regenera al cargar."
+      }
+    ],
+    "avisos": [
+      {
+        "archivo": "data\\originales\\ventas.csv",
+        "fila": 2,
+        "campo": "id_farmaceutico",
+        "codigo": "HISTORICO",
+        "motivo": "Referencia actualmente inactiva; no se revalida la actividad de una operación histórica."
+      },
+      {
+        "archivo": "data\\originales\\detalle_ventas.csv",
+        "fila": 20,
+        "campo": "id_producto",
+        "codigo": "HISTORICO",
+        "motivo": "Producto actualmente inactivo; se conserva el detalle histórico."
+      },
+      {
+        "archivo": "data\\adicionales\\ventas.csv",
+        "fila": 3,
+        "campo": "id_farmaceutico",
+        "codigo": "HISTORICO",
+        "motivo": "Referencia actualmente inactiva; no se revalida la actividad de una operación histórica."
+      },
+      {
+        "archivo": "data\\adicionales\\ventas.csv",
+        "fila": 4,
+        "campo": "id_farmaceutico",
+        "codigo": "HISTORICO",
+        "motivo": "Referencia actualmente inactiva; no se revalida la actividad de una operación histórica."
+      },
+      {
+        "archivo": "data\\adicionales\\ventas.csv",
+        "fila": 10,
+        "campo": "id_cliente",
+        "codigo": "HISTORICO",
+        "motivo": "Referencia actualmente inactiva; no se revalida la actividad de una operación histórica."
+      },
+      {
+        "archivo": "data\\adicionales\\ventas.csv",
+        "fila": 10,
+        "campo": "id_farmaceutico",
+        "codigo": "HISTORICO",
+        "motivo": "Referencia actualmente inactiva; no se revalida la actividad de una operación histórica."
+      },
+      {
+        "archivo": "data\\adicionales\\detalle_ventas.csv",
+        "fila": 11,
+        "campo": "id_producto",
+        "codigo": "HISTORICO",
+        "motivo": "Producto actualmente inactivo; se conserva el detalle histórico."
+      },
+      {
+        "archivo": "data\\originales\\recetas.csv",
+        "fila": 3,
+        "campo": "proxima_dispensa",
+        "codigo": "HISTORICO",
+        "motivo": "Fecha informada 2026-09-15 distinta de última venta +30 días (2026-09-14); se conserva sin corregir."
+      }
+    ],
+    "escrituras": 0
+  },
+  "carga_ejecutada": false,
+  "motivo": "Validacion previa obligatoria; no se omiten validaciones ni se alteran CSV."
+}

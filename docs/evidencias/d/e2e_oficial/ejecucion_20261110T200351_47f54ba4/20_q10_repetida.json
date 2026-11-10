@@ -1,0 +1,35 @@
+{
+  "comando": [
+    "python",
+    "-m",
+    "farmared",
+    "q10",
+    "--id-sucursal",
+    "A-S002"
+  ],
+  "exit_code": 0,
+  "segundos_observados": 0.625,
+  "stdout": {
+    "consulta": "q10",
+    "id_sucursal": "A-S002",
+    "proyeccion": "eventualmente_consistente",
+    "resultados": [
+      {
+        "apellido": "Ficticio",
+        "id_cliente": "A-C002",
+        "nombre": "Cliente adicional 2"
+      },
+      {
+        "apellido": "Ficticio",
+        "id_cliente": "A-C003",
+        "nombre": "Cliente adicional 3"
+      },
+      {
+        "apellido": "Ficticio",
+        "id_cliente": "A-C009",
+        "nombre": "Cliente adicional 9"
+      }
+    ]
+  },
+  "stderr": ""
+}

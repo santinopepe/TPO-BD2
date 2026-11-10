@@ -1,0 +1,104 @@
+{
+  "metodo": "Lectura de hashes, blobs HEAD y finales de linea; no se modificaron ni cargaron fuentes.",
+  "archivos": [
+    {
+      "archivo": "data/adicionales/clientes.csv",
+      "sha256_esperado": "80bd39404be0b45f3579b1f23eafa7a6b544a45e8054b100a5d18cc59f428b1a",
+      "sha256_checkout": "1feab7c5d15bc7139c5fa03dba0aaf57850b349101f670af0a23e45b6c96ff9e",
+      "sha256_blob_git": "80bd39404be0b45f3579b1f23eafa7a6b544a45e8054b100a5d18cc59f428b1a",
+      "checkout_coincide": false,
+      "blob_git_coincide": true,
+      "normalizacion_solo_diagnostica_coincide": true,
+      "crlf_checkout": 11,
+      "crlf_blob": 0
+    },
+    {
+      "archivo": "data/adicionales/detalle_ventas.csv",
+      "sha256_esperado": "cb6d2a748a51247cc053c38920bb0974c2b8ddcb203f6ea361af7b00fd503b9b",
+      "sha256_checkout": "deeb0194091c121a088e04a7079eae08d5d7166cdb96b19406cdb3a744ffa28f",
+      "sha256_blob_git": "cb6d2a748a51247cc053c38920bb0974c2b8ddcb203f6ea361af7b00fd503b9b",
+      "checkout_coincide": false,
+      "blob_git_coincide": true,
+      "normalizacion_solo_diagnostica_coincide": true,
+      "crlf_checkout": 17,
+      "crlf_blob": 0
+    },
+    {
+      "archivo": "data/adicionales/farmaceuticos.csv",
+      "sha256_esperado": "9810b0c81b89356388ef55d1be3f9b635a8d8d7a958171d6b536ac9ef641b2da",
+      "sha256_checkout": "1ed849536a70f4d9fe943e0398f777212fa4ae0d5159bc58d2079a3a7dee19ea",
+      "sha256_blob_git": "9810b0c81b89356388ef55d1be3f9b635a8d8d7a958171d6b536ac9ef641b2da",
+      "checkout_coincide": false,
+      "blob_git_coincide": true,
+      "normalizacion_solo_diagnostica_coincide": true,
+      "crlf_checkout": 11,
+      "crlf_blob": 0
+    },
+    {
+      "archivo": "data/adicionales/productos.csv",
+      "sha256_esperado": "3307fb35a8548b0326ea97ae27c15419448d1b270a241e9b78fcc324c3383652",
+      "sha256_checkout": "44c4ca7041d638c8ee7a83309466ff692186a2bbb7fa9a1573f138c7c85ea711",
+      "sha256_blob_git": "3307fb35a8548b0326ea97ae27c15419448d1b270a241e9b78fcc324c3383652",
+      "checkout_coincide": false,
+      "blob_git_coincide": true,
+      "normalizacion_solo_diagnostica_coincide": true,
+      "crlf_checkout": 11,
+      "crlf_blob": 0
+    },
+    {
+      "archivo": "data/adicionales/proveedores.csv",
+      "sha256_esperado": "d1299690f249f733d7b090a7c601263802a4ff1c272d6dfb68ba4f562c0caf18",
+      "sha256_checkout": "7d59fe71fc16b48300887c47994d7f4ffbaec5cddeeccc0a7244fd0297a05d6d",
+      "sha256_blob_git": "d1299690f249f733d7b090a7c601263802a4ff1c272d6dfb68ba4f562c0caf18",
+      "checkout_coincide": false,
+      "blob_git_coincide": true,
+      "normalizacion_solo_diagnostica_coincide": true,
+      "crlf_checkout": 11,
+      "crlf_blob": 0
+    },
+    {
+      "archivo": "data/adicionales/recetas.csv",
+      "sha256_esperado": "c5108fdfca6442aba6ba6bd8571d951c78fb68a59ae6c0c180ddc986987f7ac5",
+      "sha256_checkout": "b41be49d4993dc5fba6dc5ccedc8090164886bda8fe3fa229df2a87dba70679e",
+      "sha256_blob_git": "c5108fdfca6442aba6ba6bd8571d951c78fb68a59ae6c0c180ddc986987f7ac5",
+      "checkout_coincide": false,
+      "blob_git_coincide": true,
+      "normalizacion_solo_diagnostica_coincide": true,
+      "crlf_checkout": 11,
+      "crlf_blob": 0
+    },
+    {
+      "archivo": "data/adicionales/stock_lotes.csv",
+      "sha256_esperado": "4bfc407afb8dfbaf70507df99288952eebf0f756b3c7e9e29d616c1bd8ce781a",
+      "sha256_checkout": "0cd29e7d05770957735426fb26a050b9fa5563f5916484ae729e8fa3e9e1b9f1",
+      "sha256_blob_git": "4bfc407afb8dfbaf70507df99288952eebf0f756b3c7e9e29d616c1bd8ce781a",
+      "checkout_coincide": false,
+      "blob_git_coincide": true,
+      "normalizacion_solo_diagnostica_coincide": true,
+      "crlf_checkout": 17,
+      "crlf_blob": 0
+    },
+    {
+      "archivo": "data/adicionales/sucursales.csv",
+      "sha256_esperado": "533a8ad3025ec4417f59ef474a76eea160bbf21dbaee73c7188f7aa5c8874dbf",
+      "sha256_checkout": "6a9be1aa58e2f3f7f2a299a239be7457ab5007c2f755c6d8a4ea9a6353140f9c",
+      "sha256_blob_git": "533a8ad3025ec4417f59ef474a76eea160bbf21dbaee73c7188f7aa5c8874dbf",
+      "checkout_coincide": false,
+      "blob_git_coincide": true,
+      "normalizacion_solo_diagnostica_coincide": true,
+      "crlf_checkout": 11,
+      "crlf_blob": 0
+    },
+    {
+      "archivo": "data/adicionales/ventas.csv",
+      "sha256_esperado": "697e1995fbd914e8b20f9b517177f54d6fb1ad9cd9b77cdab6cb0d94f7349fa7",
+      "sha256_checkout": "8ad3e48dfc6163f07c92650bd9f7fe86fc97cf6e9b2644cbc8950906f98ff933",
+      "sha256_blob_git": "697e1995fbd914e8b20f9b517177f54d6fb1ad9cd9b77cdab6cb0d94f7349fa7",
+      "checkout_coincide": false,
+      "blob_git_coincide": true,
+      "normalizacion_solo_diagnostica_coincide": true,
+      "crlf_checkout": 13,
+      "crlf_blob": 0
+    }
+  ]
+}

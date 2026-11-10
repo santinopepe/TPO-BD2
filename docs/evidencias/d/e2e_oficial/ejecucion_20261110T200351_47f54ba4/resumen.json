@@ -1,0 +1,76 @@
+{
+  "estado": "verificada",
+  "origen": "datasets_oficiales_mas_adicionales_versionados",
+  "fecha": "2026-11-10T17:03:51.481053-03:00",
+  "validacion_huella": "c2bbc4cb4e97de5cef6c17d09522ef172041e8ee08a2a6a8529533cf4f31e2e0",
+  "base": "farmared_demo_d_oficial_e3311eda",
+  "documentos_por_coleccion": {
+    "clientes": 18,
+    "sucursales": 15,
+    "farmaceuticos": 17,
+    "proveedores": 15,
+    "productos": 23,
+    "stock_lotes": 34,
+    "recetas": 19,
+    "ventas": 28
+  },
+  "documentos_negocio": 169,
+  "pendientes_iniciales": 120,
+  "procesados_iniciales": 120,
+  "pendientes_finales": 0,
+  "nodos": 120,
+  "relaciones": 142,
+  "versiones": {
+    "mongodb": "8.0.15",
+    "replica_set": "rs0",
+    "neo4j": [
+      {
+        "name": "Neo4j Kernel",
+        "versions": [
+          "5.26.12"
+        ],
+        "edition": "community"
+      }
+    ]
+  },
+  "consultas": {
+    "id_cliente": "C001",
+    "eventos_q03": 6,
+    "clientes_q04": 5,
+    "id_sucursal": "A-S002",
+    "clientes_q10": 3,
+    "cliente_sin_historial": "C008"
+  },
+  "referencias_mongo_coinciden": true,
+  "segunda_sync_procesados": 0,
+  "reconstruccion_habilitable": true,
+  "source_mongo_y_outbox_intactos_tras_reconstruccion": true,
+  "grafo_original_intacto": true,
+  "stock_y_precios_historicos_conservados": true,
+  "limpieza": [
+    {
+      "proyecto": "farmared_d_recuperacion_1edb4391537c42bd8a08ae30b0998ebe",
+      "volumenes_propios_eliminados": [
+        "farmared_d_recuperacion_1edb4391537c42bd8a08ae30b0998ebe_neo4j_data",
+        "farmared_d_recuperacion_1edb4391537c42bd8a08ae30b0998ebe_neo4j_logs"
+      ],
+      "contenedores_propios_retirados": [
+        "28eb6eddb657"
+      ]
+    },
+    {
+      "proyecto": "farmared_d_oficial_ae2895a928674827a5f0e7e274391f4e",
+      "volumenes_propios_eliminados": [
+        "farmared_d_oficial_ae2895a928674827a5f0e7e274391f4e_mongo_data",
+        "farmared_d_oficial_ae2895a928674827a5f0e7e274391f4e_neo4j_data",
+        "farmared_d_oficial_ae2895a928674827a5f0e7e274391f4e_neo4j_logs"
+      ],
+      "contenedores_propios_retirados": [
+        "1f449fc41642",
+        "4580f2c97f31"
+      ]
+    }
+  ],
+  "fuentes_intactas": true,
+  "recursos_previos_conservados": true
+}

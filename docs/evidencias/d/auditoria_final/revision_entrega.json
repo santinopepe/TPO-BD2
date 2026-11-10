@@ -1,0 +1,77 @@
+{
+  "git_status": {
+    "exit_code": 0,
+    "stdout": " M data/adicionales/clientes.csv\n M data/adicionales/detalle_ventas.csv\n M data/adicionales/farmaceuticos.csv\n M data/adicionales/manifiesto.json\n M data/adicionales/productos.csv\n M data/adicionales/proveedores.csv\n M data/adicionales/recetas.csv\n M data/adicionales/stock_lotes.csv\n M data/adicionales/sucursales.csv\n M data/adicionales/ventas.csv\n M data/originales/clientes.csv\n M data/originales/detalle_ventas.csv\n M data/originales/farmaceuticos.csv\n M data/originales/productos.csv\n M data/originales/proveedores.csv\n M data/originales/recetas.csv\n M data/originales/stock_lotes.csv\n M data/originales/sucursales.csv\n M data/originales/ventas.csv\n M src/farmared/__main__.py\n M tests/carga/test_base.py\n M tests/infra/test_conexiones.py\n?? .gitattributes\n?? docs/evidencias/\n?? docs/informe/d_bloque_readme.md\n?? docs/informe/d_grafo_y_sincronizacion.md\n?? docs/portabilidad_datasets.md\n?? src/farmared/cli_grafo.py\n?? src/farmared/consultas/\n?? src/farmared/grafo/\n?? src/farmared/proyeccion/\n?? tests/carga/test_portabilidad.py\n?? tests/d_grafo/\n",
+    "stderr": ""
+  },
+  "git_diff_check": {
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  "git_diff_fuentes_y_compose": {
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  "archivos_revisados": 185,
+  "hallazgos_heuristicos": [
+    {
+      "archivo": "docs/evidencias/portabilidad/control_final.json",
+      "clase": "ruta_personal_absoluta",
+      "evaluacion": "metadato historico de herramienta Git; no dependencia de ejecucion"
+    },
+    {
+      "archivo": "docs/evidencias/portabilidad/diagnostico_antes.json",
+      "clase": "ruta_personal_absoluta",
+      "evaluacion": "metadato historico de herramienta Git; no dependencia de ejecucion"
+    },
+    {
+      "archivo": "tests/carga/test_base.py",
+      "clase": "uri_con_credenciales",
+      "evaluacion": "credencial ficticia en prueba de ocultamiento; no secreto operativo"
+    },
+    {
+      "archivo": "tests/infra/test_demo.py",
+      "clase": "uri_con_credenciales",
+      "evaluacion": "credencial ficticia en prueba de ocultamiento; no secreto operativo"
+    }
+  ],
+  "limite_revision": "patrones de secretos y rutas; no prueba matematica de ausencia de secretos",
+  "fuentes_sha256_conservadas": true,
+  "ignore_efectivo": {
+    "exit_code": 0,
+    "stdout": ".env\n.venv/pyvenv.cfg\n.pytest_cache/README.md\nsrc/farmared/grafo/__pycache__/mapeos.cpython-314.pyc\n",
+    "stderr": ""
+  },
+  "ignorados_fuera_de_caches": {
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  "secretos_operativos_detectados": false,
+  "rutas_personales_requeridas_por_produccion_detectadas": false,
+  "versionado_pendiente": "modulos y pruebas D y documentacion aparecen sin seguimiento; revisar y versionar antes de publicar, sin commit automatico",
+  "infra_y_dependencias_revision": {
+    "infra/docker-compose.yml": {
+      "bytes_identicos_a_head": false,
+      "contenido_identico_sin_diferencias_eol": true,
+      "git_diff_exit_code": 0
+    },
+    "pyproject.toml": {
+      "bytes_identicos_a_head": false,
+      "contenido_identico_sin_diferencias_eol": true,
+      "git_diff_exit_code": 0
+    },
+    "uv.lock": {
+      "bytes_identicos_a_head": false,
+      "contenido_identico_sin_diferencias_eol": true,
+      "git_diff_exit_code": 0
+    },
+    ".devcontainer/devcontainer.json": {
+      "bytes_identicos_a_head": false,
+      "contenido_identico_sin_diferencias_eol": true,
+      "git_diff_exit_code": 0
+    }
+  }
+}

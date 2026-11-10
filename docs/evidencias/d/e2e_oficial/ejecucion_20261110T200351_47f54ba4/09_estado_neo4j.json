@@ -1,0 +1,27 @@
+{
+  "conteos_etiquetas": {
+    "Cliente": 18,
+    "Farmaceutico": 17,
+    "Producto": 23,
+    "Receta": 19,
+    "Sucursal": 15,
+    "Venta": 28
+  },
+  "conteos_relaciones": {
+    "TIENE_RECETA": 19,
+    "REALIZO": 28,
+    "TRABAJA_EN": 17,
+    "ATENDIDA_POR": 28,
+    "CONTIENE": 38,
+    "USA_RECETA": 12
+  },
+  "versiones": [
+    {
+      "name": "Neo4j Kernel",
+      "versions": [
+        "5.26.12"
+      ],
+      "edition": "community"
+    }
+  ]
+}

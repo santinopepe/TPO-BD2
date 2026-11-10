@@ -1,0 +1,19 @@
+{
+  "comando": [
+    "python",
+    "-m",
+    "farmared",
+    "q10",
+    "--id-sucursal",
+    "A-S004"
+  ],
+  "exit_code": 0,
+  "segundos_observados": 0.611,
+  "stdout": {
+    "consulta": "q10",
+    "id_sucursal": "A-S004",
+    "proyeccion": "eventualmente_consistente",
+    "resultados": []
+  },
+  "stderr": ""
+}

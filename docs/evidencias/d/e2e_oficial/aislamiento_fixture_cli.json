@@ -1,0 +1,10 @@
+{
+  "metodo": "docker compose config, sin iniciar servicios; no se guardan valores de credenciales",
+  "fixture_antes": {
+    "coincide_con_envfile": false,
+    "hereda_entorno_padre": true
+  },
+  "fixture_despues": {
+    "coincide_con_envfile": true
+  }
+}
