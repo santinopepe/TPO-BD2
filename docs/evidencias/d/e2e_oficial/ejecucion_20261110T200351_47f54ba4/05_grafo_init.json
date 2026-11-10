@@ -1,0 +1,15 @@
+{
+  "comando": [
+    "python",
+    "-m",
+    "farmared",
+    "grafo-init"
+  ],
+  "exit_code": 0,
+  "segundos_observados": 1.59,
+  "stdout": {
+    "comando": "grafo-init",
+    "esquema": "listo"
+  },
+  "stderr": ""
+}

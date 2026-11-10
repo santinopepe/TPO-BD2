@@ -1,0 +1,2001 @@
+[
+  {
+    "paso": "01_validacion",
+    "comando": [
+      "python",
+      "-m",
+      "farmared",
+      "validar-datasets",
+      "--directorio",
+      "data/originales",
+      "--directorio",
+      "data/adicionales"
+    ],
+    "exit_code": 0,
+    "segundos_observados": 0.236,
+    "stdout": {
+      "valido": true,
+      "version_validacion": 1,
+      "conteos": {
+        "clientes": 18,
+        "sucursales": 15,
+        "farmaceuticos": 17,
+        "proveedores": 15,
+        "productos": 23,
+        "stock_lotes": 34,
+        "recetas": 19,
+        "ventas": 28,
+        "detalle_ventas": 38
+      },
+      "huella": "c2bbc4cb4e97de5cef6c17d09522ef172041e8ee08a2a6a8529533cf4f31e2e0",
+      "fuentes": [
+        {
+          "tabla": "clientes",
+          "orden": 0,
+          "archivo": "data\\originales\\clientes.csv",
+          "sha256": "afaddcaa8762b619dd46b3e21acd4544b0f034550493b76832e774a4ef21d9ed",
+          "bytes": 908,
+          "filas_leidas": 8
+        },
+        {
+          "tabla": "clientes",
+          "orden": 1,
+          "archivo": "data\\adicionales\\clientes.csv",
+          "sha256": "80bd39404be0b45f3579b1f23eafa7a6b544a45e8054b100a5d18cc59f428b1a",
+          "bytes": 1328,
+          "filas_leidas": 10
+        },
+        {
+          "tabla": "sucursales",
+          "orden": 0,
+          "archivo": "data\\originales\\sucursales.csv",
+          "sha256": "89210e743de64f168c684a51cde82b3feeda27d794b5dd586f57b102b6d1e7b7",
+          "bytes": 513,
+          "filas_leidas": 5
+        },
+        {
+          "tabla": "sucursales",
+          "orden": 1,
+          "archivo": "data\\adicionales\\sucursales.csv",
+          "sha256": "533a8ad3025ec4417f59ef474a76eea160bbf21dbaee73c7188f7aa5c8874dbf",
+          "bytes": 1032,
+          "filas_leidas": 10
+        },
+        {
+          "tabla": "farmaceuticos",
+          "orden": 0,
+          "archivo": "data\\originales\\farmaceuticos.csv",
+          "sha256": "03db193b616a41954589703a349ba5b427e05c8ee431ca5c18f1f7dc3f31e021",
+          "bytes": 471,
+          "filas_leidas": 7
+        },
+        {
+          "tabla": "farmaceuticos",
+          "orden": 1,
+          "archivo": "data\\adicionales\\farmaceuticos.csv",
+          "sha256": "9810b0c81b89356388ef55d1be3f9b635a8d8d7a958171d6b536ac9ef641b2da",
+          "bytes": 809,
+          "filas_leidas": 10
+        },
+        {
+          "tabla": "proveedores",
+          "orden": 0,
+          "archivo": "data\\originales\\proveedores.csv",
+          "sha256": "609b89e2038ae7ce586baa2cbac24f54b76d6610792844028a3d8543a1beeb23",
+          "bytes": 536,
+          "filas_leidas": 5
+        },
+        {
+          "tabla": "proveedores",
+          "orden": 1,
+          "archivo": "data\\adicionales\\proveedores.csv",
+          "sha256": "d1299690f249f733d7b090a7c601263802a4ff1c272d6dfb68ba4f562c0caf18",
+          "bytes": 1046,
+          "filas_leidas": 10
+        },
+        {
+          "tabla": "productos",
+          "orden": 0,
+          "archivo": "data\\originales\\productos.csv",
+          "sha256": "cd0bde7d1da5de4cb96ccbd9b7a0218e670e075e4c75179145bbd2a9c572f0f8",
+          "bytes": 1431,
+          "filas_leidas": 13
+        },
+        {
+          "tabla": "productos",
+          "orden": 1,
+          "archivo": "data\\adicionales\\productos.csv",
+          "sha256": "3307fb35a8548b0326ea97ae27c15419448d1b270a241e9b78fcc324c3383652",
+          "bytes": 1099,
+          "filas_leidas": 10
+        },
+        {
+          "tabla": "stock_lotes",
+          "orden": 0,
+          "archivo": "data\\originales\\stock_lotes.csv",
+          "sha256": "7dc07e052cabede0cdfa425315699d38de88f921d9a11e061bd377d6842e30ad",
+          "bytes": 772,
+          "filas_leidas": 18
+        },
+        {
+          "tabla": "stock_lotes",
+          "orden": 1,
+          "archivo": "data\\adicionales\\stock_lotes.csv",
+          "sha256": "4bfc407afb8dfbaf70507df99288952eebf0f756b3c7e9e29d616c1bd8ce781a",
+          "bytes": 803,
+          "filas_leidas": 16
+        },
+        {
+          "tabla": "recetas",
+          "orden": 0,
+          "archivo": "data\\originales\\recetas.csv",
+          "sha256": "021f56ef49addd28b71076d44bdeabbcf3ffde0f04a9a7c950e792c3e8213ec9",
+          "bytes": 871,
+          "filas_leidas": 9
+        },
+        {
+          "tabla": "recetas",
+          "orden": 1,
+          "archivo": "data\\adicionales\\recetas.csv",
+          "sha256": "c5108fdfca6442aba6ba6bd8571d951c78fb68a59ae6c0c180ddc986987f7ac5",
+          "bytes": 941,
+          "filas_leidas": 10
+        },
+        {
+          "tabla": "ventas",
+          "orden": 0,
+          "archivo": "data\\originales\\ventas.csv",
+          "sha256": "a8009f4bccdccd7b0679c7518935cb985f31a9bbdb6788172a58998a1f230ab8",
+          "bytes": 1165,
+          "filas_leidas": 16
+        },
+        {
+          "tabla": "ventas",
+          "orden": 1,
+          "archivo": "data\\adicionales\\ventas.csv",
+          "sha256": "697e1995fbd914e8b20f9b517177f54d6fb1ad9cd9b77cdab6cb0d94f7349fa7",
+          "bytes": 924,
+          "filas_leidas": 12
+        },
+        {
+          "tabla": "detalle_ventas",
+          "orden": 0,
+          "archivo": "data\\originales\\detalle_ventas.csv",
+          "sha256": "cb57f070e1e2a12727d19ec799a2002398fc5ddc686ba370c6d9f14f654d085d",
+          "bytes": 581,
+          "filas_leidas": 22
+        },
+        {
+          "tabla": "detalle_ventas",
+          "orden": 1,
+          "archivo": "data\\adicionales\\detalle_ventas.csv",
+          "sha256": "cb6d2a748a51247cc053c38920bb0974c2b8ddcb203f6ea361af7b00fd503b9b",
+          "bytes": 526,
+          "filas_leidas": 16
+        }
+      ],
+      "errores": [],
+      "avisos": [
+        {
+          "archivo": "data\\originales\\ventas.csv",
+          "fila": 2,
+          "campo": "id_farmaceutico",
+          "codigo": "HISTORICO",
+          "motivo": "Referencia actualmente inactiva; no se revalida la actividad de una operación histórica."
+        },
+        {
+          "archivo": "data\\originales\\detalle_ventas.csv",
+          "fila": 20,
+          "campo": "id_producto",
+          "codigo": "HISTORICO",
+          "motivo": "Producto actualmente inactivo; se conserva el detalle histórico."
+        },
+        {
+          "archivo": "data\\adicionales\\ventas.csv",
+          "fila": 3,
+          "campo": "id_farmaceutico",
+          "codigo": "HISTORICO",
+          "motivo": "Referencia actualmente inactiva; no se revalida la actividad de una operación histórica."
+        },
+        {
+          "archivo": "data\\adicionales\\ventas.csv",
+          "fila": 4,
+          "campo": "id_farmaceutico",
+          "codigo": "HISTORICO",
+          "motivo": "Referencia actualmente inactiva; no se revalida la actividad de una operación histórica."
+        },
+        {
+          "archivo": "data\\adicionales\\ventas.csv",
+          "fila": 10,
+          "campo": "id_cliente",
+          "codigo": "HISTORICO",
+          "motivo": "Referencia actualmente inactiva; no se revalida la actividad de una operación histórica."
+        },
+        {
+          "archivo": "data\\adicionales\\ventas.csv",
+          "fila": 10,
+          "campo": "id_farmaceutico",
+          "codigo": "HISTORICO",
+          "motivo": "Referencia actualmente inactiva; no se revalida la actividad de una operación histórica."
+        },
+        {
+          "archivo": "data\\adicionales\\detalle_ventas.csv",
+          "fila": 11,
+          "campo": "id_producto",
+          "codigo": "HISTORICO",
+          "motivo": "Producto actualmente inactivo; se conserva el detalle histórico."
+        },
+        {
+          "archivo": "data\\originales\\recetas.csv",
+          "fila": 3,
+          "campo": "proxima_dispensa",
+          "codigo": "HISTORICO",
+          "motivo": "Fecha informada 2026-09-15 distinta de última venta +30 días (2026-09-14); se conserva sin corregir."
+        }
+      ],
+      "escrituras": 0,
+      "generaciones": [
+        {
+          "archivo": "data\\adicionales\\manifiesto.json",
+          "orden": 1,
+          "sha256": "db74749e2a29a1e4d09c8be2dd18f7e54817c86d0f2c31a77ff3e4e106a9175c",
+          "base_date": "2026-11-10",
+          "version_generador": 1
+        }
+      ]
+    },
+    "stderr": ""
+  },
+  {
+    "paso": "compose",
+    "comando": [
+      "docker",
+      "compose",
+      "--project-name",
+      "farmared_d_oficial_ae2895a928674827a5f0e7e274391f4e",
+      "--env-file",
+      "<ENV_TEMPORAL>",
+      "-f",
+      "infra/docker-compose.yml",
+      "up",
+      "-d",
+      "mongodb",
+      "neo4j"
+    ],
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": "Network farmared_d_oficial_ae2895a928674827a5f0e7e274391f4e_default Creating \n Volume farmared_d_oficial_ae2895a928674827a5f0e7e274391f4e_neo4j_logs Creating \n Volume farmared_d_oficial_ae2895a928674827a5f0e7e274391f4e_neo4j_data Creating \n Volume farmared_d_oficial_ae2895a928674827a5f0e7e274391f4e_mongo_data Creating \n Volume farmared_d_oficial_ae2895a928674827a5f0e7e274391f4e_neo4j_data Creating \n Volume farmared_d_oficial_ae2895a928674827a5f0e7e274391f4e_neo4j_logs Creating \n Network farmared_d_oficial_ae2895a928674827a5f0e7e274391f4e_default Creating \n Volume farmared_d_oficial_ae2895a928674827a5f0e7e274391f4e_mongo_data Creating \n Volume farmared_d_oficial_ae2895a928674827a5f0e7e274391f4e_neo4j_data Created \n Volume farmared_d_oficial_ae2895a928674827a5f0e7e274391f4e_neo4j_data Created \n Volume farmared_d_oficial_ae2895a928674827a5f0e7e274391f4e_mongo_data Created \n Volume farmared_d_oficial_ae2895a928674827a5f0e7e274391f4e_mongo_data Created \n Volume farmared_d_oficial_ae2895a928674827a5f0e7e274391f4e_neo4j_logs Created \n Volume farmared_d_oficial_ae2895a928674827a5f0e7e274391f4e_neo4j_logs Created \n Network farmared_d_oficial_ae2895a928674827a5f0e7e274391f4e_default Created \n Network farmared_d_oficial_ae2895a928674827a5f0e7e274391f4e_default Created \n Container farmared_d_oficial_ae2895a928674827a5f0e7e274391f4e-neo4j-1 Creating \n Container farmared_d_oficial_ae2895a928674827a5f0e7e274391f4e-mongodb-1 Creating \n Container farmared_d_oficial_ae2895a928674827a5f0e7e274391f4e-neo4j-1 Created \n Container farmared_d_oficial_ae2895a928674827a5f0e7e274391f4e-mongodb-1 Created \n Container farmared_d_oficial_ae2895a928674827a5f0e7e274391f4e-neo4j-1 Starting \n Container farmared_d_oficial_ae2895a928674827a5f0e7e274391f4e-mongodb-1 Starting \n Container farmared_d_oficial_ae2895a928674827a5f0e7e274391f4e-neo4j-1 Started \n Container farmared_d_oficial_ae2895a928674827a5f0e7e274391f4e-mongodb-1 Started"
+  },
+  {
+    "paso": "compose",
+    "comando": [
+      "docker",
+      "compose",
+      "--project-name",
+      "farmared_d_oficial_ae2895a928674827a5f0e7e274391f4e",
+      "--env-file",
+      "<ENV_TEMPORAL>",
+      "-f",
+      "infra/docker-compose.yml",
+      "run",
+      "--rm",
+      "mongodb-init"
+    ],
+    "exit_code": 0,
+    "stdout": "rs0 listo: primario real confirmado; configuración existente conservada.",
+    "stderr": "Container farmared_d_oficial_ae2895a928674827a5f0e7e274391f4e-mongodb-1 Running \n Container farmared_d_oficial_ae2895a928674827a5f0e7e274391f4e-mongodb-init-run-9359b2ce2bb2 Creating \n Container farmared_d_oficial_ae2895a928674827a5f0e7e274391f4e-mongodb-init-run-9359b2ce2bb2 Created"
+  },
+  {
+    "paso": "compose",
+    "comando": [
+      "docker",
+      "compose",
+      "--project-name",
+      "farmared_d_oficial_ae2895a928674827a5f0e7e274391f4e",
+      "--env-file",
+      "<ENV_TEMPORAL>",
+      "-f",
+      "infra/docker-compose.yml",
+      "up",
+      "-d",
+      "--wait",
+      "--wait-timeout",
+      "180",
+      "mongodb",
+      "neo4j"
+    ],
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": "Container farmared_d_oficial_ae2895a928674827a5f0e7e274391f4e-neo4j-1 Running \n Container farmared_d_oficial_ae2895a928674827a5f0e7e274391f4e-mongodb-1 Running \n Container farmared_d_oficial_ae2895a928674827a5f0e7e274391f4e-neo4j-1 Waiting \n Container farmared_d_oficial_ae2895a928674827a5f0e7e274391f4e-mongodb-1 Waiting \n Container farmared_d_oficial_ae2895a928674827a5f0e7e274391f4e-mongodb-1 Healthy \n Container farmared_d_oficial_ae2895a928674827a5f0e7e274391f4e-neo4j-1 Healthy"
+  },
+  {
+    "paso": "compose",
+    "comando": [
+      "docker",
+      "compose",
+      "--project-name",
+      "farmared_d_oficial_ae2895a928674827a5f0e7e274391f4e",
+      "--env-file",
+      "<ENV_TEMPORAL>",
+      "-f",
+      "infra/docker-compose.yml",
+      "port",
+      "neo4j",
+      "7687"
+    ],
+    "exit_code": 0,
+    "stdout": "127.0.0.1:32769",
+    "stderr": ""
+  },
+  {
+    "paso": "compose",
+    "comando": [
+      "docker",
+      "compose",
+      "--project-name",
+      "farmared_d_oficial_ae2895a928674827a5f0e7e274391f4e",
+      "--env-file",
+      "<ENV_TEMPORAL>",
+      "-f",
+      "infra/docker-compose.yml",
+      "port",
+      "mongodb",
+      "27017"
+    ],
+    "exit_code": 0,
+    "stdout": "127.0.0.1:32770",
+    "stderr": ""
+  },
+  {
+    "paso": "02_salud",
+    "comando": [
+      "python",
+      "-m",
+      "farmared",
+      "salud"
+    ],
+    "exit_code": 0,
+    "segundos_observados": 0.959,
+    "stdout": {
+      "proyeccion": "no_comprobada",
+      "mongo": {
+        "estado": "listo",
+        "base": "farmared_demo_d_oficial_e3311eda",
+        "primario": true
+      },
+      "neo4j": {
+        "estado": "listo"
+      }
+    },
+    "stderr": ""
+  },
+  {
+    "paso": "03_preparar_mongo",
+    "comando": [
+      "python",
+      "-m",
+      "farmared",
+      "preparar-mongo",
+      "--base",
+      "farmared_demo_d_oficial_e3311eda"
+    ],
+    "exit_code": 0,
+    "segundos_observados": 1.41,
+    "stdout": {
+      "base": "farmared_demo_d_oficial_e3311eda",
+      "esquema": "listo",
+      "colecciones": [
+        "clientes",
+        "sucursales",
+        "farmaceuticos",
+        "proveedores",
+        "productos",
+        "stock_lotes",
+        "recetas",
+        "ventas",
+        "outbox"
+      ]
+    },
+    "stderr": ""
+  },
+  {
+    "paso": "04_seed",
+    "comando": [
+      "python",
+      "-m",
+      "farmared",
+      "seed",
+      "--base",
+      "farmared_demo_d_oficial_e3311eda",
+      "--directorio",
+      "data/originales",
+      "--directorio",
+      "data/adicionales"
+    ],
+    "exit_code": 0,
+    "segundos_observados": 0.903,
+    "stdout": {
+      "base": "farmared_demo_d_oficial_e3311eda",
+      "carga": "completa",
+      "reutilizada": false,
+      "huella": "c2bbc4cb4e97de5cef6c17d09522ef172041e8ee08a2a6a8529533cf4f31e2e0",
+      "base_date": "2026-11-10",
+      "conteos_iniciales": {
+        "clientes": 18,
+        "sucursales": 15,
+        "farmaceuticos": 17,
+        "proveedores": 15,
+        "productos": 23,
+        "stock_lotes": 34,
+        "recetas": 19,
+        "ventas": 28
+      },
+      "eventos_emitidos": 120,
+      "avisos": [
+        {
+          "archivo": "data\\originales\\ventas.csv",
+          "fila": 2,
+          "campo": "id_farmaceutico",
+          "codigo": "HISTORICO",
+          "motivo": "Referencia actualmente inactiva; no se revalida la actividad de una operación histórica."
+        },
+        {
+          "archivo": "data\\originales\\detalle_ventas.csv",
+          "fila": 20,
+          "campo": "id_producto",
+          "codigo": "HISTORICO",
+          "motivo": "Producto actualmente inactivo; se conserva el detalle histórico."
+        },
+        {
+          "archivo": "data\\adicionales\\ventas.csv",
+          "fila": 3,
+          "campo": "id_farmaceutico",
+          "codigo": "HISTORICO",
+          "motivo": "Referencia actualmente inactiva; no se revalida la actividad de una operación histórica."
+        },
+        {
+          "archivo": "data\\adicionales\\ventas.csv",
+          "fila": 4,
+          "campo": "id_farmaceutico",
+          "codigo": "HISTORICO",
+          "motivo": "Referencia actualmente inactiva; no se revalida la actividad de una operación histórica."
+        },
+        {
+          "archivo": "data\\adicionales\\ventas.csv",
+          "fila": 10,
+          "campo": "id_cliente",
+          "codigo": "HISTORICO",
+          "motivo": "Referencia actualmente inactiva; no se revalida la actividad de una operación histórica."
+        },
+        {
+          "archivo": "data\\adicionales\\ventas.csv",
+          "fila": 10,
+          "campo": "id_farmaceutico",
+          "codigo": "HISTORICO",
+          "motivo": "Referencia actualmente inactiva; no se revalida la actividad de una operación histórica."
+        },
+        {
+          "archivo": "data\\adicionales\\detalle_ventas.csv",
+          "fila": 11,
+          "campo": "id_producto",
+          "codigo": "HISTORICO",
+          "motivo": "Producto actualmente inactivo; se conserva el detalle histórico."
+        },
+        {
+          "archivo": "data\\originales\\recetas.csv",
+          "fila": 3,
+          "campo": "proxima_dispensa",
+          "codigo": "HISTORICO",
+          "motivo": "Fecha informada 2026-09-15 distinta de última venta +30 días (2026-09-14); se conserva sin corregir."
+        }
+      ],
+      "proyeccion": "no_comprobada"
+    },
+    "stderr": ""
+  },
+  {
+    "paso": "05_grafo_init",
+    "comando": [
+      "python",
+      "-m",
+      "farmared",
+      "grafo-init"
+    ],
+    "exit_code": 0,
+    "segundos_observados": 1.59,
+    "stdout": {
+      "comando": "grafo-init",
+      "esquema": "listo"
+    },
+    "stderr": ""
+  },
+  {
+    "paso": "07_sync_inicial",
+    "comando": [
+      "python",
+      "-m",
+      "farmared",
+      "sync",
+      "--base",
+      "farmared_demo_d_oficial_e3311eda",
+      "--lock-path",
+      "<LOCK_COMPARTIDO>",
+      "--max-eventos",
+      "1000"
+    ],
+    "exit_code": 0,
+    "segundos_observados": 11.659,
+    "stdout": {
+      "base": "farmared_demo_d_oficial_e3311eda",
+      "comando": "sync",
+      "estado": "sin_pendientes_observados",
+      "eventos_procesados": [
+        "01591be5-a9c3-54fb-bea3-bcd87f6fdbb5",
+        "015a4b86-8ae8-5ad0-8865-169610a59ddb",
+        "0256fea5-c470-5f2e-b441-f8aac1395534",
+        "028bac03-326a-5197-9958-ba6f6d859e7d",
+        "0bccc615-fd87-58e5-a171-69104f8bdfa3",
+        "0bfe7314-4d74-5e5b-b4e4-e342d4a88c4a",
+        "0c788228-0739-54a3-8e32-f3ffa62dd58a",
+        "0fea2db1-e8b6-5569-92d8-dc26452ec343",
+        "12e99989-561b-574b-8b47-42e2254edce3",
+        "18d61605-2d19-583e-9c97-35cc66bc0216",
+        "19359186-08e1-5e49-a9db-3d2c344634ed",
+        "1974f660-65a0-5473-8c45-4eeeea636b4b",
+        "1c752846-29c1-5b75-8da4-e3a926deca88",
+        "21683de2-56e4-5eae-8fe1-2627bbaf1196",
+        "221a161d-c851-529d-a2e4-bd27ac67746e",
+        "234201ba-a1d1-515a-b7ac-0f6e4c042fc9",
+        "246ab6ab-b3a0-5c27-934b-f68e86ca5316",
+        "2482812b-ef9f-585f-b7be-1af28fcc6e26",
+        "24a5578b-cf26-5f84-9c7e-e0243ba1d4cc",
+        "24c07750-49b2-52b9-b55c-fa415f2f7734",
+        "26b3dba6-483e-5406-872b-fcecd717a94b",
+        "271b228c-a62e-5da7-b8a8-4f49fa5c5e67",
+        "2aa7ee06-4e23-5669-b2fd-155f4029c7c3",
+        "31c28ff3-ac46-5594-a1c3-2e170a818770",
+        "3266a090-147b-5445-9d21-543eb425a71a",
+        "40adcbc3-5c27-5a97-8ff1-0e3fe7807f6f",
+        "43798963-612f-564b-8474-6890e3a3708c",
+        "44295dd1-27c0-559b-9faf-007a26b86f2c",
+        "444903a7-9058-5fbb-9cb5-3b4511994baa",
+        "49544fcc-2add-5dda-a7d9-c78b8ba49afb",
+        "4dd07b42-373f-5eda-a9fa-6fd143c340f4",
+        "4e661c9c-1c3c-5d93-991c-81c537dff69d",
+        "5296c79b-909a-5940-9ab6-684d61129c53",
+        "530bbd3a-a116-5d5a-8890-2b734191d57c",
+        "568ed8ba-22ad-58bd-8ca0-5cad8fd975ee",
+        "56cebd4d-c19d-5b2d-82b4-e2c12a260560",
+        "5770ec84-b0ba-5a71-917a-8519db32ce6b",
+        "5876d97c-7840-550b-bf83-2eb6427e48b4",
+        "5d618f13-a546-5aaf-ada7-fa7ad7b4605c",
+        "5e605b16-dce2-5c22-85ec-1c0636849bed",
+        "5eb2df51-8a02-52ba-9914-0f1634d067d2",
+        "5feb3e40-110d-5a70-b74d-b663e736940c",
+        "6441617a-68f9-5246-b2ad-6558c3e2ff65",
+        "64863a2f-1821-5626-8f08-a82ddd4502c1",
+        "6616ecb3-ac30-53e0-b42d-14637a420876",
+        "66fa05f2-4438-5f57-b32b-0eca860701c3",
+        "68ace92f-5afa-53d8-b038-903d053d263e",
+        "6a817b13-d54e-572c-99f5-75d4560d3b34",
+        "6d772eaa-c4dd-5ee6-9bd0-c74d5a7ff532",
+        "6ddc8496-9550-5911-8742-52cbd1bc8c20",
+        "70c2c129-6a68-57ca-9a8d-00b4dab71b1b",
+        "73062acd-8e21-5dbc-9929-c22905405074",
+        "7414d04a-f121-5a9d-9845-e9186d4d2aac",
+        "757eb289-5801-50bd-a9e4-5b5cf6557acd",
+        "7857f5d1-8a19-5a4c-a1a4-be8068e7aa3f",
+        "78b62289-5b87-5ee8-9b6d-d20c59697479",
+        "794b7a10-804f-574d-a444-448d80eb3079",
+        "7d7a998c-e218-591b-aae7-0ce80fc3bbe6",
+        "818ec892-08ea-5069-9903-3592bf355715",
+        "81b638ad-9c70-5600-8f6f-6a948596d85b",
+        "821c22d0-ca7d-5a53-b626-0a863dbded10",
+        "843494df-2a01-5a97-8095-8a6599d74be6",
+        "84965ece-03d6-5767-b6e0-3d6d7ed0496c",
+        "8a8de86d-e2ca-5934-a014-9d4365d33500",
+        "8acdf3b7-ab75-5ee2-8067-f8e8f54548b0",
+        "8b4708e3-a43c-5410-9f2a-8e46722e7c1a",
+        "8cdec478-b010-57c6-b29f-93115c419de7",
+        "8e3a29ea-855d-573d-ac4f-7378db60936b",
+        "8fa89e16-e21e-5a4d-896c-da434ef05511",
+        "91867007-b2d9-5ab4-81c2-3cc865417333",
+        "9349d213-8e22-5d7e-86a7-e74d887ec10c",
+        "971ea275-0728-52d5-afc6-dfb575460aca",
+        "99d8879f-dbcd-5559-98d0-f9e86b0388d3",
+        "9a022bd9-da8c-5aba-8d2d-28e9ba7e2019",
+        "9ae05a0e-5fd3-5431-8a7d-c22975202fe3",
+        "9f411d10-540f-5a2b-a9d4-fff6e86cf38a",
+        "a16a0942-2e71-558e-9cc4-2afe2dc584b6",
+        "a479ce11-d954-52c2-a2bb-9c0dcd4f1469",
+        "a600f175-87d9-50d9-b374-8b8cb66a7651",
+        "a62578ab-64e2-508e-8ee3-bdd030a72f74",
+        "a64f9485-ff5e-57b8-969c-fa892cc65abc",
+        "a8811f1d-a79b-5c81-80fc-29b52e35bad9",
+        "ac81fdb5-238f-5e68-b021-8dbcc2e63916",
+        "ad7ebe77-d523-5325-82c2-793cbba465d4",
+        "ade276c0-94b5-57c5-b84d-6f662b1f577b",
+        "af7899d4-ba02-5517-840d-a94184797003",
+        "b0fb1672-1153-519b-960d-04fe3aa9223e",
+        "b212650b-9b22-5bbb-92e1-4d56b65ab7a1",
+        "b33255da-5eac-5dc8-ab1d-7caeac0c0105",
+        "b50439ae-1c4c-5d10-a809-06310cceda28",
+        "b5572a96-aec2-567b-a6e1-398fed5a22eb",
+        "b7e8f4a6-79ef-5097-a674-8349f4b5aa8a",
+        "bbbb3d92-cee4-5c57-89f9-492ab1c2ba98",
+        "bcec64e1-75f6-5570-b648-dc3010c030f1",
+        "be36d34d-f532-5562-9b87-d3a08dd181b5",
+        "bff3a358-282a-50bf-9eba-2a78adba3433",
+        "c29a6b38-9ac9-519f-b71b-19a26ecbb14d",
+        "c7c5fa34-323f-5798-a213-c3ecae0fc7bb",
+        "c7f8f53d-aaee-562d-874f-b5c247fcd194",
+        "c81d10c5-7f55-5cf9-a55a-49ca2a721de8",
+        "c97f25dd-82fc-59f0-a867-0c548187133b",
+        "cbc81e5e-995d-5285-a39a-30c9b61ed183",
+        "d42d3364-73f6-5b06-b998-e5e1eb34df70",
+        "d6d1b2fb-1568-50ae-8f44-8513a63d166d",
+        "dc8da64d-d711-587d-9cee-44ad4a7de3b4",
+        "dda0a49e-6150-55e0-843a-488ac5d7f63e",
+        "dfb71171-462d-5d1a-bd7e-ed2c59c4e2a0",
+        "e0d10bb7-be4b-539d-9802-f8e267c55d7e",
+        "e36e884c-6a12-533b-ae84-213b538ea7c0",
+        "ee24e39d-c8a7-53b6-ac48-198de2b7ec9f",
+        "eeadeada-92c9-5bc0-a126-f7d22293b358",
+        "ef7b61e9-0e52-58d6-92b0-1c3dedf292d8",
+        "efca7174-54ec-5ee0-a4e4-6e33a3a6b576",
+        "f411a909-9eb7-5b8c-8498-9565d0bef81c",
+        "f4628e69-26bf-5444-a0a7-e23df8a5e98a",
+        "f578d258-4c47-56da-add2-a1cad62d86f2",
+        "f7ae5658-5952-527a-b1ca-82e4a277d4d9",
+        "f85fd6a1-d8fa-5450-9623-77b4a50bdd16",
+        "f86eb8e4-4ce4-57d6-b62b-bcb3c188d410",
+        "fb330604-b35c-5baf-89d5-6adca3139922"
+      ],
+      "fallidos": [],
+      "limite_alcanzado": false,
+      "pendientes_observados": 0,
+      "procesados": 120
+    },
+    "stderr": ""
+  },
+  {
+    "paso": "08_verificacion",
+    "comando": [
+      "python",
+      "-m",
+      "farmared",
+      "grafo-verify",
+      "--base",
+      "farmared_demo_d_oficial_e3311eda",
+      "--lock-path",
+      "<LOCK_COMPARTIDO>",
+      "--confirmar-escrituras-pausadas"
+    ],
+    "exit_code": 0,
+    "segundos_observados": 1.09,
+    "stdout": {
+      "alcance": "estado_estable_declarado",
+      "base": "farmared_demo_d_oficial_e3311eda",
+      "comando": "grafo-verify",
+      "conteos": {
+        "nodos_esperados": 120,
+        "nodos_observados": 120,
+        "relaciones_esperadas": 142,
+        "relaciones_observadas": 142
+      },
+      "diferencias": [],
+      "equivalente": true,
+      "precondiciones": {
+        "escrituras_pausadas_confirmadas": true,
+        "exclusion_compartida": true
+      }
+    },
+    "stderr": ""
+  },
+  {
+    "paso": "11_q03",
+    "comando": [
+      "python",
+      "-m",
+      "farmared",
+      "q03",
+      "--id-cliente",
+      "C001"
+    ],
+    "exit_code": 0,
+    "segundos_observados": 1.177,
+    "stdout": {
+      "consulta": "q03",
+      "id_cliente": "C001",
+      "proyeccion": "eventualmente_consistente",
+      "resultados": [
+        {
+          "detalle": {
+            "dispensas_autorizadas": 1,
+            "dispensas_realizadas": 1,
+            "medico": "Dr. Alejandro Vidal",
+            "proxima_dispensa": null,
+            "tipo": "Simple"
+          },
+          "estado": "Completada",
+          "fecha": "2026-09-10",
+          "id_registro": "RC001",
+          "tipo_evento": "RECETA"
+        },
+        {
+          "detalle": {
+            "id_receta": "RC001",
+            "items": [
+              {
+                "cantidad": 1,
+                "id_detalle": "D004",
+                "id_producto": "PRD003",
+                "nombre_al_vender": null,
+                "orden": 0,
+                "precio_unit": 9800,
+                "subtotal": 9800
+              }
+            ],
+            "medio_pago": "Obra social",
+            "tipo": "Con receta",
+            "total": 9800
+          },
+          "estado": "Completada",
+          "fecha": "2026-09-10",
+          "id_registro": "V003",
+          "tipo_evento": "VENTA"
+        },
+        {
+          "detalle": {
+            "id_receta": null,
+            "items": [
+              {
+                "cantidad": 1,
+                "id_detalle": "D020",
+                "id_producto": "PRD002",
+                "nombre_al_vender": null,
+                "orden": 0,
+                "precio_unit": 3500,
+                "subtotal": 3500
+              }
+            ],
+            "medio_pago": "Débito",
+            "tipo": "Venta libre",
+            "total": 3500
+          },
+          "estado": "Anulada",
+          "fecha": "2026-09-25",
+          "id_registro": "V015",
+          "tipo_evento": "VENTA"
+        },
+        {
+          "detalle": {
+            "id_receta": null,
+            "items": [
+              {
+                "cantidad": 2,
+                "id_detalle": "D017",
+                "id_producto": "PRD011",
+                "nombre_al_vender": null,
+                "orden": 0,
+                "precio_unit": 2200,
+                "subtotal": 4400
+              }
+            ],
+            "medio_pago": "Efectivo",
+            "tipo": "Venta libre",
+            "total": 4400
+          },
+          "estado": "Completada",
+          "fecha": "2026-10-02",
+          "id_registro": "V013",
+          "tipo_evento": "VENTA"
+        },
+        {
+          "detalle": {
+            "dispensas_autorizadas": 1,
+            "dispensas_realizadas": 1,
+            "medico": "Dra. Mónica Salas",
+            "proxima_dispensa": null,
+            "tipo": "Simple"
+          },
+          "estado": "Completada",
+          "fecha": "2026-10-08",
+          "id_registro": "RC008",
+          "tipo_evento": "RECETA"
+        },
+        {
+          "detalle": {
+            "id_receta": "RC008",
+            "items": [
+              {
+                "cantidad": 1,
+                "id_detalle": "D013",
+                "id_producto": "PRD010",
+                "nombre_al_vender": null,
+                "orden": 0,
+                "precio_unit": 7100,
+                "subtotal": 7100
+              }
+            ],
+            "medio_pago": "Crédito",
+            "tipo": "Con receta",
+            "total": 7100
+          },
+          "estado": "Completada",
+          "fecha": "2026-10-08",
+          "id_registro": "V010",
+          "tipo_evento": "VENTA"
+        }
+      ]
+    },
+    "stderr": "Received notification from DBMS server: <GqlStatusObject gql_status='01N52', status_description='warn: property key does not exist. The property `nombre_al_vender` does not exist. Verify that the spelling is correct.', position=<SummaryInputPosition line=11, column=33, offset=387>, raw_classification='UNRECOGNIZED', classification=<NotificationClassification.UNRECOGNIZED: 'UNRECOGNIZED'>, raw_severity='WARNING', severity=<NotificationSeverity.WARNING: 'WARNING'>, diagnostic_record={'_classification': 'UNRECOGNIZED', '_severity': 'WARNING', '_position': {'offset': 387, 'line': 11, 'column': 33}, 'OPERATION': '', 'OPERATION_CODE': '0', 'CURRENT_SCHEMA': '/'}> for query: \"\\nMATCH (c:Cliente {id: $id_cliente})\\nCALL (c) {\\n    MATCH (c)-[:REALIZO]->(v:Venta)\\n    WITH DISTINCT v\\n    CALL (v) {\\n        OPTIONAL MATCH (v)-[i:CONTIENE]->(p:Producto)\\n        WITH i, p ORDER BY i.orden, i.id_detalle\\n        RETURN collect(CASE WHEN i IS NULL THEN null ELSE {\\n            id_detalle: i.id_detalle, orden: i.orden, id_producto: p.id,\\n            nombre_al_vender: i.nombre_al_vender, cantidad: i.cantidad,\\n            precio_unit: i.precio_unit, subtotal: i.subtotal\\n        } END) AS items\\n    }\\n    RETURN v.fecha AS fecha, 'VENTA' AS tipo_evento, v.id AS id_registro,\\n           v.estado AS estado, {\\n               tipo: v.tipo, total: v.total, medio_pago: v.medio_pago,\\n               id_receta: head([(v)-[:USA_RECETA]->(r:Receta) | r.id]),\\n               items: items\\n           } AS detalle\\n    UNION ALL\\n    MATCH (c)-[:TIENE_RECETA]->(r:Receta)\\n    WITH DISTINCT r\\n    RETURN r.fecha_emision AS fecha, 'RECETA' AS tipo_evento, r.id AS id_registro,\\n           r.estado AS estado, {\\n               tipo: r.tipo, medico: r.medico,\\n               dispensas_realizadas: r.dispensas_realizadas,\\n               dispensas_autorizadas: r.dispensas_autorizadas,\\n               proxima_dispensa: r.proxima_dispensa\\n           } AS detalle\\n}\\nRETURN fecha, tipo_evento, id_registro, estado, detalle\\nORDER BY fecha, tipo_evento, id_registro\\n\""
+  },
+  {
+    "paso": "12_q04",
+    "comando": [
+      "python",
+      "-m",
+      "farmared",
+      "q04"
+    ],
+    "exit_code": 0,
+    "segundos_observados": 0.674,
+    "stdout": {
+      "consulta": "q04",
+      "proyeccion": "eventualmente_consistente",
+      "resultados": [
+        {
+          "apellido": "Ficticio",
+          "cantidad": 2,
+          "id_cliente": "A-C001",
+          "nombre": "Cliente adicional 1"
+        },
+        {
+          "apellido": "Ficticio",
+          "cantidad": 2,
+          "id_cliente": "A-C008",
+          "nombre": "Cliente adicional 8"
+        },
+        {
+          "apellido": "Fernández",
+          "cantidad": 2,
+          "id_cliente": "C001",
+          "nombre": "Lucía"
+        },
+        {
+          "apellido": "Gómez",
+          "cantidad": 2,
+          "id_cliente": "C002",
+          "nombre": "Martín"
+        },
+        {
+          "apellido": "Paz",
+          "cantidad": 2,
+          "id_cliente": "C006",
+          "nombre": "Ricardo"
+        }
+      ]
+    },
+    "stderr": ""
+  },
+  {
+    "paso": "13_q10",
+    "comando": [
+      "python",
+      "-m",
+      "farmared",
+      "q10",
+      "--id-sucursal",
+      "A-S002"
+    ],
+    "exit_code": 0,
+    "segundos_observados": 0.644,
+    "stdout": {
+      "consulta": "q10",
+      "id_sucursal": "A-S002",
+      "proyeccion": "eventualmente_consistente",
+      "resultados": [
+        {
+          "apellido": "Ficticio",
+          "id_cliente": "A-C002",
+          "nombre": "Cliente adicional 2"
+        },
+        {
+          "apellido": "Ficticio",
+          "id_cliente": "A-C003",
+          "nombre": "Cliente adicional 3"
+        },
+        {
+          "apellido": "Ficticio",
+          "id_cliente": "A-C009",
+          "nombre": "Cliente adicional 9"
+        }
+      ]
+    },
+    "stderr": ""
+  },
+  {
+    "paso": "q10_sucursal_A-S001",
+    "comando": [
+      "python",
+      "-m",
+      "farmared",
+      "q10",
+      "--id-sucursal",
+      "A-S001"
+    ],
+    "exit_code": 0,
+    "segundos_observados": 0.559,
+    "stdout": {
+      "consulta": "q10",
+      "id_sucursal": "A-S001",
+      "proyeccion": "eventualmente_consistente",
+      "resultados": [
+        {
+          "apellido": "Ficticio",
+          "id_cliente": "A-C001",
+          "nombre": "Cliente adicional 1"
+        },
+        {
+          "apellido": "Ficticio",
+          "id_cliente": "A-C002",
+          "nombre": "Cliente adicional 2"
+        },
+        {
+          "apellido": "Ficticio",
+          "id_cliente": "A-C003",
+          "nombre": "Cliente adicional 3"
+        },
+        {
+          "apellido": "Ficticio",
+          "id_cliente": "A-C004",
+          "nombre": "Cliente adicional 4"
+        },
+        {
+          "apellido": "Ficticio",
+          "id_cliente": "A-C006",
+          "nombre": "Cliente adicional 6"
+        },
+        {
+          "apellido": "Ficticio",
+          "id_cliente": "A-C007",
+          "nombre": "Cliente adicional 7"
+        },
+        {
+          "apellido": "Ficticio",
+          "id_cliente": "A-C008",
+          "nombre": "Cliente adicional 8"
+        }
+      ]
+    },
+    "stderr": ""
+  },
+  {
+    "paso": "q10_sucursal_A-S002",
+    "comando": [
+      "python",
+      "-m",
+      "farmared",
+      "q10",
+      "--id-sucursal",
+      "A-S002"
+    ],
+    "exit_code": 0,
+    "segundos_observados": 0.745,
+    "stdout": {
+      "consulta": "q10",
+      "id_sucursal": "A-S002",
+      "proyeccion": "eventualmente_consistente",
+      "resultados": [
+        {
+          "apellido": "Ficticio",
+          "id_cliente": "A-C002",
+          "nombre": "Cliente adicional 2"
+        },
+        {
+          "apellido": "Ficticio",
+          "id_cliente": "A-C003",
+          "nombre": "Cliente adicional 3"
+        },
+        {
+          "apellido": "Ficticio",
+          "id_cliente": "A-C009",
+          "nombre": "Cliente adicional 9"
+        }
+      ]
+    },
+    "stderr": ""
+  },
+  {
+    "paso": "q10_sucursal_A-S003",
+    "comando": [
+      "python",
+      "-m",
+      "farmared",
+      "q10",
+      "--id-sucursal",
+      "A-S003"
+    ],
+    "exit_code": 0,
+    "segundos_observados": 0.694,
+    "stdout": {
+      "consulta": "q10",
+      "id_sucursal": "A-S003",
+      "proyeccion": "eventualmente_consistente",
+      "resultados": []
+    },
+    "stderr": ""
+  },
+  {
+    "paso": "q10_sucursal_A-S004",
+    "comando": [
+      "python",
+      "-m",
+      "farmared",
+      "q10",
+      "--id-sucursal",
+      "A-S004"
+    ],
+    "exit_code": 0,
+    "segundos_observados": 0.611,
+    "stdout": {
+      "consulta": "q10",
+      "id_sucursal": "A-S004",
+      "proyeccion": "eventualmente_consistente",
+      "resultados": []
+    },
+    "stderr": ""
+  },
+  {
+    "paso": "q10_sucursal_A-S005",
+    "comando": [
+      "python",
+      "-m",
+      "farmared",
+      "q10",
+      "--id-sucursal",
+      "A-S005"
+    ],
+    "exit_code": 0,
+    "segundos_observados": 0.519,
+    "stdout": {
+      "consulta": "q10",
+      "id_sucursal": "A-S005",
+      "proyeccion": "eventualmente_consistente",
+      "resultados": []
+    },
+    "stderr": ""
+  },
+  {
+    "paso": "q10_sucursal_A-S006",
+    "comando": [
+      "python",
+      "-m",
+      "farmared",
+      "q10",
+      "--id-sucursal",
+      "A-S006"
+    ],
+    "exit_code": 0,
+    "segundos_observados": 0.518,
+    "stdout": {
+      "consulta": "q10",
+      "id_sucursal": "A-S006",
+      "proyeccion": "eventualmente_consistente",
+      "resultados": []
+    },
+    "stderr": ""
+  },
+  {
+    "paso": "q10_sucursal_A-S007",
+    "comando": [
+      "python",
+      "-m",
+      "farmared",
+      "q10",
+      "--id-sucursal",
+      "A-S007"
+    ],
+    "exit_code": 0,
+    "segundos_observados": 0.544,
+    "stdout": {
+      "consulta": "q10",
+      "id_sucursal": "A-S007",
+      "proyeccion": "eventualmente_consistente",
+      "resultados": []
+    },
+    "stderr": ""
+  },
+  {
+    "paso": "q10_sucursal_A-S008",
+    "comando": [
+      "python",
+      "-m",
+      "farmared",
+      "q10",
+      "--id-sucursal",
+      "A-S008"
+    ],
+    "exit_code": 0,
+    "segundos_observados": 0.552,
+    "stdout": {
+      "consulta": "q10",
+      "id_sucursal": "A-S008",
+      "proyeccion": "eventualmente_consistente",
+      "resultados": []
+    },
+    "stderr": ""
+  },
+  {
+    "paso": "q10_sucursal_A-S009",
+    "comando": [
+      "python",
+      "-m",
+      "farmared",
+      "q10",
+      "--id-sucursal",
+      "A-S009"
+    ],
+    "exit_code": 0,
+    "segundos_observados": 0.525,
+    "stdout": {
+      "consulta": "q10",
+      "id_sucursal": "A-S009",
+      "proyeccion": "eventualmente_consistente",
+      "resultados": []
+    },
+    "stderr": ""
+  },
+  {
+    "paso": "q10_sucursal_A-S010",
+    "comando": [
+      "python",
+      "-m",
+      "farmared",
+      "q10",
+      "--id-sucursal",
+      "A-S010"
+    ],
+    "exit_code": 0,
+    "segundos_observados": 0.525,
+    "stdout": {
+      "consulta": "q10",
+      "id_sucursal": "A-S010",
+      "proyeccion": "eventualmente_consistente",
+      "resultados": []
+    },
+    "stderr": ""
+  },
+  {
+    "paso": "q10_sucursal_S001",
+    "comando": [
+      "python",
+      "-m",
+      "farmared",
+      "q10",
+      "--id-sucursal",
+      "S001"
+    ],
+    "exit_code": 0,
+    "segundos_observados": 0.513,
+    "stdout": {
+      "consulta": "q10",
+      "id_sucursal": "S001",
+      "proyeccion": "eventualmente_consistente",
+      "resultados": [
+        {
+          "apellido": "Fernández",
+          "id_cliente": "C001",
+          "nombre": "Lucía"
+        },
+        {
+          "apellido": "Paz",
+          "id_cliente": "C006",
+          "nombre": "Ricardo"
+        }
+      ]
+    },
+    "stderr": ""
+  },
+  {
+    "paso": "q10_sucursal_S002",
+    "comando": [
+      "python",
+      "-m",
+      "farmared",
+      "q10",
+      "--id-sucursal",
+      "S002"
+    ],
+    "exit_code": 0,
+    "segundos_observados": 0.552,
+    "stdout": {
+      "consulta": "q10",
+      "id_sucursal": "S002",
+      "proyeccion": "eventualmente_consistente",
+      "resultados": [
+        {
+          "apellido": "Fernández",
+          "id_cliente": "C001",
+          "nombre": "Lucía"
+        },
+        {
+          "apellido": "Navarro",
+          "id_cliente": "C004",
+          "nombre": "Federico"
+        }
+      ]
+    },
+    "stderr": ""
+  },
+  {
+    "paso": "q10_sucursal_S003",
+    "comando": [
+      "python",
+      "-m",
+      "farmared",
+      "q10",
+      "--id-sucursal",
+      "S003"
+    ],
+    "exit_code": 0,
+    "segundos_observados": 0.53,
+    "stdout": {
+      "consulta": "q10",
+      "id_sucursal": "S003",
+      "proyeccion": "eventualmente_consistente",
+      "resultados": [
+        {
+          "apellido": "Gómez",
+          "id_cliente": "C002",
+          "nombre": "Martín"
+        },
+        {
+          "apellido": "Benavídez",
+          "id_cliente": "C005",
+          "nombre": "Sofía"
+        }
+      ]
+    },
+    "stderr": ""
+  },
+  {
+    "paso": "q10_sucursal_S004",
+    "comando": [
+      "python",
+      "-m",
+      "farmared",
+      "q10",
+      "--id-sucursal",
+      "S004"
+    ],
+    "exit_code": 0,
+    "segundos_observados": 0.524,
+    "stdout": {
+      "consulta": "q10",
+      "id_sucursal": "S004",
+      "proyeccion": "eventualmente_consistente",
+      "resultados": [
+        {
+          "apellido": "Ruiz",
+          "id_cliente": "C003",
+          "nombre": "Carla"
+        },
+        {
+          "apellido": "Cabrera",
+          "id_cliente": "C007",
+          "nombre": "Julieta"
+        }
+      ]
+    },
+    "stderr": ""
+  },
+  {
+    "paso": "q10_sucursal_S005",
+    "comando": [
+      "python",
+      "-m",
+      "farmared",
+      "q10",
+      "--id-sucursal",
+      "S005"
+    ],
+    "exit_code": 0,
+    "segundos_observados": 0.525,
+    "stdout": {
+      "consulta": "q10",
+      "id_sucursal": "S005",
+      "proyeccion": "eventualmente_consistente",
+      "resultados": []
+    },
+    "stderr": ""
+  },
+  {
+    "paso": "16_q03_sin_historial",
+    "comando": [
+      "python",
+      "-m",
+      "farmared",
+      "q03",
+      "--id-cliente",
+      "C008"
+    ],
+    "exit_code": 0,
+    "segundos_observados": 0.526,
+    "stdout": {
+      "consulta": "q03",
+      "id_cliente": "C008",
+      "proyeccion": "eventualmente_consistente",
+      "resultados": []
+    },
+    "stderr": "Received notification from DBMS server: <GqlStatusObject gql_status='01N52', status_description='warn: property key does not exist. The property `nombre_al_vender` does not exist. Verify that the spelling is correct.', position=<SummaryInputPosition line=11, column=33, offset=387>, raw_classification='UNRECOGNIZED', classification=<NotificationClassification.UNRECOGNIZED: 'UNRECOGNIZED'>, raw_severity='WARNING', severity=<NotificationSeverity.WARNING: 'WARNING'>, diagnostic_record={'_classification': 'UNRECOGNIZED', '_severity': 'WARNING', '_position': {'offset': 387, 'line': 11, 'column': 33}, 'OPERATION': '', 'OPERATION_CODE': '0', 'CURRENT_SCHEMA': '/'}> for query: \"\\nMATCH (c:Cliente {id: $id_cliente})\\nCALL (c) {\\n    MATCH (c)-[:REALIZO]->(v:Venta)\\n    WITH DISTINCT v\\n    CALL (v) {\\n        OPTIONAL MATCH (v)-[i:CONTIENE]->(p:Producto)\\n        WITH i, p ORDER BY i.orden, i.id_detalle\\n        RETURN collect(CASE WHEN i IS NULL THEN null ELSE {\\n            id_detalle: i.id_detalle, orden: i.orden, id_producto: p.id,\\n            nombre_al_vender: i.nombre_al_vender, cantidad: i.cantidad,\\n            precio_unit: i.precio_unit, subtotal: i.subtotal\\n        } END) AS items\\n    }\\n    RETURN v.fecha AS fecha, 'VENTA' AS tipo_evento, v.id AS id_registro,\\n           v.estado AS estado, {\\n               tipo: v.tipo, total: v.total, medio_pago: v.medio_pago,\\n               id_receta: head([(v)-[:USA_RECETA]->(r:Receta) | r.id]),\\n               items: items\\n           } AS detalle\\n    UNION ALL\\n    MATCH (c)-[:TIENE_RECETA]->(r:Receta)\\n    WITH DISTINCT r\\n    RETURN r.fecha_emision AS fecha, 'RECETA' AS tipo_evento, r.id AS id_registro,\\n           r.estado AS estado, {\\n               tipo: r.tipo, medico: r.medico,\\n               dispensas_realizadas: r.dispensas_realizadas,\\n               dispensas_autorizadas: r.dispensas_autorizadas,\\n               proxima_dispensa: r.proxima_dispensa\\n           } AS detalle\\n}\\nRETURN fecha, tipo_evento, id_registro, estado, detalle\\nORDER BY fecha, tipo_evento, id_registro\\n\""
+  },
+  {
+    "paso": "17_sync_repetida",
+    "comando": [
+      "python",
+      "-m",
+      "farmared",
+      "sync",
+      "--base",
+      "farmared_demo_d_oficial_e3311eda",
+      "--lock-path",
+      "<LOCK_COMPARTIDO>"
+    ],
+    "exit_code": 0,
+    "segundos_observados": 1.06,
+    "stdout": {
+      "base": "farmared_demo_d_oficial_e3311eda",
+      "comando": "sync",
+      "estado": "sin_pendientes_observados",
+      "eventos_procesados": [],
+      "fallidos": [],
+      "limite_alcanzado": false,
+      "pendientes_observados": 0,
+      "procesados": 0
+    },
+    "stderr": ""
+  },
+  {
+    "paso": "18_q03_repetida",
+    "comando": [
+      "python",
+      "-m",
+      "farmared",
+      "q03",
+      "--id-cliente",
+      "C001"
+    ],
+    "exit_code": 0,
+    "segundos_observados": 0.544,
+    "stdout": {
+      "consulta": "q03",
+      "id_cliente": "C001",
+      "proyeccion": "eventualmente_consistente",
+      "resultados": [
+        {
+          "detalle": {
+            "dispensas_autorizadas": 1,
+            "dispensas_realizadas": 1,
+            "medico": "Dr. Alejandro Vidal",
+            "proxima_dispensa": null,
+            "tipo": "Simple"
+          },
+          "estado": "Completada",
+          "fecha": "2026-09-10",
+          "id_registro": "RC001",
+          "tipo_evento": "RECETA"
+        },
+        {
+          "detalle": {
+            "id_receta": "RC001",
+            "items": [
+              {
+                "cantidad": 1,
+                "id_detalle": "D004",
+                "id_producto": "PRD003",
+                "nombre_al_vender": null,
+                "orden": 0,
+                "precio_unit": 9800,
+                "subtotal": 9800
+              }
+            ],
+            "medio_pago": "Obra social",
+            "tipo": "Con receta",
+            "total": 9800
+          },
+          "estado": "Completada",
+          "fecha": "2026-09-10",
+          "id_registro": "V003",
+          "tipo_evento": "VENTA"
+        },
+        {
+          "detalle": {
+            "id_receta": null,
+            "items": [
+              {
+                "cantidad": 1,
+                "id_detalle": "D020",
+                "id_producto": "PRD002",
+                "nombre_al_vender": null,
+                "orden": 0,
+                "precio_unit": 3500,
+                "subtotal": 3500
+              }
+            ],
+            "medio_pago": "Débito",
+            "tipo": "Venta libre",
+            "total": 3500
+          },
+          "estado": "Anulada",
+          "fecha": "2026-09-25",
+          "id_registro": "V015",
+          "tipo_evento": "VENTA"
+        },
+        {
+          "detalle": {
+            "id_receta": null,
+            "items": [
+              {
+                "cantidad": 2,
+                "id_detalle": "D017",
+                "id_producto": "PRD011",
+                "nombre_al_vender": null,
+                "orden": 0,
+                "precio_unit": 2200,
+                "subtotal": 4400
+              }
+            ],
+            "medio_pago": "Efectivo",
+            "tipo": "Venta libre",
+            "total": 4400
+          },
+          "estado": "Completada",
+          "fecha": "2026-10-02",
+          "id_registro": "V013",
+          "tipo_evento": "VENTA"
+        },
+        {
+          "detalle": {
+            "dispensas_autorizadas": 1,
+            "dispensas_realizadas": 1,
+            "medico": "Dra. Mónica Salas",
+            "proxima_dispensa": null,
+            "tipo": "Simple"
+          },
+          "estado": "Completada",
+          "fecha": "2026-10-08",
+          "id_registro": "RC008",
+          "tipo_evento": "RECETA"
+        },
+        {
+          "detalle": {
+            "id_receta": "RC008",
+            "items": [
+              {
+                "cantidad": 1,
+                "id_detalle": "D013",
+                "id_producto": "PRD010",
+                "nombre_al_vender": null,
+                "orden": 0,
+                "precio_unit": 7100,
+                "subtotal": 7100
+              }
+            ],
+            "medio_pago": "Crédito",
+            "tipo": "Con receta",
+            "total": 7100
+          },
+          "estado": "Completada",
+          "fecha": "2026-10-08",
+          "id_registro": "V010",
+          "tipo_evento": "VENTA"
+        }
+      ]
+    },
+    "stderr": "Received notification from DBMS server: <GqlStatusObject gql_status='01N52', status_description='warn: property key does not exist. The property `nombre_al_vender` does not exist. Verify that the spelling is correct.', position=<SummaryInputPosition line=11, column=33, offset=387>, raw_classification='UNRECOGNIZED', classification=<NotificationClassification.UNRECOGNIZED: 'UNRECOGNIZED'>, raw_severity='WARNING', severity=<NotificationSeverity.WARNING: 'WARNING'>, diagnostic_record={'_classification': 'UNRECOGNIZED', '_severity': 'WARNING', '_position': {'offset': 387, 'line': 11, 'column': 33}, 'OPERATION': '', 'OPERATION_CODE': '0', 'CURRENT_SCHEMA': '/'}> for query: \"\\nMATCH (c:Cliente {id: $id_cliente})\\nCALL (c) {\\n    MATCH (c)-[:REALIZO]->(v:Venta)\\n    WITH DISTINCT v\\n    CALL (v) {\\n        OPTIONAL MATCH (v)-[i:CONTIENE]->(p:Producto)\\n        WITH i, p ORDER BY i.orden, i.id_detalle\\n        RETURN collect(CASE WHEN i IS NULL THEN null ELSE {\\n            id_detalle: i.id_detalle, orden: i.orden, id_producto: p.id,\\n            nombre_al_vender: i.nombre_al_vender, cantidad: i.cantidad,\\n            precio_unit: i.precio_unit, subtotal: i.subtotal\\n        } END) AS items\\n    }\\n    RETURN v.fecha AS fecha, 'VENTA' AS tipo_evento, v.id AS id_registro,\\n           v.estado AS estado, {\\n               tipo: v.tipo, total: v.total, medio_pago: v.medio_pago,\\n               id_receta: head([(v)-[:USA_RECETA]->(r:Receta) | r.id]),\\n               items: items\\n           } AS detalle\\n    UNION ALL\\n    MATCH (c)-[:TIENE_RECETA]->(r:Receta)\\n    WITH DISTINCT r\\n    RETURN r.fecha_emision AS fecha, 'RECETA' AS tipo_evento, r.id AS id_registro,\\n           r.estado AS estado, {\\n               tipo: r.tipo, medico: r.medico,\\n               dispensas_realizadas: r.dispensas_realizadas,\\n               dispensas_autorizadas: r.dispensas_autorizadas,\\n               proxima_dispensa: r.proxima_dispensa\\n           } AS detalle\\n}\\nRETURN fecha, tipo_evento, id_registro, estado, detalle\\nORDER BY fecha, tipo_evento, id_registro\\n\""
+  },
+  {
+    "paso": "19_q04_repetida",
+    "comando": [
+      "python",
+      "-m",
+      "farmared",
+      "q04"
+    ],
+    "exit_code": 0,
+    "segundos_observados": 0.614,
+    "stdout": {
+      "consulta": "q04",
+      "proyeccion": "eventualmente_consistente",
+      "resultados": [
+        {
+          "apellido": "Ficticio",
+          "cantidad": 2,
+          "id_cliente": "A-C001",
+          "nombre": "Cliente adicional 1"
+        },
+        {
+          "apellido": "Ficticio",
+          "cantidad": 2,
+          "id_cliente": "A-C008",
+          "nombre": "Cliente adicional 8"
+        },
+        {
+          "apellido": "Fernández",
+          "cantidad": 2,
+          "id_cliente": "C001",
+          "nombre": "Lucía"
+        },
+        {
+          "apellido": "Gómez",
+          "cantidad": 2,
+          "id_cliente": "C002",
+          "nombre": "Martín"
+        },
+        {
+          "apellido": "Paz",
+          "cantidad": 2,
+          "id_cliente": "C006",
+          "nombre": "Ricardo"
+        }
+      ]
+    },
+    "stderr": ""
+  },
+  {
+    "paso": "20_q10_repetida",
+    "comando": [
+      "python",
+      "-m",
+      "farmared",
+      "q10",
+      "--id-sucursal",
+      "A-S002"
+    ],
+    "exit_code": 0,
+    "segundos_observados": 0.625,
+    "stdout": {
+      "consulta": "q10",
+      "id_sucursal": "A-S002",
+      "proyeccion": "eventualmente_consistente",
+      "resultados": [
+        {
+          "apellido": "Ficticio",
+          "id_cliente": "A-C002",
+          "nombre": "Cliente adicional 2"
+        },
+        {
+          "apellido": "Ficticio",
+          "id_cliente": "A-C003",
+          "nombre": "Cliente adicional 3"
+        },
+        {
+          "apellido": "Ficticio",
+          "id_cliente": "A-C009",
+          "nombre": "Cliente adicional 9"
+        }
+      ]
+    },
+    "stderr": ""
+  },
+  {
+    "paso": "21_verificacion_repetida",
+    "comando": [
+      "python",
+      "-m",
+      "farmared",
+      "grafo-verify",
+      "--base",
+      "farmared_demo_d_oficial_e3311eda",
+      "--lock-path",
+      "<LOCK_COMPARTIDO>",
+      "--confirmar-escrituras-pausadas"
+    ],
+    "exit_code": 0,
+    "segundos_observados": 1.135,
+    "stdout": {
+      "alcance": "estado_estable_declarado",
+      "base": "farmared_demo_d_oficial_e3311eda",
+      "comando": "grafo-verify",
+      "conteos": {
+        "nodos_esperados": 120,
+        "nodos_observados": 120,
+        "relaciones_esperadas": 142,
+        "relaciones_observadas": 142
+      },
+      "diferencias": [],
+      "equivalente": true,
+      "precondiciones": {
+        "escrituras_pausadas_confirmadas": true,
+        "exclusion_compartida": true
+      }
+    },
+    "stderr": ""
+  },
+  {
+    "paso": "compose",
+    "comando": [
+      "docker",
+      "compose",
+      "--project-name",
+      "farmared_d_recuperacion_1edb4391537c42bd8a08ae30b0998ebe",
+      "--env-file",
+      "<ENV_TEMPORAL>",
+      "-f",
+      "infra/docker-compose.yml",
+      "up",
+      "-d",
+      "--wait",
+      "--wait-timeout",
+      "180",
+      "neo4j"
+    ],
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": "Network farmared_d_recuperacion_1edb4391537c42bd8a08ae30b0998ebe_default Creating \n Volume farmared_d_recuperacion_1edb4391537c42bd8a08ae30b0998ebe_neo4j_data Creating \n Network farmared_d_recuperacion_1edb4391537c42bd8a08ae30b0998ebe_default Creating \n Volume farmared_d_recuperacion_1edb4391537c42bd8a08ae30b0998ebe_neo4j_logs Creating \n Volume farmared_d_recuperacion_1edb4391537c42bd8a08ae30b0998ebe_neo4j_logs Creating \n Volume farmared_d_recuperacion_1edb4391537c42bd8a08ae30b0998ebe_neo4j_data Creating \n Volume farmared_d_recuperacion_1edb4391537c42bd8a08ae30b0998ebe_neo4j_data Created \n Volume farmared_d_recuperacion_1edb4391537c42bd8a08ae30b0998ebe_neo4j_data Created \n Volume farmared_d_recuperacion_1edb4391537c42bd8a08ae30b0998ebe_neo4j_logs Created \n Volume farmared_d_recuperacion_1edb4391537c42bd8a08ae30b0998ebe_neo4j_logs Created \n Network farmared_d_recuperacion_1edb4391537c42bd8a08ae30b0998ebe_default Created \n Network farmared_d_recuperacion_1edb4391537c42bd8a08ae30b0998ebe_default Created \n Container farmared_d_recuperacion_1edb4391537c42bd8a08ae30b0998ebe-neo4j-1 Creating \n Container farmared_d_recuperacion_1edb4391537c42bd8a08ae30b0998ebe-neo4j-1 Created \n Container farmared_d_recuperacion_1edb4391537c42bd8a08ae30b0998ebe-neo4j-1 Starting \n Container farmared_d_recuperacion_1edb4391537c42bd8a08ae30b0998ebe-neo4j-1 Started \n Container farmared_d_recuperacion_1edb4391537c42bd8a08ae30b0998ebe-neo4j-1 Waiting \n Container farmared_d_recuperacion_1edb4391537c42bd8a08ae30b0998ebe-neo4j-1 Healthy"
+  },
+  {
+    "paso": "compose",
+    "comando": [
+      "docker",
+      "compose",
+      "--project-name",
+      "farmared_d_recuperacion_1edb4391537c42bd8a08ae30b0998ebe",
+      "--env-file",
+      "<ENV_TEMPORAL>",
+      "-f",
+      "infra/docker-compose.yml",
+      "port",
+      "neo4j",
+      "7687"
+    ],
+    "exit_code": 0,
+    "stdout": "127.0.0.1:32772",
+    "stderr": ""
+  },
+  {
+    "paso": "22_reconstruccion",
+    "comando": [
+      "python",
+      "-m",
+      "farmared",
+      "grafo-rebuild",
+      "--base",
+      "farmared_demo_d_oficial_e3311eda",
+      "--lock-path",
+      "<LOCK_COMPARTIDO>",
+      "--confirmar-entorno-aislado",
+      "--confirmar-escrituras-pausadas",
+      "--confirmar-sincronizador-pausado"
+    ],
+    "exit_code": 0,
+    "segundos_observados": 7.823,
+    "stdout": {
+      "base": "farmared_demo_d_oficial_e3311eda",
+      "comando": "grafo-rebuild",
+      "commit_neo4j": "confirmado",
+      "error": null,
+      "estado": "verificada",
+      "fase": "finalizada",
+      "habilitable": true,
+      "mongo_modificado": false,
+      "outbox_modificada": false,
+      "precondiciones": {
+        "actualizacion_existente_confirmada": false,
+        "entorno_aislado_confirmado": true,
+        "escrituras_pausadas_confirmadas": true,
+        "exclusion_compartida": true
+      },
+      "recuperable": false,
+      "sincronizador_pausado_confirmado": true,
+      "verificacion": {
+        "conteos": {
+          "nodos_esperados": 120,
+          "nodos_observados": 120,
+          "relaciones_esperadas": 142,
+          "relaciones_observadas": 142
+        },
+        "diferencias": [],
+        "equivalente": true
+      }
+    },
+    "stderr": "Received notification from DBMS server: <GqlStatusObject gql_status='01N52', status_description='warn: property key does not exist. The property `id` does not exist. Verify that the spelling is correct.', position=<SummaryInputPosition line=1, column=44, offset=43>, raw_classification='UNRECOGNIZED', classification=<NotificationClassification.UNRECOGNIZED: 'UNRECOGNIZED'>, raw_severity='WARNING', severity=<NotificationSeverity.WARNING: 'WARNING'>, diagnostic_record={'_classification': 'UNRECOGNIZED', '_severity': 'WARNING', '_position': {'offset': 43, 'line': 1, 'column': 44}, 'OPERATION': '', 'OPERATION_CODE': '0', 'CURRENT_SCHEMA': '/'}> for query: 'MATCH (n) RETURN labels(n) AS etiquetas, n.id AS id, properties(n) AS propiedades'"
+  },
+  {
+    "paso": "23_verificacion_recuperada",
+    "comando": [
+      "python",
+      "-m",
+      "farmared",
+      "grafo-verify",
+      "--base",
+      "farmared_demo_d_oficial_e3311eda",
+      "--lock-path",
+      "<LOCK_COMPARTIDO>",
+      "--confirmar-escrituras-pausadas"
+    ],
+    "exit_code": 0,
+    "segundos_observados": 1.169,
+    "stdout": {
+      "alcance": "estado_estable_declarado",
+      "base": "farmared_demo_d_oficial_e3311eda",
+      "comando": "grafo-verify",
+      "conteos": {
+        "nodos_esperados": 120,
+        "nodos_observados": 120,
+        "relaciones_esperadas": 142,
+        "relaciones_observadas": 142
+      },
+      "diferencias": [],
+      "equivalente": true,
+      "precondiciones": {
+        "escrituras_pausadas_confirmadas": true,
+        "exclusion_compartida": true
+      }
+    },
+    "stderr": ""
+  },
+  {
+    "paso": "24_q03_recuperada",
+    "comando": [
+      "python",
+      "-m",
+      "farmared",
+      "q03",
+      "--id-cliente",
+      "C001"
+    ],
+    "exit_code": 0,
+    "segundos_observados": 2.034,
+    "stdout": {
+      "consulta": "q03",
+      "id_cliente": "C001",
+      "proyeccion": "eventualmente_consistente",
+      "resultados": [
+        {
+          "detalle": {
+            "dispensas_autorizadas": 1,
+            "dispensas_realizadas": 1,
+            "medico": "Dr. Alejandro Vidal",
+            "proxima_dispensa": null,
+            "tipo": "Simple"
+          },
+          "estado": "Completada",
+          "fecha": "2026-09-10",
+          "id_registro": "RC001",
+          "tipo_evento": "RECETA"
+        },
+        {
+          "detalle": {
+            "id_receta": "RC001",
+            "items": [
+              {
+                "cantidad": 1,
+                "id_detalle": "D004",
+                "id_producto": "PRD003",
+                "nombre_al_vender": null,
+                "orden": 0,
+                "precio_unit": 9800,
+                "subtotal": 9800
+              }
+            ],
+            "medio_pago": "Obra social",
+            "tipo": "Con receta",
+            "total": 9800
+          },
+          "estado": "Completada",
+          "fecha": "2026-09-10",
+          "id_registro": "V003",
+          "tipo_evento": "VENTA"
+        },
+        {
+          "detalle": {
+            "id_receta": null,
+            "items": [
+              {
+                "cantidad": 1,
+                "id_detalle": "D020",
+                "id_producto": "PRD002",
+                "nombre_al_vender": null,
+                "orden": 0,
+                "precio_unit": 3500,
+                "subtotal": 3500
+              }
+            ],
+            "medio_pago": "Débito",
+            "tipo": "Venta libre",
+            "total": 3500
+          },
+          "estado": "Anulada",
+          "fecha": "2026-09-25",
+          "id_registro": "V015",
+          "tipo_evento": "VENTA"
+        },
+        {
+          "detalle": {
+            "id_receta": null,
+            "items": [
+              {
+                "cantidad": 2,
+                "id_detalle": "D017",
+                "id_producto": "PRD011",
+                "nombre_al_vender": null,
+                "orden": 0,
+                "precio_unit": 2200,
+                "subtotal": 4400
+              }
+            ],
+            "medio_pago": "Efectivo",
+            "tipo": "Venta libre",
+            "total": 4400
+          },
+          "estado": "Completada",
+          "fecha": "2026-10-02",
+          "id_registro": "V013",
+          "tipo_evento": "VENTA"
+        },
+        {
+          "detalle": {
+            "dispensas_autorizadas": 1,
+            "dispensas_realizadas": 1,
+            "medico": "Dra. Mónica Salas",
+            "proxima_dispensa": null,
+            "tipo": "Simple"
+          },
+          "estado": "Completada",
+          "fecha": "2026-10-08",
+          "id_registro": "RC008",
+          "tipo_evento": "RECETA"
+        },
+        {
+          "detalle": {
+            "id_receta": "RC008",
+            "items": [
+              {
+                "cantidad": 1,
+                "id_detalle": "D013",
+                "id_producto": "PRD010",
+                "nombre_al_vender": null,
+                "orden": 0,
+                "precio_unit": 7100,
+                "subtotal": 7100
+              }
+            ],
+            "medio_pago": "Crédito",
+            "tipo": "Con receta",
+            "total": 7100
+          },
+          "estado": "Completada",
+          "fecha": "2026-10-08",
+          "id_registro": "V010",
+          "tipo_evento": "VENTA"
+        }
+      ]
+    },
+    "stderr": "Received notification from DBMS server: <GqlStatusObject gql_status='01N52', status_description='warn: property key does not exist. The property `nombre_al_vender` does not exist. Verify that the spelling is correct.', position=<SummaryInputPosition line=11, column=33, offset=387>, raw_classification='UNRECOGNIZED', classification=<NotificationClassification.UNRECOGNIZED: 'UNRECOGNIZED'>, raw_severity='WARNING', severity=<NotificationSeverity.WARNING: 'WARNING'>, diagnostic_record={'_classification': 'UNRECOGNIZED', '_severity': 'WARNING', '_position': {'offset': 387, 'line': 11, 'column': 33}, 'OPERATION': '', 'OPERATION_CODE': '0', 'CURRENT_SCHEMA': '/'}> for query: \"\\nMATCH (c:Cliente {id: $id_cliente})\\nCALL (c) {\\n    MATCH (c)-[:REALIZO]->(v:Venta)\\n    WITH DISTINCT v\\n    CALL (v) {\\n        OPTIONAL MATCH (v)-[i:CONTIENE]->(p:Producto)\\n        WITH i, p ORDER BY i.orden, i.id_detalle\\n        RETURN collect(CASE WHEN i IS NULL THEN null ELSE {\\n            id_detalle: i.id_detalle, orden: i.orden, id_producto: p.id,\\n            nombre_al_vender: i.nombre_al_vender, cantidad: i.cantidad,\\n            precio_unit: i.precio_unit, subtotal: i.subtotal\\n        } END) AS items\\n    }\\n    RETURN v.fecha AS fecha, 'VENTA' AS tipo_evento, v.id AS id_registro,\\n           v.estado AS estado, {\\n               tipo: v.tipo, total: v.total, medio_pago: v.medio_pago,\\n               id_receta: head([(v)-[:USA_RECETA]->(r:Receta) | r.id]),\\n               items: items\\n           } AS detalle\\n    UNION ALL\\n    MATCH (c)-[:TIENE_RECETA]->(r:Receta)\\n    WITH DISTINCT r\\n    RETURN r.fecha_emision AS fecha, 'RECETA' AS tipo_evento, r.id AS id_registro,\\n           r.estado AS estado, {\\n               tipo: r.tipo, medico: r.medico,\\n               dispensas_realizadas: r.dispensas_realizadas,\\n               dispensas_autorizadas: r.dispensas_autorizadas,\\n               proxima_dispensa: r.proxima_dispensa\\n           } AS detalle\\n}\\nRETURN fecha, tipo_evento, id_registro, estado, detalle\\nORDER BY fecha, tipo_evento, id_registro\\n\""
+  },
+  {
+    "paso": "25_q04_recuperada",
+    "comando": [
+      "python",
+      "-m",
+      "farmared",
+      "q04"
+    ],
+    "exit_code": 0,
+    "segundos_observados": 1.202,
+    "stdout": {
+      "consulta": "q04",
+      "proyeccion": "eventualmente_consistente",
+      "resultados": [
+        {
+          "apellido": "Ficticio",
+          "cantidad": 2,
+          "id_cliente": "A-C001",
+          "nombre": "Cliente adicional 1"
+        },
+        {
+          "apellido": "Ficticio",
+          "cantidad": 2,
+          "id_cliente": "A-C008",
+          "nombre": "Cliente adicional 8"
+        },
+        {
+          "apellido": "Fernández",
+          "cantidad": 2,
+          "id_cliente": "C001",
+          "nombre": "Lucía"
+        },
+        {
+          "apellido": "Gómez",
+          "cantidad": 2,
+          "id_cliente": "C002",
+          "nombre": "Martín"
+        },
+        {
+          "apellido": "Paz",
+          "cantidad": 2,
+          "id_cliente": "C006",
+          "nombre": "Ricardo"
+        }
+      ]
+    },
+    "stderr": ""
+  },
+  {
+    "paso": "26_q10_recuperada",
+    "comando": [
+      "python",
+      "-m",
+      "farmared",
+      "q10",
+      "--id-sucursal",
+      "A-S002"
+    ],
+    "exit_code": 0,
+    "segundos_observados": 1.062,
+    "stdout": {
+      "consulta": "q10",
+      "id_sucursal": "A-S002",
+      "proyeccion": "eventualmente_consistente",
+      "resultados": [
+        {
+          "apellido": "Ficticio",
+          "id_cliente": "A-C002",
+          "nombre": "Cliente adicional 2"
+        },
+        {
+          "apellido": "Ficticio",
+          "id_cliente": "A-C003",
+          "nombre": "Cliente adicional 3"
+        },
+        {
+          "apellido": "Ficticio",
+          "id_cliente": "A-C009",
+          "nombre": "Cliente adicional 9"
+        }
+      ]
+    },
+    "stderr": ""
+  },
+  {
+    "paso": "compose",
+    "comando": [
+      "docker",
+      "compose",
+      "--project-name",
+      "farmared_d_recuperacion_1edb4391537c42bd8a08ae30b0998ebe",
+      "--env-file",
+      "<ENV_TEMPORAL>",
+      "-f",
+      "infra/docker-compose.yml",
+      "down",
+      "--volumes",
+      "--remove-orphans"
+    ],
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": "Container farmared_d_recuperacion_1edb4391537c42bd8a08ae30b0998ebe-neo4j-1 Stopping \n Container farmared_d_recuperacion_1edb4391537c42bd8a08ae30b0998ebe-neo4j-1 Stopped \n Container farmared_d_recuperacion_1edb4391537c42bd8a08ae30b0998ebe-neo4j-1 Removing \n Container farmared_d_recuperacion_1edb4391537c42bd8a08ae30b0998ebe-neo4j-1 Removed \n Network farmared_d_recuperacion_1edb4391537c42bd8a08ae30b0998ebe_default Removing \n Volume farmared_d_recuperacion_1edb4391537c42bd8a08ae30b0998ebe_neo4j_logs Removing \n Volume farmared_d_recuperacion_1edb4391537c42bd8a08ae30b0998ebe_neo4j_data Removing \n Volume farmared_d_recuperacion_1edb4391537c42bd8a08ae30b0998ebe_neo4j_logs Removed \n Volume farmared_d_recuperacion_1edb4391537c42bd8a08ae30b0998ebe_neo4j_data Removed \n Network farmared_d_recuperacion_1edb4391537c42bd8a08ae30b0998ebe_default Removed"
+  },
+  {
+    "paso": "compose",
+    "comando": [
+      "docker",
+      "compose",
+      "--project-name",
+      "farmared_d_oficial_ae2895a928674827a5f0e7e274391f4e",
+      "--env-file",
+      "<ENV_TEMPORAL>",
+      "-f",
+      "infra/docker-compose.yml",
+      "down",
+      "--volumes",
+      "--remove-orphans"
+    ],
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": "Container farmared_d_oficial_ae2895a928674827a5f0e7e274391f4e-neo4j-1 Stopping \n Container farmared_d_oficial_ae2895a928674827a5f0e7e274391f4e-mongodb-1 Stopping \n Container farmared_d_oficial_ae2895a928674827a5f0e7e274391f4e-mongodb-1 Stopped \n Container farmared_d_oficial_ae2895a928674827a5f0e7e274391f4e-mongodb-1 Removing \n Container farmared_d_oficial_ae2895a928674827a5f0e7e274391f4e-mongodb-1 Removed \n Container farmared_d_oficial_ae2895a928674827a5f0e7e274391f4e-neo4j-1 Stopped \n Container farmared_d_oficial_ae2895a928674827a5f0e7e274391f4e-neo4j-1 Removing \n Container farmared_d_oficial_ae2895a928674827a5f0e7e274391f4e-neo4j-1 Removed \n Volume farmared_d_oficial_ae2895a928674827a5f0e7e274391f4e_mongo_data Removing \n Network farmared_d_oficial_ae2895a928674827a5f0e7e274391f4e_default Removing \n Volume farmared_d_oficial_ae2895a928674827a5f0e7e274391f4e_neo4j_logs Removing \n Volume farmared_d_oficial_ae2895a928674827a5f0e7e274391f4e_mongo_data Removed \n Volume farmared_d_oficial_ae2895a928674827a5f0e7e274391f4e_neo4j_data Removing \n Volume farmared_d_oficial_ae2895a928674827a5f0e7e274391f4e_neo4j_logs Removed \n Volume farmared_d_oficial_ae2895a928674827a5f0e7e274391f4e_neo4j_data Removed \n Network farmared_d_oficial_ae2895a928674827a5f0e7e274391f4e_default Removed"
+  }
+]

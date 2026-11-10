@@ -2,6 +2,8 @@
 
 import argparse
 import json
+import os
+import stat
 from dataclasses import replace
 from importlib.util import module_from_spec, spec_from_file_location
 from pathlib import Path
@@ -137,23 +139,47 @@ def test_salud_ambos_informa_fallos_independientes(monkeypatch, capsys):
     assert llamados == ["mongo", "neo4j"]
 
 
-def test_preparar_env_no_pisa_archivo_y_restringe_permisos(tmp_path):
+@pytest.fixture
+def preparador_env():
     ruta = Path(__file__).resolve().parents[2] / "infra/preparar_env.py"
     spec = spec_from_file_location("preparar_env", ruta)
     modulo = module_from_spec(spec)
     spec.loader.exec_module(modulo)
-    (tmp_path / ".env.example").write_text("NEO4J_PASSWORD=\nMONGO_DB=prueba\n")
-    assert modulo.preparar_env(tmp_path) is True
+    return modulo
+
+
+def test_preparar_env_no_pisa_archivo(tmp_path, preparador_env):
+    (tmp_path / ".env.example").write_bytes(b"NEO4J_PASSWORD=\nMONGO_DB=prueba\n")
+    assert preparador_env.preparar_env(tmp_path) is True
     contenido = (tmp_path / ".env").read_bytes()
-    assert b"NEO4J_PASSWORD=\n" not in contenido
-    assert (tmp_path / ".env").stat().st_mode & 0o777 == 0o600
-    assert modulo.preparar_env(tmp_path) is False
+    linea = next(l for l in contenido.splitlines() if l.startswith(b"NEO4J_PASSWORD="))
+    assert len(linea.split(b"=", 1)[1]) >= 8
+    assert preparador_env.preparar_env(tmp_path) is False
     assert (tmp_path / ".env").read_bytes() == contenido
+
+
+@pytest.mark.skipif(os.name != "posix", reason="0600 es un modo POSIX; Windows usa ACL, no st_mode.")
+def test_preparar_env_restringe_permisos_posix(tmp_path, preparador_env):
+    (tmp_path / ".env.example").write_bytes(b"NEO4J_PASSWORD=\n")
+    assert preparador_env.preparar_env(tmp_path) is True
+    assert stat.S_IMODE((tmp_path / ".env").stat().st_mode) == 0o600
+
+
+def test_enlazar_env_compose_idempotente(tmp_path, preparador_env):
+    (tmp_path / ".env.example").write_bytes(b"NEO4J_PASSWORD=\n")
+    preparador_env.preparar_env(tmp_path)
+    contenido = (tmp_path / ".env").read_bytes()
     (tmp_path / "infra").mkdir()
-    modulo.enlazar_env_compose(tmp_path)
-    modulo.enlazar_env_compose(tmp_path)
+    try:
+        preparador_env.enlazar_env_compose(tmp_path)
+    except OSError as error:
+        if os.name == "nt" and getattr(error, "winerror", None) == 1314:
+            pytest.skip("Windows requiere privilegio de symlink o modo desarrollador; no se usa copia insegura.")
+        raise
+    preparador_env.enlazar_env_compose(tmp_path)
     assert (tmp_path / "infra/.env").resolve() == tmp_path / ".env"
     assert (tmp_path / "infra/.env").read_bytes() == contenido
+
 
 
 def test_preparar_env_no_pisa_env_de_infra_preexistente(tmp_path):

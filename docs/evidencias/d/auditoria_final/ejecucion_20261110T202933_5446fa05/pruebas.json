@@ -1,0 +1,46 @@
+{
+  "origen": "pruebas_automatizadas_con_fixtures_en_entorno_exclusivo",
+  "ejecuciones": [
+    {
+      "suite": "persona_d",
+      "comando": [
+        "python",
+        "-m",
+        "pytest",
+        "tests/d_grafo",
+        "-q"
+      ],
+      "exit_code": 0,
+      "stdout": "........................................................................ [ 26%]\n........................................................................ [ 53%]\n........................................................................ [ 79%]\n.......................................................                  [100%]\n271 passed in 233.32s (0:03:53)\n",
+      "stderr": ""
+    },
+    {
+      "suite": "general",
+      "comando": [
+        "python",
+        "-m",
+        "pytest",
+        "-q"
+      ],
+      "exit_code": 0,
+      "stdout": "........................................................................ [ 13%]\n........................................................................ [ 26%]\n........................................................................ [ 39%]\n........................................................................ [ 52%]\n........................................................................ [ 65%]\n........................................................................ [ 78%]\n........................................................................ [ 91%]\n.........................ss.....................                         [100%]\n=========================== short test summary info ===========================\nSKIPPED [1] tests\\infra\\test_conexiones.py:161: 0600 es un modo POSIX; Windows usa ACL, no st_mode.\nSKIPPED [1] tests\\infra\\test_conexiones.py:177: Windows requiere privilegio de symlink o modo desarrollador; no se usa copia insegura.\n550 passed, 2 skipped in 324.52s (0:05:24)\n",
+      "stderr": ""
+    }
+  ],
+  "limpieza": [
+    {
+      "proyecto": "farmared_d_oficial_pruebas_0bcd81e085a14b7eb5e686bdc86e5219",
+      "volumenes_propios_eliminados": [
+        "farmared_d_oficial_pruebas_0bcd81e085a14b7eb5e686bdc86e5219_mongo_data",
+        "farmared_d_oficial_pruebas_0bcd81e085a14b7eb5e686bdc86e5219_neo4j_data",
+        "farmared_d_oficial_pruebas_0bcd81e085a14b7eb5e686bdc86e5219_neo4j_logs"
+      ],
+      "contenedores_propios_retirados": [
+        "301a77451a4a",
+        "6bd7352cbd9a"
+      ]
+    }
+  ],
+  "fuentes_intactas": true,
+  "recursos_previos_conservados": true
+}

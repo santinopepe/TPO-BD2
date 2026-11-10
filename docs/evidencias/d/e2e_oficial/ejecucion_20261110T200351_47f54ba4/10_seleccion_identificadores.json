@@ -1,0 +1,129 @@
+{
+  "clientes": [
+    {
+      "id": "C001",
+      "ventas": 4,
+      "recetas": 2
+    },
+    {
+      "id": "C006",
+      "ventas": 4,
+      "recetas": 2
+    },
+    {
+      "id": "A-C001",
+      "ventas": 3,
+      "recetas": 2
+    },
+    {
+      "id": "C002",
+      "ventas": 2,
+      "recetas": 2
+    },
+    {
+      "id": "A-C003",
+      "ventas": 2,
+      "recetas": 1
+    },
+    {
+      "id": "A-C008",
+      "ventas": 1,
+      "recetas": 2
+    },
+    {
+      "id": "C003",
+      "ventas": 2,
+      "recetas": 1
+    },
+    {
+      "id": "A-C004",
+      "ventas": 1,
+      "recetas": 1
+    },
+    {
+      "id": "A-C006",
+      "ventas": 1,
+      "recetas": 1
+    },
+    {
+      "id": "A-C007",
+      "ventas": 1,
+      "recetas": 1
+    },
+    {
+      "id": "A-C009",
+      "ventas": 1,
+      "recetas": 1
+    },
+    {
+      "id": "C004",
+      "ventas": 1,
+      "recetas": 1
+    },
+    {
+      "id": "C007",
+      "ventas": 1,
+      "recetas": 1
+    }
+  ],
+  "sucursales": [
+    {
+      "id": "A-S002",
+      "ventas": 3,
+      "ventas_profesional_inactivo": 3,
+      "estados": {
+        "Completada": 2,
+        "Pendiente": 1
+      }
+    },
+    {
+      "id": "S002",
+      "ventas": 2,
+      "ventas_profesional_inactivo": 1,
+      "estados": {
+        "Completada": 2
+      }
+    },
+    {
+      "id": "A-S001",
+      "ventas": 9,
+      "ventas_profesional_inactivo": 0,
+      "estados": {
+        "Completada": 6,
+        "Pendiente": 2,
+        "Anulada": 1
+      }
+    },
+    {
+      "id": "S003",
+      "ventas": 4,
+      "ventas_profesional_inactivo": 0,
+      "estados": {
+        "Completada": 3,
+        "Pendiente": 1
+      }
+    },
+    {
+      "id": "S004",
+      "ventas": 3,
+      "ventas_profesional_inactivo": 0,
+      "estados": {
+        "Completada": 2,
+        "Pendiente": 1
+      }
+    },
+    {
+      "id": "S001",
+      "ventas": 7,
+      "ventas_profesional_inactivo": 0,
+      "estados": {
+        "Completada": 6,
+        "Anulada": 1
+      }
+    }
+  ],
+  "elegidos": {
+    "id_cliente": "C001",
+    "id_sucursal": "A-S002"
+  }
+}
