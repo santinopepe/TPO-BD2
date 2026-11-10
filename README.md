@@ -21,7 +21,7 @@ Las versiones se verificaron en [PyPI: PyMongo](https://pypi.org/project/pymongo
 [Neo4j](https://pypi.org/project/neo4j/6.4.1/) y [pytest](https://pypi.org/project/pytest/9.2.0/).
 
 `estado` informa versión y reloj, con motores/proyección **no comprobados**.
-`q01`–`q15`, `seed`, `validar-datasets`, `setup`, `reset-demo`, `sync` y
+`q01`–`q15`, `seed`, `setup`, `reset-demo`, `sync` y
 `demo-transaccion` están anunciados como pendientes: invocarlos termina con código
 3 y explica el responsable. Todavía no reciben parámetros de negocio.
 Los códigos de salida son 0 (éxito), 1 (error de dominio), 2 (uso inválido) y
@@ -81,6 +81,21 @@ En bases existentes verifica documentos/índices antes del DDL, preserva datos y
 rechaza definiciones incompatibles sin reemplazarlas. El DDL no es atómico entre
 colecciones y requiere escritores pausados; ante una falla no se anuncia éxito.
 
+
+## Validación de datasets sin motores
+
+```bash
+uv run --locked farmared validar-datasets --directorio data/originales
+```
+
+Valida los nueve CSV y devuelve JSON con conteos, errores, avisos y SHA-256 de
+fuentes/conjunto. Código 0 significa sin errores bloqueantes; los avisos históricos
+siguen visibles. Código 1 significa validación fallida, sin datos parciales para
+cargar. No necesita `.env`, MongoDB ni Neo4j, y no realiza escrituras.
+
+`--directorio` es repetible para validar originales y adicionales como una unión.
+El contrato y la clasificación de errores/avisos están en
+[docs/validacion_datasets.md](docs/validacion_datasets.md). El loader aún está pendiente.
 
 ## Entorno local: Docker Compose
 
@@ -171,19 +186,3 @@ Si se comparte un host, usar un `COMPOSE_PROJECT_NAME` distinto y otros
 host en `.env` para esos puertos. Los nombres de servicio y puertos internos no
 cambian. No reutilizar volúmenes/bases de demo mutables entre integrantes.
 
-## Datos disponibles y secuencia de entregas
-
-Se encontraron los nueve CSV en `datasets_farmared/`, directorio ignorado previamente.
-Se inspeccionaron cabeceras, enums y conteos (8 clientes, 5 sucursales, 7 farmacéuticos,
-5 proveedores, 13 productos, 18 lotes, 9 recetas, 16 ventas y 22 detalles).
-Esto **no** constituye validación integral ni una carga. Los originales permanecen
-intactos. Su incorporación versionada en `data/originales/` queda para la entrega
-de datasets, junto con referencias, importes, totales y diagnósticos de filas.
-
-1. Paquete, contratos, configuración, reloj y CLI mínima: implementado.
-2. Compose/devcontainer, conexiones y readiness con primario real: implementado.
-3. Colecciones, validadores e índices base MongoDB: implementado.
-4. Lectura, conversión y validación integral de los nueve CSV.
-5. Carga idempotente, manifiesto/huellas, historia y outbox transaccional.
-6. Adicionales reproducibles con `base_date` persistida y casos borde.
-7. Integración disponible de B/C/D, CI, evidencias, diagramas y ensamblado del informe.
