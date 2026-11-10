@@ -1,0 +1,139 @@
+name: CI FarmaRed
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: farmared-ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  pruebas:
+    name: Sin motores / Python ${{ matrix.python }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        python: ["3.11.18", "3.12.12", "3.13.18", "3.14.10"]
+    env:
+      FARMARED_TEST_MONGO: "0"
+      FARMARED_TEST_INTEGRACION: "0"
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+        with:
+          persist-credentials: false
+      - uses: astral-sh/setup-uv@07a047e608db84b3d8c06cd9a7c7dcc9c355c18e # v10.3.2
+        with:
+          version: "0.13.7"
+          python-version: ${{ matrix.python }}
+          enable-cache: false
+      - name: Instalar con lock y validar fuentes
+        run: |
+          mkdir -p "$RUNNER_TEMP/farmared-resultados"
+          uv sync --locked
+          uv run --locked farmared validar-datasets --directorio data/originales > "$RUNNER_TEMP/farmared-resultados/originales.json"
+          uv run --locked farmared validar-datasets --directorio data/originales --directorio data/adicionales > "$RUNNER_TEMP/farmared-resultados/union.json"
+      - name: Ejecutar pruebas sin motores
+        run: uv run --locked pytest --junitxml="$RUNNER_TEMP/farmared-resultados/pytest.xml"
+      - name: Construir e instalar wheel fuera del repositorio
+        run: |
+          uv build
+          uv venv "$RUNNER_TEMP/farmared-wheel"
+          uv export --locked --no-dev --no-emit-project --output-file "$RUNNER_TEMP/farmared-resultados/runtime.txt"
+          uv pip sync --python "$RUNNER_TEMP/farmared-wheel/bin/python" --require-hashes "$RUNNER_TEMP/farmared-resultados/runtime.txt"
+          uv pip install --python "$RUNNER_TEMP/farmared-wheel/bin/python" --no-deps dist/*.whl
+          cd "$RUNNER_TEMP"
+          "$RUNNER_TEMP/farmared-wheel/bin/farmared" estado
+      - name: Conservar resultados y distribuciones
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: pruebas-python-${{ matrix.python }}
+          path: |
+            ${{ runner.temp }}/farmared-resultados/
+            dist/*.whl
+            dist/*.tar.gz
+          if-no-files-found: warn
+          retention-days: 7
+
+  integracion:
+    name: MongoDB replica set y Neo4j / Python 3.12.12
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      COMPOSE_PROJECT_NAME: farmared-ci-${{ github.run_id }}-${{ github.run_attempt }}
+      FARMARED_TEST_INTEGRACION: "1"
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+        with:
+          persist-credentials: false
+      - uses: astral-sh/setup-uv@07a047e608db84b3d8c06cd9a7c7dcc9c355c18e # v10.3.2
+        with:
+          version: "0.13.7"
+          python-version: "3.12.12"
+          enable-cache: false
+      - name: Instalar y crear configuración temporal
+        run: |
+          uv sync --locked
+          mkdir -p "$RUNNER_TEMP/farmared-resultados"
+          uv run --locked python - <<'PY'
+          import os
+          import secrets
+          from pathlib import Path
+
+          clave = secrets.token_urlsafe(32)
+          print(f"::add-mask::{clave}")
+          ruta = Path(os.environ["RUNNER_TEMP"]) / "farmared-ci.env"
+          with open(ruta, "x", opener=lambda path, flags: os.open(path, flags, 0o600)) as archivo:
+              archivo.write(
+                  "MONGO_URI=mongodb://127.0.0.1:27017/?replicaSet=rs0&directConnection=true\n"
+                  "MONGO_DB=farmared_ci\n"
+                  "NEO4J_URI=bolt://127.0.0.1:7687\n"
+                  "NEO4J_USER=neo4j\n"
+                  f"NEO4J_PASSWORD={clave}\n"
+                  "DB_TIMEOUT_MS=15000\n"
+              )
+          PY
+      - name: Iniciar motores y esperar primario real
+        run: |
+          docker compose --env-file "$RUNNER_TEMP/farmared-ci.env" -f infra/docker-compose.yml up -d mongodb neo4j
+          docker compose --env-file "$RUNNER_TEMP/farmared-ci.env" -f infra/docker-compose.yml run --rm mongodb-init
+          docker compose --env-file "$RUNNER_TEMP/farmared-ci.env" -f infra/docker-compose.yml up -d --wait --wait-timeout 180 mongodb neo4j
+      - name: Comprobar salud y ejecutar integración
+        run: |
+          uv run --locked --env-file "$RUNNER_TEMP/farmared-ci.env" farmared salud > "$RUNNER_TEMP/farmared-resultados/salud.json"
+          uv run --locked --env-file "$RUNNER_TEMP/farmared-ci.env" pytest --junitxml="$RUNNER_TEMP/farmared-resultados/pytest.xml"
+      - name: Capturar logs ante falla
+        if: failure()
+        run: |
+          if [ -f "$RUNNER_TEMP/farmared-ci.env" ]; then
+            mkdir -p "$RUNNER_TEMP/farmared-resultados"
+            docker compose --env-file "$RUNNER_TEMP/farmared-ci.env" -f infra/docker-compose.yml logs --no-color > "$RUNNER_TEMP/farmared-resultados/motores.log" 2>&1
+          fi
+      - name: Retirar únicamente recursos de este proyecto
+        if: always()
+        run: |
+          if [ -f "$RUNNER_TEMP/farmared-ci.env" ]; then
+            docker compose --env-file "$RUNNER_TEMP/farmared-ci.env" -f infra/docker-compose.yml down --volumes --remove-orphans
+          fi
+      - name: Eliminar secreto temporal
+        if: always()
+        run: rm -f -- "$RUNNER_TEMP/farmared-ci.env"
+      - name: Conservar resultados de integración
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: integracion-motores
+          path: ${{ runner.temp }}/farmared-resultados/
+          if-no-files-found: warn
+          retention-days: 7

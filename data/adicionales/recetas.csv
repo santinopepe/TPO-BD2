@@ -1,0 +1,11 @@
+id_receta,id_cliente,medico,matricula_medico,fecha_emision,tipo,dispensas_autorizadas,dispensas_realizadas,proxima_dispensa,estado
+A-RC001,A-C001,Médico ficticio,A-MP001,2026-10-01,Tratamiento prolongado,3,1,2026-11-09,Vigente
+A-RC002,A-C001,Médico ficticio,A-MP002,2026-10-01,Tratamiento prolongado,3,0,2026-11-10,Vigente
+A-RC003,A-C003,Médico ficticio,A-MP003,2026-10-01,Tratamiento prolongado,3,0,2026-11-11,Vigente
+A-RC004,A-C004,Médico ficticio,A-MP004,2026-10-01,Tratamiento prolongado,3,3,,Completada
+A-RC005,A-C005,Médico ficticio,A-MP005,2026-10-01,Simple,1,0,,Vigente
+A-RC006,A-C006,Médico ficticio,A-MP006,2026-10-01,Archivada,1,0,,Vigente
+A-RC007,A-C007,Médico ficticio,A-MP007,2026-10-01,Simple,1,0,,Vencida
+A-RC008,A-C008,Médico ficticio,A-MP008,2026-10-01,Simple,1,0,,Vigente
+A-RC009,A-C009,Médico ficticio,A-MP009,2026-10-01,Simple,1,0,,Vigente
+A-RC010,A-C008,Médico ficticio,A-MP010,2026-10-01,Simple,1,0,,Vigente

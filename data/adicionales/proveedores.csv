@@ -1,0 +1,11 @@
+id_proveedor,razon_social,cuit,tipo,ciudad,provincia,telefono,activo
+A-PRV001,Proveedor ficticio 1,30-90000001-1,Laboratorio,Buenos Aires,Buenos Aires,1102000001,True
+A-PRV002,Proveedor ficticio 2,30-90000002-1,Droguería,Buenos Aires,Buenos Aires,1102000002,True
+A-PRV003,Proveedor ficticio 3,30-90000003-1,Laboratorio,Buenos Aires,Buenos Aires,1102000003,True
+A-PRV004,Proveedor ficticio 4,30-90000004-1,Droguería,Buenos Aires,Buenos Aires,1102000004,True
+A-PRV005,Proveedor ficticio 5,30-90000005-1,Laboratorio,Buenos Aires,Buenos Aires,1102000005,True
+A-PRV006,Proveedor ficticio 6,30-90000006-1,Droguería,Buenos Aires,Buenos Aires,1102000006,True
+A-PRV007,Proveedor ficticio 7,30-90000007-1,Laboratorio,Buenos Aires,Buenos Aires,1102000007,True
+A-PRV008,Proveedor ficticio 8,30-90000008-1,Droguería,Buenos Aires,Buenos Aires,1102000008,True
+A-PRV009,Proveedor ficticio 9,30-90000009-1,Laboratorio,Buenos Aires,Buenos Aires,1102000009,True
+A-PRV010,Proveedor ficticio 10,30-90000010-1,Droguería,Buenos Aires,Buenos Aires,1102000010,False

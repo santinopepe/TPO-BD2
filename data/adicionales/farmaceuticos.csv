@@ -1,0 +1,11 @@
+id_farmaceutico,nombre,apellido,matricula,cargo,id_sucursal,activo
+A-F001,Profesional adicional 1,Ficticio,A-MN001,Farmacéutico,A-S001,True
+A-F002,Profesional adicional 2,Ficticio,A-MN002,Farmacéutico,A-S002,False
+A-F003,Profesional adicional 3,Ficticio,A-MN003,Farmacéutico,A-S001,True
+A-F004,Profesional adicional 4,Ficticio,A-MN004,Farmacéutico,A-S004,True
+A-F005,Profesional adicional 5,Ficticio,A-MN005,Farmacéutico,A-S005,True
+A-F006,Profesional adicional 6,Ficticio,A-MN006,Farmacéutico,A-S006,True
+A-F007,Profesional adicional 7,Ficticio,A-MN007,Farmacéutico,A-S007,True
+A-F008,Profesional adicional 8,Ficticio,A-MN008,Farmacéutico,A-S008,True
+A-F009,Profesional adicional 9,Ficticio,A-MN009,Farmacéutico,A-S009,True
+A-F010,Profesional adicional 10,Ficticio,A-MN010,Farmacéutico,A-S010,True

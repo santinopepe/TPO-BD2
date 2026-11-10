@@ -1,0 +1,169 @@
+{
+  "archivos": {
+    "clientes.csv": {
+      "filas": 10,
+      "sha256": "80bd39404be0b45f3579b1f23eafa7a6b544a45e8054b100a5d18cc59f428b1a"
+    },
+    "detalle_ventas.csv": {
+      "filas": 16,
+      "sha256": "cb6d2a748a51247cc053c38920bb0974c2b8ddcb203f6ea361af7b00fd503b9b"
+    },
+    "farmaceuticos.csv": {
+      "filas": 10,
+      "sha256": "9810b0c81b89356388ef55d1be3f9b635a8d8d7a958171d6b536ac9ef641b2da"
+    },
+    "productos.csv": {
+      "filas": 10,
+      "sha256": "3307fb35a8548b0326ea97ae27c15419448d1b270a241e9b78fcc324c3383652"
+    },
+    "proveedores.csv": {
+      "filas": 10,
+      "sha256": "d1299690f249f733d7b090a7c601263802a4ff1c272d6dfb68ba4f562c0caf18"
+    },
+    "recetas.csv": {
+      "filas": 10,
+      "sha256": "c5108fdfca6442aba6ba6bd8571d951c78fb68a59ae6c0c180ddc986987f7ac5"
+    },
+    "stock_lotes.csv": {
+      "filas": 16,
+      "sha256": "4bfc407afb8dfbaf70507df99288952eebf0f756b3c7e9e29d616c1bd8ce781a"
+    },
+    "sucursales.csv": {
+      "filas": 10,
+      "sha256": "533a8ad3025ec4417f59ef474a76eea160bbf21dbaee73c7188f7aa5c8874dbf"
+    },
+    "ventas.csv": {
+      "filas": 12,
+      "sha256": "697e1995fbd914e8b20f9b517177f54d6fb1ad9cd9b77cdab6cb0d94f7349fa7"
+    }
+  },
+  "base_date": "2026-11-10",
+  "casos": [
+    {
+      "caso": "sin_historial",
+      "ejercita": "q03/q12",
+      "ids": [
+        "A-C010"
+      ]
+    },
+    {
+      "caso": "multiples_recetas",
+      "ejercita": "q04",
+      "ids": [
+        "A-C001",
+        "A-RC001",
+        "A-RC002"
+      ]
+    },
+    {
+      "caso": "activo_sin_ventas",
+      "ejercita": "q05; q14 rechaza droguería",
+      "ids": [
+        "A-F010"
+      ]
+    },
+    {
+      "caso": "historico_inactivo",
+      "ejercita": "q02/q10/q11 sin borrar historia; q15 rechaza profesional inactivo",
+      "ids": [
+        "A-F002",
+        "A-V002",
+        "A-V003"
+      ]
+    },
+    {
+      "caso": "producto_activo_proveedor_inactivo",
+      "ejercita": "q01",
+      "ids": [
+        "A-PRD010",
+        "A-PRV010"
+      ]
+    },
+    {
+      "caso": "cliente_producto_inactivos",
+      "ejercita": "historia y rechazo operacional q14",
+      "ids": [
+        "A-C009",
+        "A-PRD009",
+        "A-V009"
+      ]
+    },
+    {
+      "caso": "stock_0_49_50",
+      "ejercita": "q08; incluir cero/vencidos, excluir 50",
+      "ids": [
+        "A-L005",
+        "A-L006",
+        "A-L007",
+        "A-L016"
+      ]
+    },
+    {
+      "caso": "fefo_dos_lotes",
+      "ejercita": "q15; vencido/hoy/futuro y sucursal",
+      "ids": [
+        "A-V005",
+        "A-L001",
+        "A-L002",
+        "A-L003",
+        "A-L015"
+      ]
+    },
+    {
+      "caso": "proximas_ayer_hoy_manana",
+      "ejercita": "q06",
+      "ids": [
+        "A-RC001",
+        "A-RC002",
+        "A-RC003"
+      ]
+    },
+    {
+      "caso": "agotada_y_vencida",
+      "ejercita": "rechazos q14/q15",
+      "ids": [
+        "A-RC004",
+        "A-RC007"
+      ]
+    },
+    {
+      "caso": "4999_5000_y_pendiente",
+      "ejercita": "q09; excluir anulada",
+      "ids": [
+        "A-V001",
+        "A-V002",
+        "A-V003",
+        "A-V007"
+      ]
+    },
+    {
+      "caso": "rollback_multiproducto",
+      "ejercita": "q14/q15; un producto insuficiente",
+      "ids": [
+        "A-V006",
+        "A-L010",
+        "A-L011"
+      ]
+    },
+    {
+      "caso": "frontera_60_dias",
+      "ejercita": "q05; -59 incluido, -60 excluido",
+      "ids": [
+        "A-V010",
+        "A-V011"
+      ]
+    },
+    {
+      "caso": "mes_actual_y_compra_antigua",
+      "ejercita": "q11/q12",
+      "ids": [
+        "A-V012",
+        "A-V008",
+        "A-C008"
+      ]
+    }
+  ],
+  "huella_originales": "e08cdbc0108e00916bddf3b26a9c28cfedf009792ff21ae74e623b4a66407407",
+  "tipo": "farmared_adicionales",
+  "version_generador": 1
+}

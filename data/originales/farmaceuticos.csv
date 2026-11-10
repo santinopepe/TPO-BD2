@@ -1,0 +1,8 @@
+id_farmaceutico,nombre,apellido,matricula,cargo,id_sucursal,activo
+F001,Mariana,Quiroga,MN-18041,Director Técnico,S001,True
+F002,Sebastián,Ledesma,MN-18078,Farmacéutico,S001,True
+F003,Carolina,Benítez,MN-18112,Director Técnico,S002,True
+F004,Julián,Pereyra,MN-17955,Farmacéutico,S002,False
+F005,Natalia,Giménez,MN-18289,Director Técnico,S003,True
+F006,Matías,Sandoval,MN-18340,Director Técnico,S004,True
+F007,Romina,Acuña,MN-18401,Director Técnico,S005,True

@@ -1,0 +1,45 @@
+{
+  "clientes": {
+    "_id": "A-EJ-C001", "nombre": "Cliente", "apellido": "Ejemplo", "dni": "00000001",
+    "email": null, "telefono": "01100000000", "ciudad": "Buenos Aires", "provincia": "Buenos Aires",
+    "obra_social": "Sin cobertura", "nro_afiliado": null, "activo": true
+  },
+  "sucursales": {
+    "_id": "A-EJ-S001", "nombre": "Farmacia ejemplo", "tipo": "Farmacia", "direccion": "Calle de ejemplo 1",
+    "ciudad": "Buenos Aires", "provincia": "Buenos Aires", "telefono": null, "activo": true
+  },
+  "farmaceuticos": {
+    "_id": "A-EJ-F001", "nombre": "Profesional", "apellido": "Ejemplo", "matricula": "A-EJ-M001",
+    "cargo": "Farmacéutico", "id_sucursal": "A-EJ-S001", "activo": true
+  },
+  "proveedores": {
+    "_id": "A-EJ-PRV001", "razon_social": "Proveedor ficticio", "cuit": "30-00000000-0",
+    "tipo": "Laboratorio", "ciudad": "Buenos Aires", "provincia": "Buenos Aires", "telefono": null, "activo": true
+  },
+  "productos": {
+    "_id": "A-EJ-P001", "nombre": "Producto de ejemplo", "principio_activo": null,
+    "categoria": "Higiene", "presentacion": "Unidad", "condicion_venta": "Venta libre",
+    "precio_unit": {"$numberLong": "1000"}, "id_proveedor": "A-EJ-PRV001", "activo": true
+  },
+  "stock_lotes": {
+    "_id": "A-EJ-L001", "id_producto": "A-EJ-P001", "id_sucursal": "A-EJ-S001",
+    "nro_lote": "A-EJ-LOTE", "unidades": 10, "vencimiento": {"$date": "2027-01-01T03:00:00Z"}
+  },
+  "recetas": {
+    "_id": "A-EJ-R001", "id_cliente": "A-EJ-C001", "medico": "Médico de ejemplo", "matricula_medico": "A-EJ-MP001",
+    "fecha_emision": {"$date": "2026-11-09T03:00:00Z"}, "tipo": "Simple",
+    "dispensas_autorizadas": 1, "dispensas_realizadas": 0, "proxima_dispensa": null, "estado": "Vigente"
+  },
+  "ventas": {
+    "_id": "A-EJ-V001", "id_cliente": "A-EJ-C001", "id_farmaceutico": "A-EJ-F001", "id_sucursal": "A-EJ-S001",
+    "id_receta": null, "fecha": {"$date": "2026-11-09T03:00:00Z"}, "tipo": "Venta libre", "medio_pago": "Efectivo",
+    "estado": "Completada", "total": {"$numberLong": "1000"},
+    "items": [{"id_detalle": "A-EJ-D001", "id_producto": "A-EJ-P001", "cantidad": 1,
+      "precio_unit": {"$numberLong": "1000"}, "subtotal": {"$numberLong": "1000"}, "asignaciones_lotes": null}],
+    "stock_aplicado": true, "receta_aplicada": false, "origen": "csv", "trazabilidad_lotes": "desconocida"
+  },
+  "outbox": {
+    "_id": "a1111111-1111-4111-8111-111111111111", "afectadas": [{"coleccion": "ventas", "id": "A-EJ-V001"}],
+    "procesado": false, "creado_en": {"$date": "2026-11-09T15:30:00Z"}
+  }
+}
