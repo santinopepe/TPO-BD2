@@ -106,8 +106,8 @@ from farmared.__main__ import COMANDOS, PENDIENTES, main
 import farmared.__main__ as router
 router.version = lambda nombre: '0.1.0'
 assert 'q13' in COMANDOS and 'q13' not in PENDIENTES
-assert 'q02' in PENDIENTES
-for comando in ('q01', 'q05', 'q06', 'q07', 'q08', 'q09', 'q11', 'q12', 'q13',
+assert 'q02' in COMANDOS and 'q02' not in PENDIENTES
+for comando in ('q01', 'q02', 'q05', 'q06', 'q07', 'q08', 'q09', 'q11', 'q12', 'q13',
                 'q03', 'q04', 'q10', 'q14', 'q15', 'sync', 'grafo-init'):
     with redirect_stdout(io.StringIO()):
         try:

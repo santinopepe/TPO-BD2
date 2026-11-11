@@ -10,7 +10,7 @@ from farmared.config import Config
 from farmared.conexiones import obtener_mongo
 from farmared.errores import CodigoError, ErrorDominio
 
-COMANDOS_MONGO = {nombre: ("farmared.cli_mongo", "ejecutar") for nombre in ("q01", "q05", "q06", "q07", "q08", "q09", "q11", "q12", "q13")}
+COMANDOS_MONGO = {nombre: ("farmared.cli_mongo", "ejecutar") for nombre in ("q01", "q02", "q05", "q06", "q07", "q08", "q09", "q11", "q12", "q13")}
 
 
 def _no_vacio(valor: str) -> str:
@@ -22,6 +22,8 @@ def _no_vacio(valor: str) -> str:
 def registrar_comandos(subparsers) -> None:
     q01 = subparsers.add_parser("q01", help="Productos activos con todos los datos de su proveedor (MongoDB).")
     q01.add_argument("--base", required=True, help="Base MongoDB explícita.")
+    q02 = subparsers.add_parser("q02", help="Ventas pendientes con farmacéutico, matrícula, sucursal y total (MongoDB).")
+    q02.add_argument("--base", required=True, help="Base MongoDB explícita.")
     q05 = subparsers.add_parser("q05", help="Farmacéuticos activos y cantidad de ventas no anuladas en los últimos 60 días (MongoDB).")
     q05.add_argument("--base", required=True, help="Base MongoDB explícita.")
     q06 = subparsers.add_parser("q06", help="Recetas prolongadas vigentes con dispensa anterior a hoy y datos del cliente (MongoDB).")
@@ -94,6 +96,8 @@ def ejecutar(args: argparse.Namespace) -> int:
     parametros = ()
     if args.comando == "q01":
         from farmared.consultas.q01 import q01_productos_activos as consultar
+    elif args.comando == "q02":
+        from farmared.consultas.q02 import q02_ventas_pendientes as consultar
     elif args.comando == "q05":
         from farmared.consultas.q05 import q05_ventas_por_farmaceutico as consultar
         parametros = (SystemClock(),)
