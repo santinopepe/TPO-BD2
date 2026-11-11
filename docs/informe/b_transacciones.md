@@ -87,7 +87,8 @@ de los productos y del farmacéutico. Si una línea no trae `id_detalle`, se gen
 | `RECETA_INVALIDA` | Falta receta, es de otro cliente, no está `Vigente` o no tiene dispensas. |
 | `STOCK_INSUFICIENTE` | Algún producto no alcanza con lotes vigentes de la sucursal; el mensaje lista todos los faltantes. |
 | `CONFLICTO_ID` | El `id_venta` ya corresponde a otra venta u otro pedido. |
-| `INTEGRIDAD` / `CONEXION` | Datos incoherentes o resultado incierto del motor: se reintenta con el **mismo** id. |
+| `CONEXION` | Se perdió la conexión y el resultado es incierto: se reintenta con el **mismo** id para conocerlo. |
+| `INTEGRIDAD` | Datos persistidos incoherentes (por ejemplo, una venta `Completada` sin stock aplicado) o fallo del motor. Si el dato está corrupto, reintentar no lo resuelve: requiere revisión. |
 
 **Orden de validación** (el primer problema define el error): cliente → farmacéutico → sucursal →
 productos → receta → precios → stock.
@@ -231,8 +232,8 @@ Implementado una sola vez (`servicios/ventas/fefo.py`) y usado por q14 y q15:
 **Plan de ejecución** (`docs/evidencias/b/explain_fefo.json`): la lectura de lotes usa el índice
 `ix_stock_lotes_fefo (id_sucursal, id_producto, vencimiento, _id)` creado por Persona A. El
 planificador resuelve el `$in` de productos con un `IXSCAN` por producto unidos por `SORT_MERGE`,
-sin ordenamiento en memoria: 4 claves y 4 documentos examinados, 3 devueltos (el lote en 0 se
-descarta tras el `FETCH`). Con 34 lotes esto no demuestra una ventaja de rendimiento; muestra que
+sin ordenamiento en memoria: 4 claves y 4 documentos examinados, 3 devueltos (A-L002, que quedó en
+0 tras el paso 1 de la demo, se descarta tras el `FETCH`). Con 34 lotes esto no demuestra una ventaja de rendimiento; muestra que
 el índice cubre el filtro y el orden FEFO.
 
 ## 6. Receta
@@ -338,10 +339,22 @@ planificador de hilos.
 | Archivo | Contenido |
 |---|---|
 | `docs/evidencias/b/demo_transaccion.json` | Seis pasos con parámetros, resultado y antes/después de lotes, recetas y ventas. |
-| `docs/evidencias/b/explain_fefo.json` | Plan ganador y estadísticas de la consulta de lotes FEFO. |
+| `docs/evidencias/b/explain_fefo.json` | Plan ganador y estadísticas de la consulta de lotes FEFO, tomados después de la demo. |
 
 ```bash
 farmared setup --solo-mongo --base farmared_demo_b --directorio data/originales --directorio data/adicionales
 farmared demo-transaccion --base farmared_demo_b --salida docs/evidencias/b/demo_transaccion.json
 FARMARED_TEST_MONGO=1 pytest -v tests/ventas
+```
+
+`explain_fefo.json` resume la salida de `explain("executionStats")` sobre la misma consulta que
+ejecuta `leer_lotes_vigentes` para el paso 1 de la demo: las etapas de
+`queryPlanner.winningPlan`, la cantidad de `rejectedPlans` y los contadores de `executionStats`.
+Se obtiene después de la demo con:
+
+```bash
+docker compose -f infra/docker-compose.yml exec -T mongodb mongosh farmared_demo_b --quiet --eval '
+  db.stock_lotes.find({id_sucursal: "A-S001", id_producto: {$in: ["A-PRD001", "A-PRD003"]},
+                       unidades: {$gt: 0}, vencimiento: {$gte: ISODate("2026-11-10T03:00:00Z")}})
+    .sort({vencimiento: 1, _id: 1}).explain("executionStats")'
 ```

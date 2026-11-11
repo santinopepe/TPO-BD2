@@ -1,10 +1,7 @@
 """Adaptador CLI de B (q14, q15, demo-transaccion); la lógica vive en consultas/ y servicios/ventas/.
 
-Integración en `__main__.py` (archivo de A), igual que `cli_grafo` de D:
-    from farmared.cli_ventas import COMANDOS_VENTAS, registrar_comandos as registrar_ventas
-    COMANDOS = {**COMANDOS_GRAFO, **COMANDOS_VENTAS, ...}
-    # quitar q14, q15 y demo-transaccion de PENDIENTES
-    registrar_ventas(subparsers)
+`__main__.py` (archivo de A) incorpora `COMANDOS_VENTAS` a su router y llama a
+`registrar_comandos`, igual que con `cli_grafo` de D.
 
 No importa PyMongo al registrar: los módulos de venta se cargan al ejecutar.
 Los ErrorDominio se propagan; `__main__` los imprime y sale con código 1.

@@ -85,18 +85,20 @@ def test_dos_ventas_de_cuatro_con_saldo_cinco_confirma_una(db, escenario, reloj,
 
 
 def test_dos_ventas_por_la_ultima_dispensa_confirma_una(db, escenario, reloj, sincronizar_lecturas):
+    # Productos de lotes distintos (B-P003 → B-L005, B-P004 → B-L006): el único documento que
+    # ambas transacciones escriben es la receta, así que la carrera se decide allí y no en un lote.
     db.recetas.update_one({"_id": "B-RC001"}, {"$set": {"dispensas_realizadas": 2}})  # queda 1 de 3
     sincronizar_lecturas()
     resultados = en_paralelo(
         db,
         lambda d: q14_registrar_venta(d, pedido("B-VC1", "B-P003", 1, "B-RC001"), reloj),
-        lambda d: q14_registrar_venta(d, pedido("B-VC2", "B-P003", 1, "B-RC001"), reloj),
+        lambda d: q14_registrar_venta(d, pedido("B-VC2", "B-P004", 1, "B-RC001"), reloj),
     )
     assert ("error", "RECETA_INVALIDA") in resultados
     assert sum(estado == "ok" for estado, _ in resultados) == 1
     receta = db.recetas.find_one({"_id": "B-RC001"})
     assert (receta["dispensas_realizadas"], receta["estado"], receta["proxima_dispensa"]) == (3, "Completada", None)
-    assert unidades(db, "B-L005") == 19  # una sola venta descontó stock
+    assert unidades(db, "B-L005") + unidades(db, "B-L006") == 20 + 3 - 1  # una sola venta descontó stock
     assert db.ventas.count_documents({}) == 1
 
 
