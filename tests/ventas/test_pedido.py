@@ -1,6 +1,7 @@
 """Pruebas puras del pedido de venta (q14): forma, tipos e identificadores de línea."""
 
 import pytest
+from bson.int64 import Int64
 
 from farmared.errores import ErrorDominio
 from farmared.servicios.ventas.pedido import ItemPedido, PedidoVenta, normalizar_pedido
@@ -106,6 +107,12 @@ def test_rechaza_medio_de_pago_fuera_del_enum(medio):
 def test_rechaza_items_vacios_o_que_no_son_lista(items):
     mensaje = rechazo(pedido(items=items))
     assert "ítem" in mensaje or "items" in mensaje
+
+
+def test_cantidad_bson_int64_se_acepta_como_entero_python():
+    # Una pendiente persistida puede traer la cantidad como BSON long (Int64, subclase de int).
+    item = normalizar_pedido(pedido(items=[{"id_producto": "B-P001", "cantidad": Int64(2)}])).items[0]
+    assert item.cantidad == 2 and type(item.cantidad) is int
 
 
 @pytest.mark.parametrize("cantidad", [0, -1, 2.0, 1.5, "2", True, None, 2**63])

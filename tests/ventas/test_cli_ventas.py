@@ -12,8 +12,8 @@ from uuid import uuid4
 
 import pytest
 
+from farmared import cli_ventas
 from farmared.cli_ventas import COMANDOS_VENTAS, a_json, ejecutar, registrar_comandos
-from farmared.clock import SystemClock
 from farmared.config import Config
 from farmared.errores import ErrorDominio
 
@@ -104,7 +104,14 @@ def test_json_muestra_dias_comerciales_como_fecha():
 
 # --- Con MongoDB ---------------------------------------------------------------
 
-def test_q14_por_cli_registra_y_reporta(db, escenario, capsys, tmp_path):
+@pytest.fixture
+def reloj_cli(reloj, monkeypatch):
+    """La CLI usa SystemClock; se fija al día del escenario para que el test no dependa de la fecha real."""
+    monkeypatch.setattr(cli_ventas, "SystemClock", lambda: reloj)
+    return reloj
+
+
+def test_q14_por_cli_registra_y_reporta(db, escenario, reloj_cli, capsys, tmp_path):
     ruta = tmp_path / "pedido.json"
     ruta.write_text(json.dumps({"id_venta": "B-VCLI1", "id_cliente": "B-C001", "id_farmaceutico": "B-F001",
                                 "medio_pago": "Efectivo", "items": [{"id_producto": "B-P002", "cantidad": 1}]}),
@@ -113,12 +120,12 @@ def test_q14_por_cli_registra_y_reporta(db, escenario, capsys, tmp_path):
 
     assert (salida["operacion"], salida["reutilizada"], salida["id_venta_generado"]) == ("q14", False, False)
     assert salida["venta"]["_id"] == "B-VCLI1" and salida["venta"]["total"] == 3500
-    assert salida["venta"]["fecha"] == SystemClock().today().isoformat()
+    assert salida["venta"]["fecha"] == reloj_cli.today().isoformat()
     assert salida["proyeccion"] == "pendiente_sync" and len(salida["eventos"]) == 1
     assert correr(capsys, "q14", "--base", db.name, "--pedido", str(ruta))["reutilizada"] is True
 
 
-def test_q14_por_cli_sin_id_genera_uno_y_avisa(db, escenario, capsys, tmp_path):
+def test_q14_por_cli_sin_id_genera_uno_y_avisa(db, escenario, reloj_cli, capsys, tmp_path):
     ruta = tmp_path / "pedido.json"
     ruta.write_text(json.dumps({"id_cliente": "B-C001", "id_farmaceutico": "B-F001", "medio_pago": "Efectivo",
                                 "items": [{"id_producto": "B-P002", "cantidad": 1}]}), encoding="utf-8")
@@ -127,7 +134,7 @@ def test_q14_por_cli_sin_id_genera_uno_y_avisa(db, escenario, capsys, tmp_path):
     assert db.ventas.count_documents({"_id": salida["venta"]["_id"]}) == 1
 
 
-def test_q15_por_cli_y_error_de_dominio_se_propaga(db, escenario, capsys):
+def test_q15_por_cli_y_error_de_dominio_se_propaga(db, escenario, reloj_cli, capsys):
     db.ventas.insert_one({
         "_id": "B-VCLI2", "id_cliente": "B-C001", "id_farmaceutico": "B-F001", "id_sucursal": "B-S001",
         "id_receta": None, "fecha": datetime(2026, 9, 1, 3, tzinfo=UTC), "tipo": "Venta libre",

@@ -3,6 +3,7 @@
 from datetime import UTC, datetime
 
 import pytest
+from bson.int64 import Int64
 
 from farmared.clock import inicio_dia_utc
 from farmared.consultas.q15 import q15_actualizar_stock
@@ -82,6 +83,15 @@ def test_pendiente_sin_fecha_creacion_toma_su_fecha_original(db, escenario, relo
     insertar(db, doc)
     q15_actualizar_stock(db, "B-VP3", reloj)
     assert db.ventas.find_one({"_id": "B-VP3"})["fecha_creacion_pendiente"] == FECHA_VIEJA
+
+
+def test_pendiente_con_cantidad_bson_long_se_completa(db, escenario, reloj):
+    doc = pendiente("B-VP4", [("B-P001", 6, 2800)])
+    doc["items"][0]["cantidad"] = Int64(6)
+    insertar(db, doc)
+    venta = q15_actualizar_stock(db, "B-VP4", reloj)["documento"]
+    assert (venta["estado"], venta["total"]) == ("Completada", 16800)
+    assert unidades(db, "B-L001", "B-L002") == (0, 8)
 
 
 # --- Rechazos: la pendiente queda exactamente igual --------------------------

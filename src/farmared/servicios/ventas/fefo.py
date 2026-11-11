@@ -67,8 +67,10 @@ def _lotes_elegibles(lotes: Iterable[Mapping], id_sucursal: str, productos: set[
             raise ErrorDominio(CodigoError.INTEGRIDAD, f"Lote repetido en el snapshot: {id_lote}.")
         vistos.add(id_lote)
         unidades = lote.get("unidades")
-        if type(unidades) is not int or unidades < 0:
+        # BSON Int64 es subclase de int (el validador de A admite long); bool no es un saldo.
+        if isinstance(unidades, bool) or not isinstance(unidades, int) or unidades < 0:
             raise ErrorDominio(CodigoError.INTEGRIDAD, f"El lote {id_lote} tiene unidades inválidas.")
+        unidades = int(unidades)
         if lote.get("id_sucursal") != id_sucursal or lote.get("id_producto") not in productos:
             continue
         vence = dia_comercial(lote.get("vencimiento"))

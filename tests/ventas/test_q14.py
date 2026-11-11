@@ -3,6 +3,7 @@
 from datetime import UTC, datetime
 
 import pytest
+from bson.int64 import Int64
 
 from farmared.consultas import q14 as modulo_q14
 from farmared.consultas.q14 import q14_registrar_venta
@@ -87,6 +88,20 @@ def test_producto_repetido_en_dos_lineas_agrega_demanda(db, escenario, reloj):
         [{"id_lote": "B-L001", "cantidad": 2}],
         [{"id_lote": "B-L001", "cantidad": 2}, {"id_lote": "B-L002", "cantidad": 1}],
     ]
+
+
+def test_enteros_guardados_como_bson_long_se_aceptan(db, escenario, reloj):
+    # El validador de A admite int y long; PyMongo devuelve los long como Int64.
+    db.productos.update_one({"_id": "B-P003"}, {"$set": {"precio_unit": Int64(4000)}})
+    db.stock_lotes.update_one({"_id": "B-L005"}, {"$set": {"unidades": Int64(20)}})
+    db.recetas.update_one({"_id": "B-RC001"}, {"$set": {"dispensas_realizadas": Int64(1),
+                                                        "dispensas_autorizadas": Int64(3)}})
+    venta = q14_registrar_venta(db, pedido(id_receta="B-RC001", items=[{"id_producto": "B-P003", "cantidad": 2}]),
+                                reloj)["documento"]
+
+    assert (venta["total"], venta["items"][0]["precio_unit"]) == (8000, 4000)
+    assert unidades(db, "B-L005") == (18,)
+    assert db.recetas.find_one({"_id": "B-RC001"})["dispensas_realizadas"] == 2
 
 
 # --- Rechazos sin efectos --------------------------------------------------

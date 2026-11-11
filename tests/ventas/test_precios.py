@@ -1,6 +1,7 @@
 """Pruebas puras de valorización: precio de catálogo, subtotales y total."""
 
 import pytest
+from bson.int64 import Int64
 
 from farmared.errores import ErrorDominio
 from farmared.servicios.ventas.pedido import ItemPedido
@@ -42,6 +43,12 @@ def test_producto_inexistente_es_no_existe():
     with pytest.raises(ErrorDominio) as exc:
         valorizar([ItemPedido("D1", "B-P999", 1)], CATALOGO)
     assert exc.value.codigo == "NO_EXISTE"
+
+
+def test_precio_bson_int64_es_valido_y_se_captura_como_int():
+    lineas, total = valorizar([ItemPedido("D1", "X", 2)], {"X": {"precio_unit": Int64(2800)}})
+    assert lineas == (LineaValorizada("D1", "X", 2, 2800, 5600),) and total == 5600
+    assert type(lineas[0].precio_unit) is int
 
 
 @pytest.mark.parametrize("precio", [None, 10.5, "2800", -1, True])

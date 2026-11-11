@@ -293,9 +293,9 @@ los escritores modifiquen.
 | Dos q14 simultáneas con el mismo id | Una aplica, la otra recibe la venta confirmada (conflicto de escritura o clave duplicada). |
 | Repetir q15 sobre una venta ya completada | Éxito previo sin repetir efectos. |
 
-Suite de Persona B (`FARMARED_TEST_MONGO=1 pytest -v tests/ventas`, ejecutada el 10/11/2026):
-**225 pruebas, todas aprobadas**,
-de las cuales 85 corren contra MongoDB real en replica set, sin mocks (las otras 140 son reglas
+Suite de Persona B (`FARMARED_TEST_MONGO=1 pytest -v tests/ventas`, ejecutada el 11/11/2026):
+**233 pruebas, todas aprobadas**,
+de las cuales 87 corren contra MongoDB real en replica set, sin mocks (las otras 146 son reglas
 puras y CLI sin motor). Las más relevantes:
 
 | Prueba | Resultado verificado |

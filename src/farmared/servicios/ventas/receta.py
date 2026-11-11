@@ -73,6 +73,8 @@ def transicion_receta(receta: Mapping, hoy: date) -> dict:
 def _contadores(receta: Mapping) -> tuple[int, int]:
     realizadas = receta.get("dispensas_realizadas")
     autorizadas = receta.get("dispensas_autorizadas")
-    if type(realizadas) is not int or type(autorizadas) is not int or realizadas < 0 or autorizadas < 1:
+    # BSON Int64 es subclase de int (el validador de A admite long); bool no es un contador.
+    if (any(isinstance(v, bool) or not isinstance(v, int) for v in (realizadas, autorizadas))
+            or realizadas < 0 or autorizadas < 1):
         raise ErrorDominio(CodigoError.INTEGRIDAD, f"La receta {receta.get('_id')} tiene contadores de dispensa inválidos.")
-    return realizadas, autorizadas
+    return int(realizadas), int(autorizadas)

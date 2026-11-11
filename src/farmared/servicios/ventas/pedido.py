@@ -52,11 +52,11 @@ def _identificador(valor, campo: str, errores: list[str]) -> str | None:
 
 
 def _cantidad(valor, campo: str, errores: list[str]) -> int | None:
-    # type() y no isinstance(): True es int en Python y 2.0 no es un entero válido.
-    if type(valor) is not int or not 1 <= valor <= MAX_IMPORTE_ARS:
+    # bool es subclase de int y no es una cantidad; Int64 (BSON long de una pendiente) sí lo es.
+    if isinstance(valor, bool) or not isinstance(valor, int) or not 1 <= valor <= MAX_IMPORTE_ARS:
         errores.append(f"{campo} debe ser un entero positivo.")
         return None
-    return valor
+    return int(valor)
 
 
 def normalizar_pedido(datos: Mapping) -> PedidoVenta:

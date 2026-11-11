@@ -33,8 +33,10 @@ def valorizar(items: Iterable[ItemPedido],
         if producto is None:
             raise ErrorDominio(CodigoError.NO_EXISTE, f"No existe el producto {item.id_producto}.")
         precio = producto.get("precio_unit")
-        if type(precio) is not int or not 0 <= precio <= MAX_IMPORTE_ARS:
+        # BSON Int64 es subclase de int (el validador de A admite long); bool no es un importe.
+        if isinstance(precio, bool) or not isinstance(precio, int) or not 0 <= precio <= MAX_IMPORTE_ARS:
             raise ErrorDominio(CodigoError.INTEGRIDAD, f"El producto {item.id_producto} no tiene un precio entero ARS válido.")
+        precio = int(precio)
         subtotal = validar_importe_ars(item.cantidad * precio)
         total = validar_importe_ars(total + subtotal)
         lineas.append(LineaValorizada(item.id_detalle, item.id_producto, item.cantidad, precio, subtotal))

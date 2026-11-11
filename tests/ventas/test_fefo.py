@@ -3,6 +3,7 @@
 from datetime import UTC, date, datetime, timedelta
 
 import pytest
+from bson.int64 import Int64
 
 from farmared.clock import inicio_dia_utc
 from farmared.errores import ErrorDominio
@@ -115,6 +116,12 @@ def test_informa_todos_los_faltantes_incluido_producto_sin_lotes():
 
 def test_lote_repetido_en_snapshot_es_error_de_integridad():
     rechazo({"B-P001": 1}, [lote("L1", 5, 1), lote("L1", 5, 2)], "INTEGRIDAD")
+
+
+def test_unidades_bson_int64_son_validas_y_el_plan_usa_int():
+    consumo = plan({"B-P001": 6}, [lote("L1", Int64(4), 10), lote("L2", Int64(10), 30)])
+    assert consumo == (ConsumoLote("L1", "B-P001", 4), ConsumoLote("L2", "B-P001", 2))
+    assert all(type(c.cantidad) is int for c in consumo)
 
 
 @pytest.mark.parametrize("unidades", [-1, 2.0, "5", None, True])

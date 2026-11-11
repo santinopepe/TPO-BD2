@@ -3,6 +3,7 @@
 from datetime import date
 
 import pytest
+from bson.int64 import Int64
 
 from farmared.clock import inicio_dia_utc
 from farmared.errores import ErrorDominio
@@ -78,7 +79,8 @@ def test_receta_vigente_sin_dispensas_disponibles():
 
 
 @pytest.mark.parametrize("cambio", [{"dispensas_realizadas": None}, {"dispensas_autorizadas": "3"},
-                                    {"dispensas_realizadas": -1}, {"dispensas_autorizadas": 0}])
+                                    {"dispensas_realizadas": -1}, {"dispensas_autorizadas": 0},
+                                    {"dispensas_realizadas": True}, {"dispensas_autorizadas": 2.0}])
 def test_contadores_corruptos_son_integridad(cambio):
     assert rechazo(receta(**cambio)) == "INTEGRIDAD"
 
@@ -96,6 +98,13 @@ def test_prolongado_con_dispensas_restantes_mueve_proxima_30_dias():
         "dispensas_realizadas": 2, "estado": "Vigente",
         "proxima_dispensa": inicio_dia_utc(date(2026, 12, 10)),
     }
+
+
+def test_contadores_bson_int64_son_validos():
+    r = receta(dispensas_realizadas=Int64(1), dispensas_autorizadas=Int64(3))
+    validar_receta(r, "B-RC001", "B-C001", True)
+    cambios = transicion_receta(r, HOY)
+    assert cambios["dispensas_realizadas"] == 2 and type(cambios["dispensas_realizadas"]) is int
 
 
 def test_prolongado_primera_dispensa():
