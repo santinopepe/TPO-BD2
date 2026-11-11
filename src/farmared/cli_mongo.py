@@ -7,7 +7,7 @@ from farmared.clock import SystemClock
 from farmared.config import Config
 from farmared.conexiones import obtener_mongo
 
-COMANDOS_MONGO = {nombre: ("farmared.cli_mongo", "ejecutar") for nombre in ("q01", "q05", "q06", "q07", "q08", "q09")}
+COMANDOS_MONGO = {nombre: ("farmared.cli_mongo", "ejecutar") for nombre in ("q01", "q05", "q06", "q07", "q08", "q09", "q12")}
 
 
 def registrar_comandos(subparsers) -> None:
@@ -23,6 +23,8 @@ def registrar_comandos(subparsers) -> None:
     q08.add_argument("--base", required=True, help="Base MongoDB explícita.")
     q09 = subparsers.add_parser("q09", help="Ventas libres menores a $5000, excepto anuladas (MongoDB).")
     q09.add_argument("--base", required=True, help="Base MongoDB explícita.")
+    q12 = subparsers.add_parser("q12", help="Clientes sin ventas registradas en el último año (MongoDB).")
+    q12.add_argument("--base", required=True, help="Base MongoDB explícita.")
 
 
 def _fecha_json(valor):
@@ -45,6 +47,9 @@ def ejecutar(args: argparse.Namespace) -> int:
         from farmared.consultas.q07 import q07_top_productos as consultar
     elif args.comando == "q08":
         from farmared.consultas.q08 import q08_lotes_stock_bajo as consultar
+    elif args.comando == "q12":
+        from farmared.consultas.q12 import q12_clientes_sin_ventas as consultar
+        parametros = (SystemClock(),)
     else:
         from farmared.consultas.q09 import q09_ventas_libres as consultar
 

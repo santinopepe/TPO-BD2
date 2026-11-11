@@ -118,7 +118,9 @@ INDICES = {
     "farmaceuticos": [IndexModel([("matricula", ASCENDING)], name="uq_farmaceuticos_matricula", unique=True)],
     "ventas": [IndexModel([
         ("id_farmaceutico", ASCENDING), ("fecha", ASCENDING),
-    ], name="ix_ventas_farmaceutico_fecha")],
+    ], name="ix_ventas_farmaceutico_fecha"), IndexModel([
+        ("id_cliente", ASCENDING), ("fecha", ASCENDING),
+    ], name="ix_ventas_cliente_fecha")],
     "stock_lotes": [IndexModel([
         ("id_sucursal", ASCENDING), ("id_producto", ASCENDING),
         ("vencimiento", ASCENDING), ("_id", ASCENDING),
@@ -146,7 +148,7 @@ def _indice_compatible(actual, esperado):
 
 
 def preparar_mongo_base(db) -> None:
-    """Crea/asegura nueve colecciones y cinco índices comunes, sin tocar documentos.
+    """Crea/asegura nueve colecciones y seis índices comunes, sin tocar documentos.
 
     Requiere escritores pausados. Hace preflight global de documentos y definiciones
     existentes. No reemplaza validadores distintos ni borra índices. El DDL no es
