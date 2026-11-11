@@ -7,12 +7,14 @@ from farmared.clock import SystemClock
 from farmared.config import Config
 from farmared.conexiones import obtener_mongo
 
-COMANDOS_MONGO = {nombre: ("farmared.cli_mongo", "ejecutar") for nombre in ("q01", "q06", "q07", "q08", "q09")}
+COMANDOS_MONGO = {nombre: ("farmared.cli_mongo", "ejecutar") for nombre in ("q01", "q05", "q06", "q07", "q08", "q09")}
 
 
 def registrar_comandos(subparsers) -> None:
     q01 = subparsers.add_parser("q01", help="Productos activos con todos los datos de su proveedor (MongoDB).")
     q01.add_argument("--base", required=True, help="Base MongoDB explícita.")
+    q05 = subparsers.add_parser("q05", help="Farmacéuticos activos y cantidad de ventas no anuladas en los últimos 60 días (MongoDB).")
+    q05.add_argument("--base", required=True, help="Base MongoDB explícita.")
     q06 = subparsers.add_parser("q06", help="Recetas prolongadas vigentes con dispensa anterior a hoy y datos del cliente (MongoDB).")
     q06.add_argument("--base", required=True, help="Base MongoDB explícita.")
     q07 = subparsers.add_parser("q07", help="Top 5 productos por unidades en ventas completadas (MongoDB).")
@@ -33,6 +35,9 @@ def ejecutar(args: argparse.Namespace) -> int:
     parametros = ()
     if args.comando == "q01":
         from farmared.consultas.q01 import q01_productos_activos as consultar
+    elif args.comando == "q05":
+        from farmared.consultas.q05 import q05_ventas_por_farmaceutico as consultar
+        parametros = (SystemClock(),)
     elif args.comando == "q06":
         from farmared.consultas.q06 import q06_recetas_prolongadas as consultar
         parametros = (SystemClock(),)
