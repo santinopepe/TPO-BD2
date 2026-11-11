@@ -1,0 +1,39 @@
+{
+  "base": "farmared_demo_b",
+  "fecha_comercial": "2026-11-10",
+  "coleccion": "stock_lotes",
+  "consulta": {
+    "filtro": {
+      "id_sucursal": "A-S001",
+      "id_producto": {
+        "$in": [
+          "A-PRD001",
+          "A-PRD003"
+        ]
+      },
+      "unidades": {
+        "$gt": 0
+      },
+      "vencimiento": {
+        "$gte": "2026-11-10T03:00:00+00:00"
+      }
+    },
+    "orden": [
+      "vencimiento ASC",
+      "_id ASC"
+    ]
+  },
+  "version_mongodb": "8.0.15",
+  "plan_ganador": [
+    "FETCH",
+    "SORT_MERGE",
+    "IXSCAN (ix_stock_lotes_fefo)",
+    "IXSCAN (ix_stock_lotes_fefo)"
+  ],
+  "planes_rechazados": 0,
+  "nReturned": 3,
+  "totalKeysExamined": 4,
+  "totalDocsExamined": 4,
+  "executionTimeMillis": 0,
+  "documentos_en_coleccion": 34
+}
