@@ -4,6 +4,7 @@ from unittest.mock import MagicMock, patch
 
 from farmared.clock import FixedClock, SystemClock
 from farmared.consultas.q13 import q13_alta, q13_baja, q13_modificar
+from farmared.errores import ErrorDominio
 from farmared.servicios.clientes import operaciones
 
 
@@ -49,8 +50,14 @@ class TestContratoQ13(unittest.TestCase):
                 funcion(*argumentos, reloj)
         self.assertEqual(self.db.mock_calls, [])
 
-    def test_operaciones_pendientes_no_simulan_exito_ni_acceden_a_la_base(self):
-        for funcion, nombre, argumentos in self.casos:
-            with self.subTest(operacion=nombre), self.assertRaisesRegex(NotImplementedError, "q13"):
+    def test_entradas_invalidas_se_rechazan_sin_acceder_a_la_base(self):
+        casos = [
+            (q13_alta, (self.db, {**self.datos, "_id": "C-C1"})),
+            (q13_modificar, (self.db, "", self.cambios)),
+            (q13_baja, (self.db, "")),
+        ]
+        for funcion, argumentos in casos:
+            with self.subTest(operacion=funcion.__name__), self.assertRaises(ErrorDominio) as error:
                 funcion(*argumentos)
+            self.assertEqual(error.exception.codigo, "VALIDACION")
         self.assertEqual(self.db.mock_calls, [])

@@ -123,7 +123,7 @@ def test_cli_instalada_fuera_del_repo(tmp_path):
     assert date.fromisoformat(payload["fecha_comercial"])
 
 
-@pytest.mark.parametrize("comando,persona", [("q13", "C"), ("q02", "C")])
+@pytest.mark.parametrize("comando,persona", [("q02", "C")])
 def test_comando_ausente_no_simula_exito(comando, persona):
     resultado = cli(comando)
     assert resultado.returncode == 3
