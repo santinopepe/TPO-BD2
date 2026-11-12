@@ -3,8 +3,7 @@
 ## Avance
 
 - [x] q01: función, comando CLI y tres pruebas agregadas; contrato documentado aquí.
-- [x] q02: función, comando CLI y seis pruebas aprobadas con MongoDB real;
-  [evidencia](../evidencias/c/q02.md).
+- [x] q02: función, comando CLI y seis pruebas aprobadas con MongoDB real.
 - [x] q05: función, comando CLI, índice y seis pruebas agregadas; contrato documentado aquí.
 - [x] q06: función, comando CLI y cinco pruebas agregadas; contrato documentado aquí.
 - [x] q07: función, comando CLI y seis pruebas agregadas; contrato documentado aquí.
@@ -12,33 +11,65 @@
 - [x] q09: función documentada, comando CLI y pruebas agregadas.
 - [x] q11: vista estándar, inicializador, comando CLI y seis pruebas agregadas.
 - [x] q12: función, comando CLI, índice y seis pruebas agregadas; contrato documentado aquí.
-- [x] q13: ABM, CLI, pruebas y evidencia de sincronización completadas.
-- [x] q13, etapa 1: interfaces, DTOs y [contrato detallado](../contratos/q13_clientes.md).
-- [x] q13, etapa 2: normalización y validación puras, preparación del documento de alta;
-  22 pruebas nuevas y 4 de contrato aprobadas sin motores.
-  Las operaciones completas de escritura se completaron en la etapa 4 y la CLI en la etapa 6.
-- [x] q13, etapa 3: unidad transaccional y outbox implementados, con 8 pruebas
-  unitarias nuevas y 6 integraciones reales; 40 pruebas de q13 aprobadas en total.
-- [x] q13, cierre de etapa 3: commit/rollback verificados en MongoDB 8.0.15;
-  [evidencia](../evidencias/c/q13_etapa3.md).
-- [x] q13, etapa 4: alta, modificación y baja implementadas y verificadas;
-  52 pruebas aprobadas en total, con 18 integraciones reales.
-  [Evidencia](../evidencias/c/q13_etapa4.md).
-- [x] q13, etapa 5: tres tests nuevos de concurrencia e independencia de Neo4j;
-  55 pruebas aprobadas en total, con 21 integraciones reales.
-  [Evidencia](../evidencias/c/q13_etapa5.md).
-- [x] q13, etapa 6: CLI con alta/modificación/baja, archivo JSON o stdin, errores y cierre;
-  61 pruebas aprobadas (22 integraciones reales) y regresiones con 93 aprobadas y 5 omitidas.
-  [Evidencia](../evidencias/c/q13_etapa6.md).
-- [x] q13, etapa 7: evidencia de antes/después, rechazo sin efectos y sync real
-  con historial conservado. Cierre: 433 aprobadas, 0 fallidas, 0 omitidas
-  (62 de q13 y 371 regresiones seleccionadas).
-  [Evidencia](../evidencias/c/q13_etapa7.md).
+- [x] q13: interfaces, validaciones, ABM transaccional, outbox y CLI implementados.
+- [x] q13: commit/rollback, concurrencia, rechazos y repeticiones probados con MongoDB real.
+- [x] q13: sincronización con Neo4j e historial conservado después de la baja.
 - [x] Inicializador de índices y vista q11, integrado a `preparar-mongo`.
-- [x] Ejecutar las pruebas de las diez consultas de C con motores reales y
-  conservar el registro: **107 aprobadas, 0 fallidas y 0 omitidas**.
-  [Verificación conjunta](../evidencias/c/pruebas_consultas_c.md): incluye las
-  45 pruebas de lectura, las 61 de q13 y su recorrido con Neo4j.
+- [x] Ejecutar las pruebas de las diez consultas con las integraciones habilitadas:
+  **107 aprobadas, 0 fallidas y 0 omitidas**.
+
+## Verificación conjunta
+
+La ejecución del 11/11/2026 utilizó Python 3.13, MongoDB 8.0.15 en replica set
+`rs0` y Neo4j Community 5.26.12. Los motores se ejecutaron en contenedores
+temporales con las imágenes fijadas por `infra/docker-compose.yml`, bases con
+UUID y limpieza al finalizar. Se utilizaron fixtures aislados.
+
+| Consulta | Pruebas aprobadas |
+| --- | ---: |
+| q01 | 3 |
+| q02 | 6 |
+| q05 | 6 |
+| q06 | 5 |
+| q07 | 6 |
+| q08 | 3 |
+| q09 | 4 |
+| q11 | 6 |
+| q12 | 6 |
+| q13 | 62 |
+| **Total** | **107** |
+
+El total reúne 45 pruebas de lectura, 61 pruebas de q13 en `tests/c_mongo/` y
+un recorrido de q13 con ambos motores. Incluye 68 integraciones reales y
+39 pruebas sin motores de contrato, validación y coordinación transaccional.
+La selección terminó sin fallos ni omisiones y no equivale a ejecutar toda la suite.
+
+Con el replica set temporal disponible, `MONGO_URI` apuntando a ese motor,
+`PYTHONPATH=src` y `FARMARED_TEST_MONGO=1`, se ejecutó:
+
+```bash
+python -m unittest discover -s tests/c_mongo -p 'test_q*.py' -v
+```
+
+Resultado: **106 pruebas aprobadas en 16.811 s**. El recorrido adicional de
+q13 con MongoDB y Neo4j terminó con **1 prueba aprobada en 13.41 s**.
+
+Para reproducir la selección MongoDB con el entorno de prueba preparado:
+
+```bash
+FARMARED_TEST_MONGO=1 uv run --locked --env-file .env pytest tests/c_mongo
+```
+
+Para reproducir el recorrido con ambos motores, activar Docker y disponer de
+las imágenes fijadas por Compose. La prueba crea y elimina sus propios motores;
+la ruta de salida de capturas JSON es opcional:
+
+```bash
+FARMARED_TEST_SYNC=1 FARMARED_EVIDENCIAS_C=/tmp/farmared-q13-evidencias uv run --locked pytest tests/d_grafo/test_q13_integracion.py -q
+```
+
+Estas pruebas verifican resultados y efectos sobre los fixtures. No son mediciones
+de rendimiento ni una demostración de todas las consultas sobre el dataset completo.
 
 ## q01 — Productos activos con todos los datos de su proveedor
 
@@ -66,7 +97,7 @@ uv run --locked --env-file .env farmared q01 --base farmared_demo_c
 
 Las pruebas usan bases aisladas `farmared_test_c_q01_<UUID>`, con limpieza al
 finalizar. Los tres casos se aprobaron con MongoDB real en la
-[verificación conjunta](../evidencias/c/pruebas_consultas_c.md). Para repetirlos:
+verificación conjunta de este informe. Para repetirlos:
 
 ```bash
 FARMARED_TEST_MONGO=1 uv run --locked --env-file .env pytest tests/c_mongo/test_q01.py
@@ -109,8 +140,9 @@ La CLI presenta `consulta`, `base` y `resultados`, con fechas ISO 8601.
 
 Se aprobaron los seis casos sobre MongoDB 8.0.15, en bases aisladas
 `farmared_test_c_q02_<UUID>` eliminadas al finalizar. También pasaron las
-40 regresiones seleccionadas de CLI/base y CLI de clientes. Ver la
-[evidencia y el ejemplo comprobado](../evidencias/c/q02.md).
+40 regresiones seleccionadas de CLI/base y CLI de clientes. El caso exitoso de
+[test_q02.py](../../tests/c_mongo/test_q02.py) compara el documento completo
+desde la API y un proceso real de CLI, con el mismo total y sucursal esperados.
 
 ## q05 — Farmacéuticos activos y cantidad de ventas en los últimos 60 días
 
@@ -149,7 +181,7 @@ bases aisladas `farmared_test_c_q05_<UUID>`, que se eliminan al terminar.
 6. Usa el día de Buenos Aires cuando la fecha UTC ya pasó a mañana.
 
 Los seis casos se aprobaron con MongoDB real en la
-[verificación conjunta](../evidencias/c/pruebas_consultas_c.md).
+verificación conjunta de este informe.
 La inspección de `explain` no forma parte de esas pruebas. Para repetirlas:
 
 ```bash
@@ -188,7 +220,7 @@ uv run --locked --env-file .env farmared q06 --base farmared_demo_c
 
 Cada caso usa una base aislada `farmared_test_c_q06_<UUID>` que se elimina al
 finalizar. Los cinco casos se aprobaron con MongoDB real en la
-[verificación conjunta](../evidencias/c/pruebas_consultas_c.md). Para repetirlos:
+verificación conjunta de este informe. Para repetirlos:
 
 ```bash
 FARMARED_TEST_MONGO=1 uv run --locked --env-file .env pytest tests/c_mongo/test_q06.py
@@ -226,7 +258,7 @@ uv run --locked --env-file .env farmared q07 --base farmared_demo_c
 Los casos que no cumplen filtros se excluyen; la consulta no los trata como errores
 de escritura. Cada test usa una base aislada `farmared_test_c_q07_<UUID>` con limpieza
 al finalizar. Los seis casos se aprobaron con MongoDB real en la
-[verificación conjunta](../evidencias/c/pruebas_consultas_c.md). Para repetirlos:
+verificación conjunta de este informe. Para repetirlos:
 
 ```bash
 FARMARED_TEST_MONGO=1 uv run --locked --env-file .env pytest tests/c_mongo/test_q07.py
@@ -263,7 +295,7 @@ con mínimo 0 y aplica validación `strict/error`, por lo que esa inserción se 
 
 Cada prueba usa una base aislada `farmared_test_c_q08_<UUID>` que se elimina al
 finalizar. Los tres casos se aprobaron con MongoDB real en la
-[verificación conjunta](../evidencias/c/pruebas_consultas_c.md). Para repetirlos:
+verificación conjunta de este informe. Para repetirlos:
 
 ```bash
 FARMARED_TEST_MONGO=1 uv run --locked --env-file .env pytest tests/c_mongo/test_q08.py
@@ -338,7 +370,7 @@ ordenados por id solo para facilitar la lectura de esta tabla:
 Se comparan los resultados sin exigir un orden: q09 no utiliza `sort`.
 
 Resultado actualizado: **4 pruebas aprobadas con MongoDB real**, sin omisiones,
-en la [verificación conjunta](../evidencias/c/pruebas_consultas_c.md).
+en la verificación conjunta de este informe.
 Para repetir los cuatro casos con el entorno preparado:
 
 ```bash
@@ -387,7 +419,7 @@ La preparación requiere escritores pausados. `tests/c_mongo/test_q12.py` usa
    fuera las del 27/02/2023 y 01/03/2024.
 
 Los seis casos se aprobaron con MongoDB real en la
-[verificación conjunta](../evidencias/c/pruebas_consultas_c.md). Para repetirlos:
+verificación conjunta de este informe. Para repetirlos:
 
 ```bash
 FARMARED_TEST_MONGO=1 uv run --locked --env-file .env pytest tests/c_mongo/test_q12.py
@@ -443,7 +475,7 @@ Los casos 2 a 6 ejecutan el pipeline equivalente con un instante fijo en lugar d
 `$$NOW`, sin alterar la definición de la vista. Son variantes de prueba, no una
 vista que use fechas fijas. Cada test usa una base `farmared_test_c_q11_<UUID>`
 con limpieza al finalizar. Los seis casos se aprobaron con MongoDB real en la
-[verificación conjunta](../evidencias/c/pruebas_consultas_c.md).
+verificación conjunta de este informe.
 
 ```bash
 FARMARED_TEST_MONGO=1 uv run --locked --env-file .env pytest tests/c_mongo/test_q11.py
@@ -497,15 +529,26 @@ Se usan los errores comunes `VALIDACION`, `DNI_DUPLICADO`, `NO_EXISTE`,
 `CONFLICTO_ID`, `INTEGRIDAD` y `CONEXION`. Los rechazos probados no producen cambios;
 un fallo de outbox revierte la escritura del cliente en la misma transacción.
 
-La [evidencia de cierre](../evidencias/c/q13_etapa7.md) y sus
-[capturas completas](../evidencias/c/q13_etapa7_recorrido.json) muestran alta,
-modificación, rechazo por cobertura incoherente y baja, con antes/después en
-MongoDB y proyección pendiente/verificada por separado. El historial q03 conserva
-una receta y una venta tras la baja. Se usaron datos sintéticos en motores
-temporales, sin sustituir la demostración del dataset completo del equipo.
+El [recorrido de integración](../../tests/d_grafo/test_q13_integracion.py)
+ejecuta alta, modificación, rechazo por cobertura incoherente y baja por CLI,
+y compara los estados antes y después de cada acción. Comprueba MongoDB
+confirmado antes de sincronizar y la equivalencia del grafo después de `sync`.
+El historial q03 conserva una receta y una venta tras la baja. Usa datos
+sintéticos en motores temporales y permite guardar las capturas al definir
+`FARMARED_EVIDENCIAS_C`, como se indica en la verificación conjunta de este informe.
 
-Validación del cierre: **61 pruebas de q13 en MongoDB + 1 recorrido con Neo4j +
-371 regresiones seleccionadas = 433 aprobadas, 0 fallidas y 0 omitidas**.
-No se ejecutó toda la suite. q13 está terminada; q02 y el ensamblado del informe
-general del equipo siguen fuera de este cierre. Ver el
-[contrato detallado](../contratos/q13_clientes.md) y el README para reproducirlo.
+El contrato del alta exige `nombre`, `apellido`, `dni`, `ciudad`, `provincia` y
+`obra_social`. Los campos de contacto y afiliado se completan con nulos cuando
+corresponde. La CLI recibe un objeto JSON desde archivo o stdin (`--datos -`)
+para alta y modificación, y exige `--id-cliente` para modificación y baja.
+
+```bash
+uv run --locked --env-file .env farmared q13 --base farmared_demo_consultas alta --datos docs/ejemplos/q13_alta_cliente.json
+uv run --locked --env-file .env farmared q13 --base farmared_demo_consultas modificar --id-cliente ID --datos docs/ejemplos/q13_cambios_cliente.json
+uv run --locked --env-file .env farmared q13 --base farmared_demo_consultas baja --id-cliente ID
+```
+
+Reemplazar `ID` por `documento._id` de la respuesta del alta. Los archivos de
+[alta](../ejemplos/q13_alta_cliente.json) y
+[modificación](../ejemplos/q13_cambios_cliente.json) contienen datos ficticios.
+El [README](../../README.md) describe la preparación del entorno y los comandos.
