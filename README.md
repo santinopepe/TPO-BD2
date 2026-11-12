@@ -15,18 +15,226 @@ uv run --locked pytest
 `uv.lock` fija dependencias transitivas y hashes; `pyproject.toml` fija versiones
 directas y el backend de construcción. `uv sync --locked` instala el proyecto en
 modo editable en `.venv`. No hace falta configurar motores para estos comandos.
-Se incluyen los drivers oficiales para los siguientes frentes, pero la CLI solo
+Se incluyen los drivers oficiales de MongoDB y Neo4j, pero la CLI solo
 importa el handler seleccionado y no importa drivers ni abre conexiones al arrancar.
 Las versiones se verificaron en [PyPI: PyMongo](https://pypi.org/project/pymongo/4.19.0/),
 [Neo4j](https://pypi.org/project/neo4j/6.4.1/) y [pytest](https://pypi.org/project/pytest/9.2.0/).
 
 `estado` informa versión y reloj, con motores/proyección **no comprobados**.
-`q01`–`q15`, `sync` y
-`demo-transaccion` están anunciados como pendientes: invocarlos termina con código
-3 y explica el responsable. Todavía no reciben parámetros de negocio.
+Las consultas `q01`, `q02`, `q05`, `q06`, `q07`, `q08`, `q09`, `q11` y `q12`
+leen datos de MongoDB; `q13` administra clientes y `q14`/`q15` operan ventas,
+recetas y stock. Las consultas `q03`, `q04` y `q10` leen el grafo Neo4j.
+`sync` actualiza ese grafo desde los eventos outbox y `demo-transaccion`
+ejecuta escenarios de ventas con sus estados antes y después.
 Los códigos de salida son 0 (éxito), 1 (error de dominio), 2 (uso inválido) y
 3 (comando pendiente). Las fallas internas no se convierten en éxitos ni se
-disfrazan como módulos pendientes. No se creó lógica de otros integrantes.
+disfrazan como módulos pendientes.
+
+## Consultas y servicios MongoDB
+
+La [guía de pruebas manuales](docs/pruebas_manuales_c.md) explica cómo cargar una
+demo, ejecutar cada consulta, comparar resultados y probar el ABM con sus rechazos.
+
+- **q01:** productos activos con todos los datos del proveedor como objeto.
+- **q02:** ventas pendientes con farmacéutico, matrícula, sucursal y total.
+- **q05:** farmacéuticos activos y cantidad de ventas no anuladas en los últimos 60 días, incluidos ceros.
+- **q06:** recetas prolongadas vigentes con próxima dispensa anterior a hoy y datos del cliente.
+- **q07:** top cinco productos por unidades vendidas, solo ventas completadas.
+- **q08:** lotes con menos de 50 unidades y datos completos de producto, proveedor y sucursal.
+- **q09:** ventas de tipo `Venta libre` con total menor a $5000, excepto `Anulada`.
+- **q11:** vista estándar de ingresos del mes actual por farmacéutico.
+- **q12:** clientes sin ventas registradas en el último año, de cualquier estado.
+- **q13:** alta, modificación de contacto/cobertura y baja lógica de clientes, con eventos outbox en la misma transacción.
+
+q01 se ejecuta con:
+
+```bash
+uv run --locked --env-file .env farmared q01 --base farmared_demo_consultas
+```
+
+Devuelve cada producto activo completo con `proveedor` como objeto, sin ordenar.
+Si la referencia no encuentra proveedor, conserva el producto y omite ese campo.
+No exige que el proveedor esté activo.
+
+q02 se ejecuta con:
+
+```bash
+uv run --locked --env-file .env farmared q02 --base farmared_demo_consultas
+```
+
+Devuelve las ventas `Pendiente` completas con `farmaceutico` y `sucursal` como
+objetos. La sucursal se obtiene desde `farmaceutico.id_sucursal`. Conserva el
+total original y los profesionales/sucursales inactivos. Si falta alguna referencia,
+conserva la venta y omite el objeto que no se pudo encontrar. No ordena ni modifica datos.
+Sus seis pruebas con MongoDB real y el comando CLI están verificadas; ver la
+[evidencia de q02](docs/evidencias/c/q02.md).
+
+q05 se ejecuta con:
+
+```bash
+uv run --locked --env-file .env farmared preparar-mongo --base farmared_demo_consultas
+uv run --locked --env-file .env farmared q05 --base farmared_demo_consultas
+```
+
+Devuelve los datos del farmacéutico activo y `cantidad_ventas`, sin ordenar.
+Incluye 60 días comerciales de Buenos Aires contando hoy, excluye anuladas e
+incluye pendientes. Cuenta dentro del `$lookup` y devuelve cero si no hay ventas.
+`preparar-mongo` asegura el índice `ix_ventas_farmaceutico_fecha` sobre
+`ventas(id_farmaceutico, fecha)`; ejecutar la preparación con escritores pausados.
+La carga también asegura ese índice. q05 solo realiza lecturas.
+
+q06 se ejecuta con:
+
+```bash
+uv run --locked --env-file .env farmared q06 --base farmared_demo_consultas
+```
+
+Usa el día actual de Buenos Aires. Excluye próximas dispensas nulas o previstas
+para hoy. Devuelve la receta completa con `cliente` como objeto, sin ordenar.
+Si no encuentra el cliente, conserva la receta sin ese campo; no filtra clientes inactivos.
+
+q07 se ejecuta con:
+
+```bash
+uv run --locked --env-file .env farmared q07 --base farmared_demo_consultas
+```
+
+Suma las cantidades de `ventas.items` para ventas completadas y devuelve hasta
+cinco productos, con `_id`, `unidades_vendidas` y el objeto `producto` completo.
+Ordena por unidades descendentes y desempata por id ascendente. Incluye productos
+inactivos; si el producto no existe, conserva el id y las unidades sin ese objeto.
+
+q08 se ejecuta con:
+
+```bash
+uv run --locked --env-file .env farmared q08 --base farmared_demo_consultas
+```
+
+Devuelve el lote completo con `producto`, `proveedor` y `sucursal` como objetos,
+sin ordenar ni proyectar campos. Incluye lotes con cero unidades y vencidos;
+conserva lotes con referencias inexistentes, omitiendo los objetos no encontrados.
+
+Con MongoDB cargado, ejecutar:
+
+```bash
+uv run --locked --env-file .env farmared q09 --base farmared_demo_consultas
+```
+
+Devuelve JSON con `consulta`, `base` y `resultados`: documentos completos,
+sin orden garantizado. Incluye pendientes; $5000 queda excluido. Usa
+`estado: {"$ne": "Anulada"}` para admitir otros estados si el esquema se amplía.
+El esquema actual sigue permitiendo solo `Completada`, `Pendiente` y `Anulada`.
+No requiere Neo4j ni sincronización.
+
+q11 se prepara y ejecuta con:
+
+```bash
+uv run --locked --env-file .env farmared preparar-mongo --base farmared_demo_consultas
+uv run --locked --env-file .env farmared q11 --base farmared_demo_consultas
+```
+
+La preparación, con escritores pausados, asegura el índice `ix_ventas_estado_fecha`
+y la vista `ingresos_mensuales_farmaceutico`. La vista calcula el mes en cada lectura
+con `$$NOW` de MongoDB y la zona de Buenos Aires; suma `total` una vez por venta
+completada. Devuelve `_id`, `ingresos_totales` y `farmaceutico` como objeto, sin
+ordenar. Incluye profesionales inactivos con ventas y omite los que no tienen
+ventas completadas del mes. Si falta la vista, q11 informa que debe prepararse.
+`setup --solo-mongo` prepara el esquema base y carga los datos; ejecutar
+`preparar-mongo` para inicializar también la vista de ingresos mensuales.
+
+q12 se ejecuta con:
+
+```bash
+uv run --locked --env-file .env farmared preparar-mongo --base farmared_demo_consultas
+uv run --locked --env-file .env farmared q12 --base farmared_demo_consultas
+```
+
+Devuelve los clientes completos sin ventas desde el inicio del día equivalente
+del año anterior hasta el inicio de mañana, según Buenos Aires. El 29 de febrero
+se ajusta al 28 de febrero del año anterior. Cualquier estado de venta cuenta,
+incluido `Anulada`, y se consideran clientes activos e inactivos. Usa un `$lookup`
+limitado a una coincidencia, sin ordenar. La preparación asegura el índice
+`ix_ventas_cliente_fecha`; requiere escritores pausados. La consulta solo lee.
+
+q13 se ejecuta con estas acciones, sobre una base preparada:
+
+```bash
+uv run --locked --env-file .env farmared q13 --base farmared_demo_consultas alta --datos docs/ejemplos/q13_alta_cliente.json
+uv run --locked --env-file .env farmared q13 --base farmared_demo_consultas modificar --id-cliente ID --datos docs/ejemplos/q13_cambios_cliente.json
+uv run --locked --env-file .env farmared q13 --base farmared_demo_consultas baja --id-cliente ID
+```
+
+Reemplazar `ID` por `documento._id` de la salida del alta. `--datos -` permite
+leer el objeto JSON desde stdin en alta y modificación. `--base` va antes de la
+acción. Los ejemplos son datos ficticios; repetir el alta con el mismo DNI se rechaza.
+
+La salida contiene `operacion`, `accion`, `base`, `documento`, `eventos`,
+`reutilizada` y `proyeccion`. Si hubo cambios, indica `pendiente_sync`; si no hubo
+cambios, indica `no_comprobada`, sin afirmar que el grafo esté actualizado.
+Las modificaciones equivalentes y bajas repetidas no generan eventos nuevos.
+JSON inválido/ilegible produce código 1 antes de conectar; argumentos inválidos,
+código 2. Los errores de negocio van a stderr con código 1; el éxito devuelve JSON
+y código 0. El adaptador cierra la conexión incluso ante errores del servicio.
+
+Pruebas de q13 con MongoDB preparado:
+
+```bash
+FARMARED_TEST_MONGO=1 uv run --locked --env-file .env pytest tests/c_mongo/test_q13*.py
+```
+
+El contrato de entradas, retornos y errores está en
+[q13_clientes.md](docs/contratos/q13_clientes.md). La
+[evidencia del ABM](docs/evidencias/c/q13_etapa7.md) incluye estados antes/después,
+rechazo sin cambios y sincronización real con conservación del historial.
+
+Para repetir el recorrido completo de q13, Docker debe estar activo y las imágenes
+fijadas en `infra/docker-compose.yml` deben estar descargadas. Esta prueba crea
+sus propios contenedores MongoDB/Neo4j, bases y credenciales temporales; los elimina
+al terminar y no utiliza los motores configurados en `.env`:
+
+```bash
+FARMARED_TEST_SYNC=1 FARMARED_EVIDENCIAS_C=/tmp/farmared-q13-evidencias uv run --locked pytest tests/d_grafo/test_q13_integracion.py -q
+```
+
+`FARMARED_EVIDENCIAS_C` es opcional: si se define, guarda el recorrido como JSON.
+La verificación del ABM ejecutó 61 pruebas de q13 en MongoDB, este recorrido con ambos motores
+y 371 regresiones seleccionadas: **433 aprobadas, 0 fallidas y 0 omitidas**.
+La selección no equivale a ejecutar toda la suite del repositorio.
+
+Pruebas de consultas MongoDB y clientes:
+
+```bash
+uv run --locked pytest tests/c_mongo
+FARMARED_TEST_MONGO=1 uv run --locked --env-file .env pytest tests/c_mongo
+```
+
+La [verificación de consultas y clientes](docs/evidencias/c/pruebas_consultas_c.md) ejecutó
+estas pruebas y el recorrido de q13 con Neo4j: **107 aprobadas, 0 fallidas y
+0 omitidas**, incluyendo 68 integraciones con motores reales. No fue necesario
+modificar consultas ni tests.
+
+Los cuarenta y cinco casos de lectura requieren MongoDB real y se omiten si no se activa
+una de las opciones de integración. q01 cubre productos inactivos, referencia a
+proveedor inexistente y producto activo con proveedor completo. q02 cubre ventas
+pendientes, otros estados, profesionales/sucursales inactivos, referencias
+inexistentes y ausencia de ventas; también verifica la CLI real. q05 cubre conteos
+por profesional, cero ventas, inactivos, fechas frontera, estados y cambio de día
+en Buenos Aires. q06 cubre el caso
+exitoso, dispensa prevista para hoy, estado no vigente, cliente inexistente y tipo
+distinto de tratamiento prolongado. q07 cubre el ranking, estados excluidos,
+ausencia de ventas, líneas repetidas, empates y productos inexistentes.
+q08 cubre lotes de 60 unidades, resultados
+completos y referencias inexistentes. El esquema impide insertar unidades negativas,
+por lo que no se agrega un caso con −3 unidades. q09 cubre ventas
+que cumplen las condiciones, ventas con receta, total igual a $5000 y ventas anuladas.
+q11 cubre la vista real, totales sin duplicación por ítems, estados, límites del
+mes, cambio de año, febrero bisiesto, profesionales inactivos y ausencia de ingresos.
+Sus fronteras usan un pipeline equivalente con reloj fijo, sin cambiar la vista.
+q12 cubre clientes sin ventas o con ventas antiguas, límites del período, todos
+los estados, referencias inexistentes y el ajuste del 29 de febrero.
+
+Ver el [informe de consultas y clientes](docs/informe/c_consultas_y_clientes.md)
+para el contrato, casos de prueba y estado de verificación de las consultas.
 
 ## Configuración y contratos
 
@@ -49,12 +257,12 @@ Los secretos y URI se omiten de `repr(Config)`.
   `SystemClock` usa el reloj real; `FixedClock` exige un instante con zona explícita.
 - `inicio_dia_utc(date)`: inicio del día en `America/Argentina/Buenos_Aires`,
   convertido a UTC para BSON Date. Los instantes outbox usan `now_utc()` directamente.
-- `farmared.errores.ErrorDominio(codigo, mensaje)`: campos públicos y códigos del reparto.
+- `farmared.errores.ErrorDominio(codigo, mensaje)`: campos públicos y códigos de error de la aplicación.
 - `farmared.contratos`: nombres de colecciones, enums literales y formas de outbox
   y retornos de escritura. `TypedDict` documenta estructura; no valida persistencia.
 - `validar_importe_ars`: entero ARS entre 0 y `2**63-1`, rechaza floats y booleanos.
   Aplicar también a resultados de sumas/productos antes de persistir. No convierte CSV.
-- IDs, DNI, CUIT y teléfonos permanecen strings; los detalles irán en `ventas.items`.
+- IDs, DNI, CUIT y teléfonos permanecen strings; los detalles se almacenan en `ventas.items`.
 
 `obtener_mongo(config)` devuelve un `Database` PyMongo después de verificar replica
 set, sesiones y primario; usa fechas conscientes de zona UTC y write concern
@@ -76,8 +284,10 @@ uv run --locked --env-file .env farmared preparar-mongo --base farmared
 ```
 
 Se crean/aseguran ocho colecciones de negocio y `outbox`, validadores `strict/error`
-e índices comunes: DNI y matrícula únicos globales, FEFO y cola outbox. No carga
-CSV, ejecuta servicios ni sincroniza. `setup` completo sigue pendiente.
+e índices comunes: DNI y matrícula únicos globales, FEFO, cola outbox y consultas
+por profesional/cliente y fecha. También se invoca `preparar_consultas_mongo(db)`
+para el índice por estado/fecha y la vista mensual de q11. No carga CSV, ejecuta
+servicios ni sincroniza. `setup` completo sigue pendiente de integración.
 En bases existentes verifica documentos/índices antes del DDL, preserva datos y
 rechaza definiciones incompatibles sin reemplazarlas. El DDL no es atómico entre
 colecciones y requiere escritores pausados; ante una falla no se anuncia éxito.
@@ -132,14 +342,16 @@ Para generar casos relativos al día actual, elegir un **directorio nuevo**:
 `uv run --locked farmared generar-adicionales --directorio data/adicionales_hoy`.
 `--base-date YYYY-MM-DD` permite una fecha deliberada. No se sobrescribe un destino
 existente ni se actualiza una base ya cargada con otras fuentes. La fecha del
-manifiesto debe usarse con `FixedClock` al verificar estos casos en B/C/D.
+manifiesto debe usarse con `FixedClock` al verificar estos casos en las pruebas
+de ventas, consultas y proyección.
 
 ## Setup disponible y reset explícito de demo
 
-`setup --solo-mongo` ejecuta el bootstrap de A: valida fuentes antes de conectar,
+`setup --solo-mongo` prepara la carga MongoDB: valida fuentes antes de conectar,
 asegura esquema/índices mediante el loader y carga o reutiliza el manifiesto.
-Solo devuelve `setup=mongo_listo`; las vistas de C y grafo/sync de D siguen
-pendientes. El setup completo, sin esa opción, termina con código 3 y lista esas
+Devuelve `setup=mongo_listo`; no inicializa la vista q11 ni prepara o sincroniza
+el grafo. Esos pasos se ejecutan con `preparar-mongo`, `grafo-init` y `sync`.
+El setup completo, sin esa opción, termina con código 3 y lista esas
 interfaces antes de abrir conexiones o escribir.
 
 ```bash
@@ -152,7 +364,7 @@ Reset admite únicamente `farmared_demo_` más un sufijo, exige coincidencia exa
 de la confirmación y anuncia el destino en stderr antes de borrar la base completa.
 No regenera archivos, recarga datos ni elimina Neo4j o volúmenes. Después de un
 reset, volver a ejecutar setup es una carga nueva; el grafo requiere reconstrucción
-de D antes de usarlo para lecturas exactas. Ver [docs/setup_y_demo.md](docs/setup_y_demo.md).
+con `grafo-rebuild` antes de usarlo para lecturas exactas. Ver [docs/setup_y_demo.md](docs/setup_y_demo.md).
 
 
 
@@ -244,5 +456,5 @@ esas bases/IDs; no llama a reset de demo ni borra entidades de negocio.
 Si se comparte un host, usar un `COMPOSE_PROJECT_NAME` distinto y otros
 `MONGO_PORT`, `NEO4J_HTTP_PORT`, `NEO4J_BOLT_PORT`; actualizar también las URI del
 host en `.env` para esos puertos. Los nombres de servicio y puertos internos no
-cambian. No reutilizar volúmenes/bases de demo mutables entre integrantes.
+cambian. No reutilizar volúmenes/bases de demo mutables entre entornos de prueba.
 
