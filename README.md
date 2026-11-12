@@ -32,8 +32,17 @@ disfrazan como módulos pendientes.
 
 ## Consultas y servicios MongoDB
 
-La [guía de pruebas manuales](docs/pruebas_manuales_c.md) explica cómo cargar una
-demo, ejecutar cada consulta, comparar resultados y probar el ABM con sus rechazos.
+Con los motores disponibles y `.env` preparado, ejecutar desde la raíz del
+repositorio para cargar una demo e inicializar los índices y la vista mensual:
+
+```bash
+uv run --locked --env-file .env farmared setup --solo-mongo --base farmared_demo_consultas --directorio data/originales --directorio data/adicionales
+uv run --locked --env-file .env farmared preparar-mongo --base farmared_demo_consultas
+```
+
+Ejecutar primero las lecturas y después las operaciones que modifican datos.
+Las consultas temporales usan el reloj real; los adicionales tienen fecha base
+10/11/2026, por lo que sus resultados pueden cambiar con el día de ejecución.
 
 - **q01:** productos activos con todos los datos del proveedor como objeto.
 - **q02:** ventas pendientes con farmacéutico, matrícula, sucursal y total.
@@ -66,8 +75,8 @@ Devuelve las ventas `Pendiente` completas con `farmaceutico` y `sucursal` como
 objetos. La sucursal se obtiene desde `farmaceutico.id_sucursal`. Conserva el
 total original y los profesionales/sucursales inactivos. Si falta alguna referencia,
 conserva la venta y omite el objeto que no se pudo encontrar. No ordena ni modifica datos.
-Sus seis pruebas con MongoDB real y el comando CLI están verificadas; ver la
-[evidencia de q02](docs/evidencias/c/q02.md).
+Sus seis casos de prueba están en [test_q02.py](tests/c_mongo/test_q02.py) e
+incluyen la ejecución real del comando CLI.
 
 q05 se ejecuta con:
 
@@ -182,10 +191,22 @@ Pruebas de q13 con MongoDB preparado:
 FARMARED_TEST_MONGO=1 uv run --locked --env-file .env pytest tests/c_mongo/test_q13*.py
 ```
 
-El contrato de entradas, retornos y errores está en
-[q13_clientes.md](docs/contratos/q13_clientes.md). La
-[evidencia del ABM](docs/evidencias/c/q13_etapa7.md) incluye estados antes/después,
-rechazo sin cambios y sincronización real con conservación del historial.
+El alta exige `nombre`, `apellido`, `dni`, `ciudad`, `provincia` y `obra_social`.
+El servicio genera el UUID y establece `activo=true`. El DNI se recibe como string
+de dígitos y es único incluso si el cliente existente está inactivo. `email` y
+`telefono` son opcionales. `Sin cobertura` exige `nro_afiliado=null`; las demás
+coberturas requieren un afiliado no vacío.
+
+La modificación admite únicamente `email`, `telefono`, `ciudad`, `provincia`,
+`obra_social` y `nro_afiliado`. Los campos omitidos se conservan y la cobertura
+se valida sobre el documento resultante. La baja cambia únicamente `activo=false`
+y preserva ventas y recetas. Cada cambio efectivo confirma el cliente y su
+evento outbox en una misma transacción MongoDB; la proyección se actualiza luego
+con `sync`.
+
+Para comprobar q13 manualmente, revisar el cliente y sus eventos antes y después
+de cada acción. Repetir el alta debe rechazar el DNI duplicado sin escrituras;
+repetir la misma modificación o baja debe devolver reutilización sin evento nuevo.
 
 Para repetir el recorrido completo de q13, Docker debe estar activo y las imágenes
 fijadas en `infra/docker-compose.yml` deben estar descargadas. Esta prueba crea
@@ -197,9 +218,6 @@ FARMARED_TEST_SYNC=1 FARMARED_EVIDENCIAS_C=/tmp/farmared-q13-evidencias uv run -
 ```
 
 `FARMARED_EVIDENCIAS_C` es opcional: si se define, guarda el recorrido como JSON.
-La verificación del ABM ejecutó 61 pruebas de q13 en MongoDB, este recorrido con ambos motores
-y 371 regresiones seleccionadas: **433 aprobadas, 0 fallidas y 0 omitidas**.
-La selección no equivale a ejecutar toda la suite del repositorio.
 
 Pruebas de consultas MongoDB y clientes:
 
@@ -208,10 +226,11 @@ uv run --locked pytest tests/c_mongo
 FARMARED_TEST_MONGO=1 uv run --locked --env-file .env pytest tests/c_mongo
 ```
 
-La [verificación de consultas y clientes](docs/evidencias/c/pruebas_consultas_c.md) ejecutó
-estas pruebas y el recorrido de q13 con Neo4j: **107 aprobadas, 0 fallidas y
+La verificación conjunta ejecutó estas pruebas y el recorrido de q13 con Neo4j:
+**107 aprobadas, 0 fallidas y
 0 omitidas**, incluyendo 68 integraciones con motores reales. No fue necesario
-modificar consultas ni tests.
+modificar consultas ni tests. Esta selección no equivale a ejecutar toda la suite
+del repositorio.
 
 Los cuarenta y cinco casos de lectura requieren MongoDB real y se omiten si no se activa
 una de las opciones de integración. q01 cubre productos inactivos, referencia a
@@ -305,8 +324,6 @@ siguen visibles. Código 1 significa validación fallida, sin datos parciales pa
 cargar. No necesita `.env`, MongoDB ni Neo4j, y no realiza escrituras.
 
 `--directorio` es repetible para validar originales y adicionales como una unión.
-El contrato y la clasificación de errores/avisos están en
-[docs/validacion_datasets.md](docs/validacion_datasets.md).
 
 ## Carga MongoDB idempotente
 
@@ -364,7 +381,7 @@ Reset admite únicamente `farmared_demo_` más un sufijo, exige coincidencia exa
 de la confirmación y anuncia el destino en stderr antes de borrar la base completa.
 No regenera archivos, recarga datos ni elimina Neo4j o volúmenes. Después de un
 reset, volver a ejecutar setup es una carga nueva; el grafo requiere reconstrucción
-con `grafo-rebuild` antes de usarlo para lecturas exactas. Ver [docs/setup_y_demo.md](docs/setup_y_demo.md).
+con `grafo-rebuild` antes de usarlo para lecturas exactas.
 
 
 
