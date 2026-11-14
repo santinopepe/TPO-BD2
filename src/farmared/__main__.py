@@ -22,6 +22,7 @@ COMANDOS = {
     "generar-adicionales": ("farmared.cli.generar_adicionales", "ejecutar"),
     "setup": ("farmared.cli.setup", "ejecutar"),
     "reset-demo": ("farmared.cli.reset_demo", "ejecutar"),
+    "ui": ("farmared.ui.servidor", "ejecutar"),
 }
 PENDIENTES = {
     **{f"q{i:02}": "C" for i in range(1, 16) if f"q{i:02}" not in COMANDOS},
@@ -32,6 +33,9 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser(prog="farmared", description="FarmaRed — TPO BD2")
     parser.add_argument("--version", action="version", version=version("farmared"))
     subparsers = parser.add_subparsers(dest="comando", required=True)
+    ui = subparsers.add_parser("ui", help="Consola web local de consultas y exploración de datos.")
+    ui.add_argument("--base", help="Base MongoDB; por defecto MONGO_DB.")
+    ui.add_argument("--puerto", type=int, default=8000, help="Puerto HTTP local (por defecto 8000).")
     subparsers.add_parser("estado", help="Versión y reloj local; no comprueba motores.")
     salud = subparsers.add_parser("salud", help="Comprueba primario MongoDB y/o conectividad Neo4j.")
     salud.add_argument("--motor", choices=("mongo", "neo4j", "ambos"), default="ambos")
